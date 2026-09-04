@@ -680,8 +680,8 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={index}
-            src={images[index].src}
-            alt={images[index].alt}
+            src={images[index]!.src}
+            alt={images[index]!.alt}
             custom={direction}
             variants={variants}
             initial="enter"
