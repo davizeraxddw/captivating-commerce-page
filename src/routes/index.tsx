@@ -21,6 +21,7 @@ import {
   LockKeyhole,
   Medal,
   PenLine,
+  Percent,
   Play,
   PlayCircle,
   Scale,
@@ -29,6 +30,7 @@ import {
   Sparkles,
   UserCheck,
   Users,
+  X,
 } from "lucide-react";
 
 import sgtWalace from "@/assets/sgt-walace.jpeg.asset.json";
@@ -194,8 +196,36 @@ function Eyebrow({ children }: { children: ReactNode }) {
 }
 
 function LandingPage() {
+  const [promoOpen, setPromoOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem("ponta-da-linha-promo-seen")) return;
+      const timer = window.setTimeout(() => {
+        window.sessionStorage.setItem("ponta-da-linha-promo-seen", "true");
+        setPromoOpen(true);
+      }, 700);
+      return () => window.clearTimeout(timer);
+    } catch {
+      const timer = window.setTimeout(() => setPromoOpen(true), 700);
+      return () => window.clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!promoOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPromoOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [promoOpen]);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
@@ -203,6 +233,63 @@ function LandingPage() {
         className="fixed inset-x-0 top-0 z-[70] h-1 origin-left bg-gold"
         style={{ scaleX }}
       />
+
+      <AnimatePresence>
+        {promoOpen && (
+          <motion.div
+            className="promo-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setPromoOpen(false)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="promo-title"
+              className="promo-card"
+              initial={{ opacity: 0, y: 24, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.96 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="promo-close"
+                onClick={() => setPromoOpen(false)}
+                aria-label="Fechar promoção"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="promo-icon">
+                <Percent className="h-7 w-7" />
+              </div>
+              <p className="promo-kicker">Oferta especial</p>
+              <h2 id="promo-title" className="promo-title">
+                Prepare-se pagando menos
+              </h2>
+              <p className="promo-copy">E-book completo em PDF com 42 videoaulas complementares.</p>
+              <div className="promo-price">
+                <span>
+                  De <del>R$ 59</del>
+                </span>
+                <strong>R$ 35</strong>
+                <small>pagamento único</small>
+              </div>
+              <p className="promo-saving">Você economiza R$ 24</p>
+              <a
+                href={KIWIFY_URL}
+                className="btn-gold mt-6 w-full"
+                onClick={() => setPromoOpen(false)}
+              >
+                Quero aproveitar por R$ 35 <ArrowRight className="h-5 w-5" />
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <header className="sticky top-0 z-50 border-b border-white/8 bg-night/82 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
