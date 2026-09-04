@@ -1,60 +1,61 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import {
-  ShieldCheck,
-  FileText,
-  PlayCircle,
-  Scale,
-  Search,
-  Gavel,
-  UserCheck,
-  Crosshair,
-  FileWarning,
-  Cannabis,
-  PenLine,
-  Medal,
-  GraduationCap,
+  ArrowRight,
   AtSign,
+  Award,
+  BadgeCheck,
+  BookOpen,
+  Check,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  CheckCircle2,
-  Star,
   Clock3,
+  Crosshair,
+  FileCheck2,
+  FileWarning,
+  Gavel,
+  GraduationCap,
+  LockKeyhole,
+  Medal,
+  PenLine,
+  Play,
+  PlayCircle,
+  Scale,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  UserCheck,
   Users,
-  BookOpen,
-  Award,
 } from "lucide-react";
 
 import ebookCover from "@/assets/ebook-cover.jpeg.asset.json";
 import sgtWalace from "@/assets/sgt-walace.jpeg.asset.json";
 import tenTardelly from "@/assets/ten-tardelly.jpeg.asset.json";
 import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
+import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
-import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 
-// TODO: substituir pelo link de checkout da Kiwify quando o cliente enviar.
+// Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Atividade Policial na Ponta da Linha: E-book + 42 Videoaulas" },
+      { title: "Atividade Policial na Ponta da Linha | E-book + 42 videoaulas" },
       {
         name: "description",
         content:
-          "Guia prático com apontamentos jurídicos para agir, escrever e registrar com segurança na atividade policial. E-book + 42 videoaulas por apenas R$ 35.",
+          "Guia prático para compreender, fundamentar e registrar a atividade policial com mais segurança. E-book em PDF + 42 videoaulas por R$ 35.",
       },
-      {
-        property: "og:title",
-        content: "Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira",
-      },
+      { property: "og:title", content: "Atividade Policial na Ponta da Linha" },
       {
         property: "og:description",
         content:
-          "E-book em PDF + 42 videoaulas. Feito por policiais com 20 anos de rua e formação jurídica. Apenas R$ 35.",
+          "Experiência operacional e conhecimento jurídico em um e-book com 42 videoaulas complementares.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -62,6 +63,95 @@ export const Route = createFileRoute("/")({
   }),
   component: LandingPage,
 });
+
+const topicos = [
+  {
+    icon: PenLine,
+    titulo: "Redação policial",
+    texto: "Como registrar uma ocorrência com clareza, contexto e atenção à preservação da prova.",
+  },
+  {
+    icon: UserCheck,
+    titulo: "Atuação do advogado",
+    texto:
+      "A atuação da defesa durante a atividade policial e os limites que precisam ser compreendidos.",
+  },
+  {
+    icon: Search,
+    titulo: "Buscas e cadeia de custódia",
+    texto: "Cuidados na busca, apreensão, preservação e documentação dos elementos probatórios.",
+  },
+  {
+    icon: Scale,
+    titulo: "Limites da atuação investigativa",
+    texto:
+      "Até onde vai a atuação da Polícia Militar e o que pode gerar questionamentos de legalidade.",
+  },
+  {
+    icon: ShieldCheck,
+    titulo: "Direitos do investigado",
+    texto:
+      "Conhecer os direitos envolvidos também ajuda a proteger a legitimidade da atuação policial.",
+  },
+  {
+    icon: Crosshair,
+    titulo: "Operações específicas",
+    texto:
+      "Situações operacionais que exigem atenção especial na conduta, narrativa e documentação.",
+  },
+  {
+    icon: FileWarning,
+    titulo: "Prova, efetividade e nulidades",
+    texto: "Por que produzir a prova não basta: é preciso preservá-la e registrá-la corretamente.",
+  },
+  {
+    icon: Gavel,
+    titulo: "O policial no processo",
+    texto: "Como o que acontece na rua e fica no registro pode repercutir no processo judicial.",
+  },
+  {
+    icon: FileCheck2,
+    titulo: "Lei de Drogas",
+    texto: "O que mudou, o que permanece e quais pontos merecem atenção durante a atuação.",
+  },
+];
+
+const paraQuem = [
+  "Está no curso de formação e quer começar mais preparado",
+  "Já atua na Polícia Militar ou em outra força de segurança",
+  "Quer elaborar documentos e registros com mais clareza",
+  "Busca compreender os aspectos jurídicos da rotina operacional",
+  "Quer reduzir falhas de atuação e documentação",
+  "Deseja conhecer melhor os limites da própria atuação",
+];
+
+const objecoes = [
+  {
+    pergunta: "Eu já aprendi isso na formação. Ainda faz sentido?",
+    resposta:
+      "A formação oferece a base. O material aproxima essa base das situações reais de serviço, com foco na aplicação, na fundamentação e no registro do que foi feito.",
+  },
+  {
+    pergunta: "Preciso ter formação jurídica?",
+    resposta:
+      "Não. O conteúdo foi construído para policiais e alunos de formação, com linguagem objetiva e conectada à realidade operacional.",
+  },
+  {
+    pergunta: "O material serve para quem já tem experiência de rua?",
+    resposta:
+      "Sim. Experiência é essencial, mas legislação e entendimentos evoluem. O material ajuda a revisar fundamentos e identificar pontos de atenção na rotina.",
+  },
+  {
+    pergunta: "O que recebo ao comprar?",
+    resposta:
+      "Você recebe o e-book em PDF e acesso a 42 videoaulas complementares sobre os temas apresentados no material.",
+  },
+  {
+    pergunta: "Qual é o valor?",
+    resposta:
+      "O conjunto completo custa R$ 35 em pagamento único. O checkout da Kiwify será conectado ao botão de compra.",
+  },
+];
 
 function Reveal({
   children,
@@ -72,13 +162,14 @@ function Reveal({
   delay?: number;
   className?: string;
 }) {
+  const reduceMotion = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
@@ -87,594 +178,590 @@ function Reveal({
 
 function CtaButton({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <a
-      href={KIWIFY_URL}
-      className={`btn-gold animate-pulse-ring inline-flex items-center justify-center gap-2 rounded-md px-8 py-4 font-body text-lg font-bold tracking-wide uppercase ${className}`}
-    >
-      {children}
+    <a href={KIWIFY_URL} className={`btn-gold group ${className}`}>
+      <span>{children}</span>
+      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
     </a>
   );
 }
 
-const topicos = [
-  {
-    icon: PenLine,
-    titulo: "Redação policial",
-    texto:
-      "Como a forma de escrever e registrar uma ocorrência pode fazer diferença na preservação da prova e na sua segurança profissional.",
-  },
-  {
-    icon: UserCheck,
-    titulo: "Atuação do advogado",
-    texto:
-      "Apontamentos sobre a atuação da defesa durante a atividade policial e os limites que precisam ser compreendidos.",
-  },
-  {
-    icon: Search,
-    titulo: "Buscas, apreensões e cadeia de custódia",
-    texto:
-      "Fundamentos e cuidados na busca, apreensão, preservação e documentação dos elementos probatórios.",
-  },
-  {
-    icon: Scale,
-    titulo: "Limites da atuação investigativa da PM",
-    texto:
-      "Até onde vai a atuação policial? Quais os limites jurídicos e o que pode gerar questionamentos de legalidade.",
-  },
-  {
-    icon: ShieldCheck,
-    titulo: "Direitos e garantias do investigado",
-    texto:
-      "Conhecer os direitos envolvidos na ocorrência também é uma forma de proteger a atuação do próprio policial.",
-  },
-  {
-    icon: Crosshair,
-    titulo: "Operações policiais específicas",
-    texto:
-      "Situações operacionais que exigem atenção especial e conhecimento jurídico na narrativa e no registro.",
-  },
-  {
-    icon: FileWarning,
-    titulo: "Registro da prova, efetividade e nulidades",
-    texto:
-      "Não basta produzir uma prova: é preciso preservá-la e registrá-la corretamente para evitar nulidades.",
-  },
-  {
-    icon: Gavel,
-    titulo: "O papel do policial no processo",
-    texto:
-      "Agir certo é essencial. Entender o próximo passo pode salvar sua carreira.",
-  },
-  {
-    icon: Cannabis,
-    titulo: "Lei de Drogas: o que mudou",
-    texto:
-      "O que mudou, o que permanece em vigor e quais pontos merecem atenção durante a sua atuação.",
-  },
-];
-
-const objecoes = [
-  {
-    pergunta: "“Mas eu já aprendi isso na formação.”",
-    resposta:
-      "A experiência prática mostra que existe uma grande diferença entre conhecer uma regra e saber aplicá-la diante de uma ocorrência real, sob pressão, com a viatura na rua.",
-  },
-  {
-    pergunta: "“Eu não sou da área jurídica.”",
-    resposta:
-      "Justamente por isso o material foi pensado para ser objetivo e aplicar na realidade operacional, sem transformar em tratado jurídico.",
-  },
-  {
-    pergunta: "“Eu já tenho experiência de rua.”",
-    resposta:
-      "Experiência é fundamental. Mas a legislação muda, os entendimentos evoluem, e uma conduta que parece simples pode gerar questionamentos quando analisada anos depois.",
-  },
-  {
-    pergunta: "“Tenho medo de fazer alguma coisa errada.”",
-    resposta:
-      "Esse receio é compreensível. Conhecimento e preparação ajudam o profissional a identificar riscos antes que eles se transformem em problemas administrativos ou judiciais.",
-  },
-  {
-    pergunta: "“Vale a pena investir nesse material?”",
-    resposta:
-      "Por apenas R$ 35 você recebe o e-book em PDF + 42 videoaulas complementares. É conhecimento para consultar, revisar e levar com você durante toda a sua jornada profissional.",
-  },
-];
-
-const paraQuem = [
-  "Está no curso de formação e quer começar a carreira mais preparado",
-  "Já atua na Polícia Militar ou em outra força de segurança",
-  "Tem dúvidas sobre como elaborar documentos e registros policiais",
-  "Quer compreender melhor os aspectos jurídicos da atividade operacional",
-  "Quer reduzir riscos de erros na atuação e na documentação",
-  "Deseja evoluir profissionalmente e se preparar para o dia a dia",
-  "Quer conhecer seus limites de atuação para decidir com segurança",
-];
+function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="eyebrow">
+      <span className="h-px w-8 bg-gold/60" />
+      {children}
+    </p>
+  );
+}
 
 function LandingPage() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+
   return (
-    <div className="min-h-screen bg-night font-body text-white antialiased">
-      {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 70% 20%, color-mix(in oklab, var(--gold) 18%, transparent), transparent 70%)",
-          }}
-        />
-        <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-          <span className="font-display text-xl tracking-wide text-gold-gradient">
-            PONTA DA LINHA
-          </span>
-          <a
-            href={KIWIFY_URL}
-            className="rounded-md border border-gold/50 px-4 py-2 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-night"
-          >
-            Garantir o meu
+    <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
+      <motion.div
+        className="fixed inset-x-0 top-0 z-[70] h-1 origin-left bg-gold"
+        style={{ scaleX }}
+      />
+
+      <header className="sticky top-0 z-50 border-b border-white/8 bg-night/82 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+          <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold/10">
+              <ShieldCheck className="h-5 w-5 text-gold" />
+            </span>
+            <span className="font-display text-lg tracking-[0.08em] text-white sm:text-xl">
+              PONTA <span className="text-gold">DA LINHA</span>
+            </span>
           </a>
-        </header>
+          <nav
+            className="hidden items-center gap-7 text-sm text-white/60 md:flex"
+            aria-label="Principal"
+          >
+            <a className="nav-link" href="#conteudo">
+              Conteúdo
+            </a>
+            <a className="nav-link" href="#autores">
+              Autores
+            </a>
+            <a className="nav-link" href="#duvidas">
+              Dúvidas
+            </a>
+          </nav>
+          <a href={KIWIFY_URL} className="btn-outline hidden sm:inline-flex">
+            Quero o material
+          </a>
+        </div>
+      </header>
 
-        <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-6 pt-6 pb-20 lg:grid-cols-2 lg:pb-28">
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-sm font-semibold tracking-widest text-gold uppercase"
-            >
-              <BookOpen className="h-4 w-4" /> E-book + 42 videoaulas
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display text-5xl leading-[1.05] uppercase sm:text-6xl lg:text-7xl shadow-gold-outline"
-            >
-              O Guia que Todo Policial Precisa
-              <br />
-              <span className="text-gold-gradient">para Sobreviver na Rua</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-white/70"
-            >
-              Guia prático com apontamentos jurídicos para agir, escrever e registrar com segurança
-              na atividade policial. Criado por quem vive a rua há 20 anos.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-8 flex flex-wrap items-center gap-6"
-            >
-              <CtaButton className="animate-pulse">
-                <span className="font-display font-bold">QUERO GARANTIR MEU ACESSO</span>
-                <ShieldCheck className="h-5 w-5 ml-2" />
-              </CtaButton>
-              <div className="grid grid-cols-2 gap-4 items-end">
-                <p className="text-sm tracking-widest text-white/50 uppercase">Investimento</p>
-                <p className="font-display text-5xl font-bold text-gold-gradient">
-                  R$ 35<span className="text-2xl">,00</span>
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-10 grid max-w-lg grid-cols-3 gap-3"
-            >
-              {[
-                { icon: FileText, label: "Material completo em PDF" },
-                { icon: PlayCircle, label: "42 aulas expositivas" },
-                { icon: Medal, label: "20 anos de experiência" },
-              ].map((b) => (
-                <div
-                  key={b.label}
-                  className="card-glass flex flex-col items-center gap-2 rounded-lg px-3 py-4 text-center"
-                >
-                  <b.icon className="h-6 w-6 text-gold" />
-                  <span className="text-xs leading-snug font-medium text-white/80">{b.label}</span>
+      <main>
+        <section id="inicio" className="hero-grid relative isolate overflow-hidden">
+          <div className="hero-orb hero-orb-one" />
+          <div className="hero-orb hero-orb-two" />
+          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:py-20">
+            <div className="relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55 }}
+                className="inline-flex items-center gap-2 rounded-full border border-gold/35 bg-gold/8 px-4 py-2 text-xs font-bold tracking-[0.16em] text-gold uppercase"
+              >
+                <Sparkles className="h-4 w-4" /> E-book em PDF + 42 videoaulas
+              </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.08 }}
+                className="mt-7 max-w-3xl font-display text-[clamp(3.2rem,8vw,6.8rem)] leading-[0.92] tracking-[-0.025em] uppercase"
+              >
+                Sua atuação termina na rua.
+                <span className="mt-2 block text-gold-gradient">O registro permanece.</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.18 }}
+                className="mt-7 max-w-2xl text-base leading-relaxed text-white/70 sm:text-xl"
+              >
+                Um guia prático para compreender, fundamentar e documentar a atividade policial com
+                mais segurança — criado por quem reúne experiência operacional e formação jurídica.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.28 }}
+                className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
+              >
+                <CtaButton>Quero me preparar melhor</CtaButton>
+                <div className="flex items-center gap-3">
+                  <span className="font-display text-4xl text-gold">R$ 35</span>
+                  <span className="max-w-24 text-xs leading-snug text-white/45">
+                    pagamento único
+                  </span>
                 </div>
-              ))}
+              </motion.div>
+              <motion.ul
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.42 }}
+                className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/62"
+              >
+                {["Linguagem objetiva", "Aplicação prática", "Acesso para revisar"].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-gold" /> {item}
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, x: 24 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto w-full max-w-[520px]"
+            >
+              <div className="absolute -inset-8 rounded-full bg-gold/10 blur-3xl" />
+              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/45 backdrop-blur-sm sm:p-6">
+                <img
+                  src={ebookCover.url}
+                  alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
+                  className="w-full rounded-[1.35rem] object-cover shadow-2xl"
+                />
+                <div className="absolute -bottom-6 -left-3 rounded-2xl border border-gold/30 bg-night-2/95 px-5 py-4 shadow-xl backdrop-blur sm:-left-9">
+                  <p className="text-xs font-bold tracking-[0.16em] text-gold uppercase">
+                    Experiência real
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-white">
+                    20 anos de atividade policial
+                  </p>
+                </div>
+                <div className="absolute -right-3 top-10 flex h-24 w-24 rotate-6 flex-col items-center justify-center rounded-full border border-gold/50 bg-gold text-center text-night shadow-xl sm:-right-8">
+                  <span className="font-display text-3xl leading-none">42</span>
+                  <span className="text-[10px] font-bold tracking-wide uppercase">videoaulas</span>
+                </div>
+              </div>
             </motion.div>
           </div>
+        </section>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-md"
-          >
-            <div className="animate-float-slow">
-              <img
-                src={ebookCover.url}
-                alt="E-book Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira"
-                className="w-full rounded-xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-gold/30"
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="mx-auto grid max-w-7xl divide-y divide-white/8 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
+            {[
+              { icon: BookOpen, value: "E-book", label: "material completo em PDF" },
+              { icon: PlayCircle, value: "42 aulas", label: "conteúdo complementar" },
+              { icon: Medal, value: "20 anos", label: "de experiência policial" },
+            ].map((item) => (
+              <div
+                key={item.value}
+                className="flex items-center gap-4 py-6 sm:justify-center sm:px-6"
+              >
+                <item.icon className="h-7 w-7 text-gold" />
+                <div>
+                  <p className="font-display text-2xl tracking-wide">{item.value}</p>
+                  <p className="text-xs text-white/45">{item.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="section-shell">
+          <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
+            <Reveal>
+              <Eyebrow>O ponto crítico</Eyebrow>
+              <h2 className="section-title">
+                Uma decisão de segundos pode ser analisada anos depois.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="space-y-5 text-base leading-relaxed text-white/68 sm:text-lg">
+                <p>
+                  A abordagem pode ter sido correta. A prova pode ter sido encontrada. Mas, se
+                  informações importantes forem omitidas ou descritas sem o contexto necessário, o
+                  problema pode começar justamente no papel.
+                </p>
+                <p className="border-l-2 border-gold pl-5 font-semibold text-white">
+                  Agir certo é importante. Saber fundamentar e registrar o que foi feito também.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="section-shell mx-auto max-w-7xl">
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <Eyebrow>Por dentro do projeto</Eyebrow>
+              <h2 className="section-title">Ouça de quem vive a atividade policial.</h2>
+              <p className="section-copy mx-auto mt-5 max-w-2xl">
+                Walace Costa e Walison Tardelly apresentam a ideia central do material: a atuação
+                não é formada apenas pela ação, mas também pela qualidade da documentação.
+              </p>
+            </Reveal>
+            <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+              <VideoCard
+                src="/videos/apresentacao-ebook.mp4"
+                eyebrow="Mensagem de Walace Costa"
+                title="Bom policial não pode improvisar quando o assunto é documentação."
+              />
+              <VideoCard
+                src="/videos/conteudo-por-dentro.mp4"
+                eyebrow="Os autores apresentam"
+                title="A ocorrência não termina na ação: ela continua na redação."
               />
             </div>
-            <div className="absolute -bottom-5 -left-5 card-glass animate-float-slow rounded-lg px-5 py-3 [animation-delay:1.2s]">
-              <p className="text-xs tracking-widest text-gold uppercase">Baseado na</p>
-              <p className="font-display text-xl tracking-wide">PRÁTICA REAL DAS RUAS</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* ================= FAIXA DE DOR ================= */}
-      <section className="border-y border-line bg-night-2">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-          <Reveal>
-            <h2 className="font-display text-3xl uppercase sm:text-4xl">
-              Na atividade policial, <span className="text-gold-gradient">não basta agir certo</span>
+        <section id="conteudo" className="section-shell mx-auto max-w-7xl scroll-mt-20">
+          <Reveal className="max-w-3xl">
+            <Eyebrow>Conteúdo programático</Eyebrow>
+            <h2 className="section-title">
+              Nove temas para conectar a rua ao fundamento jurídico.
             </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 text-lg leading-relaxed text-white/70">
-              Uma decisão tomada em segundos pode ser analisada anos depois. E aquilo que não foi
-              registrado da forma correta pode gerar consequências para a ocorrência, para a prova e,
-              principalmente, para <strong className="text-white">sua carreira</strong>.
+            <p className="section-copy mt-5">
+              Conteúdo pensado para consulta, revisão e aplicação consciente no cotidiano
+              profissional.
             </p>
           </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-8 inline-block rounded-lg border border-gold/40 bg-gold/10 px-6 py-3 font-display text-xl tracking-wide text-gold uppercase">
-              Agir certo é importante. Saber registrar o que foi feito também.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ================= CONTEÚDO ================= */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <Reveal className="text-center">
-          <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-            Conteúdo programático
-          </p>
-          <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
-            O que você vai <span className="text-gold-gradient">encontrar no e-book</span>
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {topicos.map((t, i) => (
-            <Reveal key={t.titulo} delay={(i % 3) * 0.1}>
-              <div className="card-glass group h-full rounded-xl p-6 transition-transform duration-300 hover:-translate-y-1.5 hover:border-gold/50">
-                <div className="flex items-center gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gold/10 text-gold ring-1 ring-gold/30 transition-colors group-hover:bg-gold group-hover:text-night">
-                    <t.icon className="h-6 w-6" />
-                  </span>
-                  <span className="font-display text-3xl text-white/15">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-gold">{t.titulo}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">{t.texto}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= NÃO É SÓ UM E-BOOK ================= */}
-      <section className="border-y border-line bg-night-2">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-2">
-          <Reveal>
-            <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-              Não é só um e-book
-            </p>
-            <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
-              E-book em PDF <span className="text-gold-gradient">+ 42 videoaulas</span>
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/70">
-              Além do material completo em PDF, você recebe acesso a 42 videoaulas com dicas e
-              explicações complementares sobre os assuntos abordados. Leia, assista, revise e volte
-              ao conteúdo sempre que precisar.
-            </p>
-            <ul className="mt-8 space-y-4">
-              {[
-                { icon: FileText, text: "E-book completo em PDF, direto ao ponto" },
-                { icon: PlayCircle, text: "42 videoaulas expositivas complementares" },
-                { icon: Clock3, text: "Acesso para consultar e revisar quando quiser" },
-                { icon: ShieldCheck, text: "Conteúdo atualizado com a prática policial" },
-              ].map((item) => (
-                <li key={item.text} className="flex items-center gap-3 text-white/80">
-                  <item.icon className="h-5 w-5 shrink-0 text-gold" />
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10">
-              <CtaButton>Garantir por R$ 35</CtaButton>
-            </div>
-          </Reveal>
-          <Reveal delay={0.15} className="relative">
-            <div className="card-glass rounded-2xl p-8 text-center">
-              <p className="text-sm tracking-[0.3em] text-white/50 uppercase">Tudo isso por apenas</p>
-              <p className="mt-4 font-display text-8xl text-gold-gradient sm:text-9xl">R$ 35</p>
-              <p className="mt-2 text-white/60">pagamento único • acesso imediato</p>
-              <div className="mx-auto mt-8 max-w-xs space-y-3 text-left">
-                {["E-book em PDF completo", "42 videoaulas expositivas", "Linguagem objetiva e aplicável"].map(
-                  (f) => (
-                    <div key={f} className="flex items-center gap-2 text-sm text-white/75">
-                      <CheckCircle2 className="h-4 w-4 text-gold" /> {f}
-                    </div>
-                  ),
-                )}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ================= AUTORES ================= */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <Reveal className="text-center">
-          <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-            Desenvolvido por policiais, para policiais
-          </p>
-          <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
-            Quem está por trás do <span className="text-gold-gradient">material</span>
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid gap-8 md:grid-cols-2">
-          {[
-            {
-              foto: sgtWalace.url,
-              nome: "Sargento Walace Costa",
-              cargo: "3º Sargento da PMMG • Tático Móvel",
-              pontos: [
-                "20 anos de serviço na Polícia Militar de Minas Gerais",
-                "Medalha de Mérito Militar (Bronze) e destaques operacionais",
-                "Bacharel em Direito (FAMINAS-BH), pós em Advocacia Criminal (FUMEC) e em Atividade Policial",
-              ],
-            },
-            {
-              foto: tenTardelly.url,
-              nome: "Tenente Walison Tardelly",
-              cargo: "Tenente da PMMG",
-              pontos: [
-                "Experiência operacional na atividade policial de rua",
-                "Visão técnica de quem atua há 20 anos como policial",
-                "Coautor do guia com foco na realidade do serviço operacional",
-              ],
-            },
-          ].map((a, i) => (
-            <Reveal key={a.nome} delay={i * 0.15}>
-              <div className="card-glass group h-full overflow-hidden rounded-2xl">
-                <div className="relative h-96 overflow-hidden">
-                  <img
-                    src={a.foto}
-                    alt={a.nome}
-                    className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-transparent" />
-                  <div className="absolute bottom-0 p-6">
-                    <p className="text-xs font-semibold tracking-widest text-gold uppercase">
-                      {a.cargo}
-                    </p>
-                    <h3 className="font-display text-3xl uppercase">{a.nome}</h3>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {topicos.map((topico, index) => (
+              <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
+                <article className="topic-card group">
+                  <div className="flex items-center justify-between">
+                    <span className="icon-tile">
+                      <topico.icon className="h-5 w-5" />
+                    </span>
+                    <span className="font-display text-4xl text-white/8">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                </div>
-                <ul className="space-y-3 p-6">
-                  {a.pontos.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-sm text-white/75">
-                      <Award className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {p}
-                    </li>
-                  ))}
-                </ul>
+                  <h3 className="mt-6 text-lg font-bold text-white">{topico.titulo}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{topico.texto}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="section-shell mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_.85fr]">
+            <Reveal>
+              <Eyebrow>Um material para usar de verdade</Eyebrow>
+              <h2 className="section-title">
+                Leia para compreender. Assista para aprofundar. Volte quando precisar.
+              </h2>
+              <p className="section-copy mt-6">
+                O PDF organiza os fundamentos. As 42 videoaulas complementam os temas com
+                explicações objetivas para você estudar no seu ritmo.
+              </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  "E-book completo em PDF",
+                  "42 videoaulas expositivas",
+                  "Conteúdo direto ao ponto",
+                  "Acesso para consulta e revisão",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.025] p-4 text-sm text-white/75"
+                  >
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-gold" /> {item}
+                  </div>
+                ))}
               </div>
             </Reveal>
-          ))}
-        </div>
-      </section>
+            <Reveal delay={0.12}>
+              <div className="offer-mini">
+                <p className="text-xs font-bold tracking-[0.22em] text-gold uppercase">
+                  Acesso completo
+                </p>
+                <div className="mt-5 flex items-end gap-2">
+                  <span className="font-display text-7xl leading-none text-white">R$ 35</span>
+                  <span className="mb-2 text-sm text-white/40">pagamento único</span>
+                </div>
+                <div className="my-7 h-px bg-white/10" />
+                <p className="text-sm leading-relaxed text-white/60">
+                  Um investimento acessível para reunir conteúdo escrito e audiovisual em um só
+                  lugar.
+                </p>
+                <CtaButton className="mt-7 w-full">Quero o conteúdo completo</CtaButton>
+              </div>
+            </Reveal>
+          </div>
+        </section>
 
-      {/* ================= QUEM É WALACE ================= */}
-      <section className="border-y border-line bg-night-2">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <div className="grid items-start gap-12 lg:grid-cols-2">
+        <section id="autores" className="section-shell mx-auto max-w-7xl scroll-mt-20">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <Eyebrow>Quem está por trás do material</Eyebrow>
+            <h2 className="section-title">Conhecimento construído na prática.</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <AuthorCard
+              image={sgtWalace.url}
+              name="Sargento Walace Costa"
+              role="3º Sargento da PMMG · Tático Móvel"
+              facts={[
+                "20 anos de serviço na Polícia Militar de Minas Gerais",
+                "Medalha de Mérito Militar e reconhecimentos operacionais",
+                "Bacharel em Direito e pós-graduado em Advocacia Criminal e Atividade Policial",
+              ]}
+            />
+            <AuthorCard
+              image={tenTardelly.url}
+              name="Tenente Walison Tardelly"
+              role="Tenente da PMMG"
+              facts={[
+                "Experiência operacional na atividade policial",
+                "Vivência prática de quem conhece a rotina do serviço",
+                "Coautor com foco na realidade da ponta da linha",
+              ]}
+            />
+          </div>
+        </section>
+
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="section-shell mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.9fr_1.1fr]">
             <Reveal>
-              <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-                Quem é Walace Costa
-              </p>
-              <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
-                20 anos de farda. <span className="text-gold-gradient">Formação jurídica.</span>
+              <ImageCarousel
+                images={[
+                  { src: walaceCasual.url, alt: "Walace Costa em momento pessoal" },
+                  { src: walaceFarda.url, alt: "Walace Costa em uniforme da PMMG" },
+                  { src: walaceMedalhas.url, alt: "Condecorações da carreira de Walace Costa" },
+                  { src: walaceDireito.url, alt: "Formação acadêmica de Walace Costa" },
+                ]}
+              />
+            </Reveal>
+            <Reveal delay={0.12}>
+              <Eyebrow>A trajetória de Walace Costa</Eyebrow>
+              <h2 className="section-title">
+                20 anos de farda, formação jurídica e compromisso com o aprendizado.
               </h2>
-              <p className="mt-6 leading-relaxed text-white/70">
-                Em 16 de agosto de 2006, Walace ingressou na Polícia Militar de Minas Gerais. Desde então, construiu uma trajetória reconhecida pela atuação operacional, incluindo um parto realizado em via pública, ocorrência que virou até tema de questão de concurso.
+              <p className="section-copy mt-6">
+                Desde 2006 na Polícia Militar de Minas Gerais, Walace construiu uma trajetória de
+                atuação operacional, estudo e aprimoramento. É bacharel em Direito, pós-graduado em
+                Advocacia Criminal e em Atividade Policial.
               </p>
               <div className="mt-8 space-y-5">
                 {[
                   {
                     icon: Medal,
-                    titulo: "Condecorado pela PMMG",
-                    texto:
-                      "Medalha de Mérito Militar (Bronze), ocorrências de destaque e reconhecimento operacional.",
+                    title: "Experiência reconhecida",
+                    text: "Medalha de Mérito Militar e ocorrências de destaque ao longo da carreira.",
                   },
                   {
                     icon: GraduationCap,
-                    titulo: "Formação jurídica completa",
-                    texto:
-                      "Bacharel em Direito (2018), pós-graduado em Advocacia Criminal (2021) e em Atividade Policial (2025).",
+                    title: "Formação que complementa a prática",
+                    text: "Conhecimento jurídico aplicado às situações da atividade operacional.",
                   },
                   {
                     icon: Users,
-                    titulo: "Mentor de policiais",
-                    texto:
-                      "Ajuda policiais e alunos de formação a evoluir, prevenir problemas administrativos e escrever melhor.",
+                    title: "Um propósito claro",
+                    text: "Compartilhar conhecimento acessível para fortalecer a atuação de outros profissionais.",
                   },
-                ].map((c) => (
-                  <div key={c.titulo} className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gold/10 text-gold ring-1 ring-gold/30">
-                      <c.icon className="h-5 w-5" />
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-4">
+                    <span className="icon-tile mt-0.5">
+                      <item.icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="font-bold">{c.titulo}</h3>
-                      <p className="mt-1 text-sm text-white/65">{c.texto}</p>
+                      <h3 className="font-bold">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-white/55">{item.text}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </Reveal>
-            <Reveal delay={0.15}>
-              <ImageCarousel
-                images={[
-                  { src: walaceCasual.url, alt: "Walace Costa — mais do que policial" },
-                  { src: walaceFarda.url, alt: "Walace Costa em uniforme de gala da PMMG" },
-                  { src: walaceMedalhas.url, alt: "Condecorações recebidas pela PMMG" },
-                  { src: walaceDireito.url, alt: "Formação em Direito e certificados" },
-                ]}
-              />
-            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ================= PARA QUEM É ================= */}
-      <section className="mx-auto max-w-4xl px-6 py-24">
-        <Reveal className="text-center">
-          <h2 className="font-display text-4xl uppercase sm:text-5xl">
-            Este material é <span className="text-gold-gradient">para você que…</span>
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-3 sm:grid-cols-2">
-          {paraQuem.map((p, i) => (
-            <Reveal key={p} delay={i * 0.06}>
-              <div className="card-glass flex items-start gap-3 rounded-lg p-4 text-white/80">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-                <span className="text-sm leading-relaxed">{p}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= OBJEÇÕES ================= */}
-      <section className="border-y border-line bg-night-2">
-        <div className="mx-auto max-w-3xl px-6 py-24">
-          <Reveal className="text-center">
-            <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-              A sua maior dúvida pode ser a nossa próxima resposta
-            </p>
-            <h2 className="mt-3 font-display text-4xl uppercase sm:text-5xl">
-              Perguntas <span className="text-gold-gradient">frequentes</span>
+        <section className="section-shell mx-auto max-w-6xl">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <Eyebrow>Para quem é</Eyebrow>
+            <h2 className="section-title">
+              Para quem prefere se preparar antes que o problema aconteça.
             </h2>
           </Reveal>
-          <div className="mt-12 space-y-3">
-            {objecoes.map((o, i) => (
-              <FaqItem key={o.pergunta} pergunta={o.pergunta} resposta={o.resposta} delay={i * 0.06} />
+          <div className="mt-12 grid gap-3 md:grid-cols-2">
+            {paraQuem.map((item, index) => (
+              <Reveal key={item} delay={(index % 2) * 0.06}>
+                <div className="flex h-full items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.025] p-5">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold text-night">
+                    <Check className="h-4 w-4" />
+                  </span>
+                  <p className="leading-relaxed text-white/72">{item}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ================= OFERTA FINAL ================= */}
-      <section id="oferta" className="relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-50"
-          style={{
-            background:
-              "radial-gradient(50% 60% at 50% 100%, color-mix(in oklab, var(--gold) 20%, transparent), transparent 75%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-4xl px-6 py-28 text-center">
-          <Reveal>
-            <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-              Não espere uma situação difícil acontecer
-            </p>
-            <h2 className="mt-4 font-display text-4xl leading-tight uppercase sm:text-6xl text-gold-gradient">
-              Seu Futuro na Atividade Policial Começa Agora
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="card-glass mx-auto mt-12 max-w-lg rounded-2xl p-10">
-              <div className="flex justify-center gap-1 text-gold">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-current" />
-                ))}
-              </div>
-              <p className="mt-6 text-sm tracking-[0.3em] text-white/50 uppercase">
-                <strong className="text-gold-gradient">E-book + 42 videoaulas</strong>
-              </p>
-              <p className="mt-3 font-display text-8xl text-gold-gradient">R$ 35,00</p>
-              <p className="mt-2 text-sm text-white/60">Pagamento único • Acesso imediato</p>
-              <CtaButton className="mt-8 w-full bg-gold text-night">
-                <span className="font-display font-bold">QUERO GARANTIR POR R$ 35</span>
-              </CtaButton>
-              <p className="mt-4 flex items-center justify-center gap-2 text-xs text-white/50">
-                <ShieldCheck className="h-4 w-4 text-gold" /> Compra segura • Checkout Kiwify
-              </p>
+        <section id="duvidas" className="border-y border-white/8 bg-night-2 scroll-mt-20">
+          <div className="section-shell mx-auto max-w-4xl">
+            <Reveal className="text-center">
+              <Eyebrow>Dúvidas frequentes</Eyebrow>
+              <h2 className="section-title">O que você precisa saber antes de começar.</h2>
+            </Reveal>
+            <div className="mt-10 space-y-3">
+              {objecoes.map((item, index) => (
+                <FaqItem key={item.pergunta} {...item} delay={index * 0.04} />
+              ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="border-t border-line bg-night-2">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-12 text-center">
-          <span className="font-display text-2xl tracking-wide text-gold-gradient">
-            PONTA DA LINHA
-          </span>
+        <section
+          id="oferta"
+          className="offer-section relative isolate overflow-hidden scroll-mt-16"
+        >
+          <div className="hero-orb hero-orb-three" />
+          <div className="section-shell relative mx-auto max-w-5xl text-center">
+            <Reveal>
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10">
+                <ShieldCheck className="h-7 w-7 text-gold" />
+              </div>
+              <Eyebrow>Atividade Policial Operacional na Ponta da Linha</Eyebrow>
+              <h2 className="mx-auto max-w-4xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.95] uppercase">
+                Prepare-se hoje para registrar melhor amanhã.
+              </h2>
+              <p className="section-copy mx-auto mt-6 max-w-2xl">
+                Tenha o e-book em PDF e 42 videoaulas complementares para estudar, consultar e
+                revisar no seu ritmo.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="mx-auto mt-10 max-w-xl rounded-[2rem] border border-gold/25 bg-night-2/85 p-6 shadow-2xl shadow-black/35 backdrop-blur sm:p-9">
+                <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+                  <div className="text-center sm:text-left">
+                    <p className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
+                      E-book + 42 videoaulas
+                    </p>
+                    <p className="mt-2 font-display text-6xl text-gold">R$ 35</p>
+                  </div>
+                  <div className="space-y-2 text-left text-sm text-white/65">
+                    <p className="flex items-center gap-2">
+                      <BadgeCheck className="h-4 w-4 text-gold" /> Conteúdo completo
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Clock3 className="h-4 w-4 text-gold" /> Acesso para revisão
+                    </p>
+                  </div>
+                </div>
+                <CtaButton className="mt-7 w-full">Quero garantir meu acesso</CtaButton>
+                <p className="mt-4 flex items-center justify-center gap-2 text-xs text-white/38">
+                  <LockKeyhole className="h-3.5 w-3.5" /> Checkout seguro pela Kiwify
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-white/8 bg-night-2 pb-24 sm:pb-0">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-10 text-center sm:px-8 md:flex-row md:text-left">
+          <div>
+            <p className="font-display text-xl tracking-wide">
+              PONTA <span className="text-gold">DA LINHA</span>
+            </p>
+            <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/38">
+              Conteúdo educacional desenvolvido por Sargento Walace Costa e Tenente Walison
+              Tardelly.
+            </p>
+          </div>
           <a
             href="https://instagram.com/walacef.costa"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-night"
+            className="btn-outline"
           >
             <AtSign className="h-4 w-4" /> @walacef.costa
           </a>
-          <p className="max-w-md text-xs leading-relaxed text-white/40">
-            Atividade Policial Operacional na Ponta da Linha: desenvolvido por Sargento Walace
-            Costa e Tenente Walison Tardelly. Conhecimento para quem está na ponta da linha.
-          </p>
         </div>
       </footer>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-night/92 p-3 backdrop-blur-xl sm:hidden">
+        <a href={KIWIFY_URL} className="btn-gold w-full py-3 text-sm">
+          Quero o material por R$ 35 <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
     </div>
+  );
+}
+
+function VideoCard({ src, eyebrow, title }: { src: string; eyebrow: string; title: string }) {
+  return (
+    <Reveal>
+      <article className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-night shadow-xl shadow-black/25">
+        <div className="relative aspect-[9/12] overflow-hidden bg-black">
+          <video
+            className="h-full w-full object-cover"
+            src={src}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={title}
+          >
+            Seu navegador não suporta a reprodução deste vídeo.
+          </video>
+          <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-night/80 px-3 py-1.5 text-[10px] font-bold tracking-wider text-white uppercase backdrop-blur">
+            <Play className="h-3 w-3 fill-gold text-gold" /> Aperte o play
+          </div>
+        </div>
+        <div className="p-5">
+          <p className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">{eyebrow}</p>
+          <h3 className="mt-2 text-base font-semibold leading-snug text-white/88">{title}</h3>
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+function AuthorCard({
+  image,
+  name,
+  role,
+  facts,
+}: {
+  image: string;
+  name: string;
+  role: string;
+  facts: string[];
+}) {
+  return (
+    <Reveal>
+      <article className="group grid h-full overflow-hidden rounded-[1.6rem] border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr]">
+        <div className="relative min-h-72 overflow-hidden">
+          <img
+            src={image}
+            alt={name}
+            className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-night/75 via-transparent to-transparent sm:bg-gradient-to-r" />
+        </div>
+        <div className="flex flex-col justify-center p-6 sm:p-7">
+          <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">{role}</p>
+          <h3 className="mt-2 font-display text-3xl uppercase">{name}</h3>
+          <ul className="mt-6 space-y-3">
+            {facts.map((fact) => (
+              <li
+                key={fact}
+                className="flex items-start gap-3 text-sm leading-relaxed text-white/58"
+              >
+                <Award className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {fact}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </Reveal>
   );
 }
 
 function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-
+  const reduceMotion = useReducedMotion();
   const paginate = useCallback(
-    (newDirection: number) => {
-      setDirection(newDirection);
-      setIndex((prev) => {
-        const next = prev + newDirection;
-        if (next < 0) return images.length - 1;
-        if (next >= images.length) return 0;
-        return next;
-      });
+    (step: number) => {
+      setDirection(step);
+      setIndex((current) => (current + step + images.length) % images.length);
     },
     [images.length],
   );
-
   useEffect(() => {
-    const timer = setInterval(() => paginate(1), 5000);
-    return () => clearInterval(timer);
-  }, [paginate]);
-
+    if (reduceMotion) return;
+    const timer = window.setInterval(() => paginate(1), 5500);
+    return () => window.clearInterval(timer);
+  }, [paginate, reduceMotion]);
   const variants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 0.96,
-    }),
+    enter: (step: number) => ({ x: step > 0 ? "12%" : "-12%", opacity: 0, scale: 1.03 }),
     center: { x: 0, opacity: 1, scale: 1 },
-    exit: (dir: number) => ({
-      x: dir > 0 ? "-100%" : "100%",
-      opacity: 0,
-      scale: 0.96,
-    }),
+    exit: (step: number) => ({ x: step > 0 ? "-12%" : "12%", opacity: 0, scale: 0.98 }),
   };
-
   return (
-    <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl ring-1 ring-line">
-      <div className="relative aspect-[4/5] w-full">
+    <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-[1.75rem] border border-white/10 bg-night shadow-2xl shadow-black/35">
+      <div className="relative aspect-[4/5]">
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={index}
@@ -685,39 +772,36 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 h-full w-full object-cover object-top"
           />
         </AnimatePresence>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/55 via-transparent to-transparent" />
       </div>
-
       <button
         onClick={() => paginate(-1)}
-        className="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-night/70 text-gold backdrop-blur-sm ring-1 ring-gold/30 transition-colors hover:bg-night hover:text-gold-bright"
+        className="carousel-button left-4"
         aria-label="Imagem anterior"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={() => paginate(1)}
-        className="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-night/70 text-gold backdrop-blur-sm ring-1 ring-gold/30 transition-colors hover:bg-night hover:text-gold-bright"
+        className="carousel-button right-4"
         aria-label="Próxima imagem"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
-
-      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-        {images.map((_, i) => (
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
+        {images.map((image, itemIndex) => (
           <button
-            key={i}
+            key={image.alt}
             onClick={() => {
-              setDirection(i > index ? 1 : -1);
-              setIndex(i);
+              setDirection(itemIndex > index ? 1 : -1);
+              setIndex(itemIndex);
             }}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? "w-6 bg-gold" : "w-2 bg-white/40 hover:bg-white/70"
-            }`}
-            aria-label={`Ir para imagem ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all ${itemIndex === index ? "w-8 bg-gold" : "w-2 bg-white/45"}`}
+            aria-label={`Mostrar imagem ${itemIndex + 1}`}
           />
         ))}
       </div>
@@ -738,26 +822,27 @@ function FaqItem({
   return (
     <Reveal delay={delay}>
       <button
-        onClick={() => setOpen((v) => !v)}
-        className="card-glass w-full rounded-lg p-5 text-left transition-colors hover:border-gold/40"
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="w-full rounded-2xl border border-white/9 bg-white/[0.025] p-5 text-left transition-colors hover:border-gold/35 sm:p-6"
         aria-expanded={open}
       >
-        <div className="flex items-center justify-between gap-4">
-          <span className="font-bold text-white">{pergunta}</span>
-          <ChevronDown
-            className={`h-5 w-5 shrink-0 text-gold transition-transform duration-300 ${
-              open ? "rotate-180" : ""
-            }`}
-          />
-        </div>
-        <motion.div
+        <span className="flex items-center justify-between gap-5">
+          <span className="font-semibold text-white/88">{pergunta}</span>
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+            <ChevronDown
+              className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+            />
+          </span>
+        </span>
+        <motion.span
           initial={false}
           animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="overflow-hidden"
+          transition={{ duration: 0.3 }}
+          className="block overflow-hidden"
         >
-          <p className="pt-4 text-sm leading-relaxed text-white/65">{resposta}</p>
-        </motion.div>
+          <span className="block pt-4 text-sm leading-relaxed text-white/55">{resposta}</span>
+        </motion.span>
       </button>
     </Reveal>
   );

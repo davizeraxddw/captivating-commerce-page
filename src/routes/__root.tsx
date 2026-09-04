@@ -84,7 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "E-book com apontamentos jurídicos para agir, escrever e registrar com segurança na atividade policial. Por Sargento Walace Costa e Tenente Walison Tardelly. Apenas R$ 35.",
       },
       { name: "author", content: "Walace Costa" },
-      { property: "og:title", content: "Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira" },
+      {
+        property: "og:title",
+        content: "Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira",
+      },
       {
         property: "og:description",
         content:
@@ -92,7 +95,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -116,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
