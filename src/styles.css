@@ -61,10 +61,30 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-soft: var(--gold-soft);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-night-3: var(--night-3);
+  --color-line: var(--line);
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
+  /* Landing page palette — dark navy + gold */
+  --night: oklch(0.16 0.03 255);
+  --night-2: oklch(0.2 0.035 255);
+  --night-3: oklch(0.24 0.04 255);
+  --gold: oklch(0.78 0.14 85);
+  --gold-bright: oklch(0.86 0.15 88);
+  --gold-soft: oklch(0.72 0.12 85);
+  --line: oklch(1 0 0 / 10%);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
