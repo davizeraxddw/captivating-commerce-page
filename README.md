@@ -1,14 +1,16 @@
-# Welcome to your Lovable project
+# Premium Sales Gateway
+
+faça uma leading page focada em vendas, porem com o visual premium. o chekout de kiwify eu vou te enviar depois, porem quero um site com animações e bonito visualmente atraindo epssoas para comrpar, vou te enviar os arquivos necessarios, o arquivo word, é sobre o produto
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a770a2e2-c5d6-4e87-ac38-5a132f66a066).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +22,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
