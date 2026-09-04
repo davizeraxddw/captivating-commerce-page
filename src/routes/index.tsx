@@ -344,10 +344,6 @@ function LandingPage() {
                 alt="Evite erros que podem custar sua carreira — e-book Atividade Policial Operacional na Ponta da Linha"
                 className="hero-promo-image"
               />
-              <a href={KIWIFY_URL} className="hero-promo-cta" aria-label="Quero acessar o material">
-                <span>Quero acessar</span>
-                <ArrowRight className="h-5 w-5" />
-              </a>
             </motion.div>
           </div>
         </section>
