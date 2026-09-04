@@ -31,7 +31,6 @@ import tenTardelly from "@/assets/ten-tardelly.jpeg.asset.json";
 import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
-import walaceEsporte from "@/assets/walace-esporte.jpeg.asset.json";
 import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 
 // TODO: substituir pelo link de checkout da Kiwify quando o cliente enviar.
