@@ -36,7 +36,6 @@ import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
-// Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
 
 const authorIntro = {
@@ -191,7 +190,8 @@ function CtaButton({ children, className = "" }: { children: ReactNode; classNam
   return (
     <a
       href={KIWIFY_URL}
-      className={`btn-gold group relative transition-colors ${className}`}>
+      className={`btn-gold group relative transition-colors ${className}`}
+    >
       <span>{children}</span>
       <ArrowRight
         className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 hover:fill-gold/80"
@@ -209,58 +209,6 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-function IntroPresentation({ reduceMotion }: { reduceMotion: boolean }) {
-  return (
-    <section className="min-h-screen bg-night overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 py-24 sm:px-8 lg:px-12">
-        <div className="grid max-w-6xl mx-auto grid-cols-1 gap-8 md:grid-cols-2 items-center">
-          <div>
-            <h2 className="text-4xl font-display font-bold tracking-[0.1em] text-gold uppercase mb-6">
-              Quem está por trás do material
-            </h2>
-            <p className="text-lg text-white/60 leading-relaxed mb-8">
-              Sargento Walace Costa e Tenente Walison Tardelly compartilham um objetivo
-              claro: fornecer conhecimento de qualidade para a comunidade policial, baseado
-              em décadas de experiência real e fundamentação jurídica sólida.
-            </p>
-            <div className="space-y-4">
-              {Object.entries(authorIntro).map(([key, author]) => (
-                <div
-                  key={key}
-                  className="flex items-start gap-4 p-6 rounded-2xl border border-white/10 bg-white/[0.025]"
-                >
-                  <img
-                    src={author.avatar}
-                    alt={author.name}
-                    className={`h-16 w-16 rounded-full object-cover flex-shrink-0 transition-transform ${reduceMotion ? "" : "hover:scale-105"}`}
-                  />
-                  <div>
-                    <p className="text-xl font-semibold text-white">
-                      {author.name}
-                    </p>
-                    <p className="text-base text-white/50">{author.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative">
-            <div
-              className="relative h-80 w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.025]"
-            >
-              <img
-                src="/images/walace-casual.jpeg.asset.json"
-                alt="Sargento Walace Costa em momento pessoal"
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function LandingPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
@@ -268,12 +216,6 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
-      <IntroPresentation reduceMotion={reduceMotion} />
-      <motion.div
-        className="fixed inset-x-0 top-0 z-[70] h-1 origin-left bg-gold"
-        style={{ scaleX }}
-      />
-
       <header className="sticky top-0 z-50 border-b border-white/8 bg-night/82 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
@@ -306,7 +248,7 @@ function LandingPage() {
 
       <main>
         <section id="inicio" className="hero-professional relative isolate overflow-hidden">
-          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_.88fr] lg:gap-16 lg:py-20">
+          <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-12">
             <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -346,7 +288,7 @@ function LandingPage() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0.2 : 0.65, delay: reduceMotion ? 0 : 0.24 }}
-                className="mt-7 flex flex-wrap gap-3"
+                className="mt-6 flex flex-wrap gap-3"
               >
                 <span className="hero-detail">
                   <BookOpen className="h-4 w-4" /> E-book em PDF
@@ -362,7 +304,7 @@ function LandingPage() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0.2 : 0.7, delay: reduceMotion ? 0 : 0.28 }}
-                className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
+                className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
               >
                 <CtaButton>Quero o material completo</CtaButton>
                 <div className="flex items-center gap-3 border-l border-white/12 pl-5">
@@ -380,7 +322,7 @@ function LandingPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: reduceMotion ? 0.2 : 0.8, delay: reduceMotion ? 0 : 0.42 }}
-                className="mt-9 flex items-center gap-4"
+                className="mt-8 flex items-center gap-4"
               >
                 <div className="flex -space-x-2">
                   <img
@@ -402,40 +344,29 @@ function LandingPage() {
                 </p>
               </motion.div>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94, x: 24 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: reduceMotion ? 0.2 : 0.9, delay: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-promo relative mx-auto w-full max-w-[570px]"
-            >
-              <img
-                src="/images/oferta-ponta-da-linha.png"
-                alt="Evite erros que podem custar sua carreira — e-book Atividade Policial Operacional na Ponta da Linha"
-                className="hero-promo-image"
-              />
-            </motion.div>
           </div>
         </section>
 
         <section className="border-y border-white/8 bg-night-2">
-          <div className="mx-auto grid max-w-7xl divide-y divide-white/8 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
-            {[
-              { icon: BookOpen, value: "E-book", label: "material completo em PDF" },
-              { icon: PlayCircle, value: "42 aulas", label: "conteúdo complementar" },
-              { icon: Medal, value: "20 anos", label: "de experiência policial" },
-            ].map((item) => (
-              <div
-                key={item.value}
-                className="flex items-center gap-4 py-6 sm:justify-center sm:px-6"
-              >
-                <item.icon className="h-7 w-7 text-gold" />
-                <div>
-                  <p className="font-display text-2xl tracking-wide">{item.value}</p>
-                  <p className="text-xs text-white/45">{item.label}</p>
+          <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {[
+                { icon: BookOpen, value: "E-book", label: "material completo em PDF" },
+                { icon: PlayCircle, value: "42 aulas", label: "conteúdo complementar" },
+                { icon: Medal, value: "20 anos", label: "de experiência policial" },
+              ].map((item) => (
+                <div
+                  key={item.value}
+                  className="flex items-center gap-4 py-3"
+                >
+                  <item.icon className="h-7 w-7 text-gold" />
+                  <div>
+                    <p className="font-display text-2xl tracking-wide">{item.value}</p>
+                    <p className="text-xs text-white/45">{item.label}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -453,9 +384,7 @@ function LandingPage() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {topicos.map((topico, index) => (
               <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
-                <article
-                  className="topic-card group hover:scale-[1.02] transition-transform duration-300"
-                >
+                <article className="topic-card group hover:scale-[1.02] transition-transform duration-300">
                   <div className="flex items-center justify-between">
                     <span className="icon-tile">
                       <topico.icon className="h-5 w-5" />
@@ -473,7 +402,7 @@ function LandingPage() {
         </section>
 
         <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto max-w-7xl">
+          <div className="section-shell mx-auto max-w-7xl px-5 py-12">
             <Reveal className="mx-auto max-w-3xl text-center">
               <Eyebrow>Por dentro do projeto</Eyebrow>
               <h2 className="section-title">Ouça de quem vive a atividade policial.</h2>
@@ -498,7 +427,7 @@ function LandingPage() {
         </section>
 
         <section className="section-shell">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
+          <div className="mx-auto max-w-6xl px-5 py-12 lg:grid-cols-2">
             <Reveal>
               <Eyebrow>O ponto crítico</Eyebrow>
               <h2 className="section-title">
@@ -550,7 +479,7 @@ function LandingPage() {
         </section>
 
         <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.9fr_1.1fr]">
+          <div className="section-shell mx-auto max-w-7xl px-5 py-12">
             <Reveal>
               <ImageCarousel
                 images={[
@@ -605,7 +534,7 @@ function LandingPage() {
         </section>
 
         <section id="duvidas" className="border-y border-white/8 bg-night-2 scroll-mt-20">
-          <div className="section-shell mx-auto max-w-4xl">
+          <div className="section-shell mx-auto max-w-4xl px-5 py-12">
             <Reveal className="text-center">
               <Eyebrow>Dúvidas frequentes</Eyebrow>
               <h2 className="section-title">O que você precisa saber antes de começar.</h2>
@@ -623,9 +552,9 @@ function LandingPage() {
           className="offer-section relative isolate overflow-hidden scroll-mt-16"
         >
           <div className="hero-orb hero-orb-three" />
-          <div className="section-shell relative mx-auto max-w-5xl text-center">
+          <div className="section-shell relative mx-auto max-w-5xl px-5 py-20 text-center">
             <Reveal>
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10">
+              <div className="mx-auto mb-8 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10">
                 <ShieldCheck className="h-7 w-7 text-gold" />
               </div>
               <Eyebrow>Atividade Policial Operacional na Ponta da Linha</Eyebrow>
@@ -638,7 +567,7 @@ function LandingPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="mx-auto mt-10 max-w-xl rounded-[2rem] border border-gold/25 bg-night-2/85 p-6 shadow-2xl shadow-black/35 backdrop-blur sm:p-9">
+              <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-gold/25 bg-night-2/85 p-6 shadow-2xl shadow-black/35 backdrop-blur sm:p-9">
                 <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
                   <div className="text-center sm:text-left">
                     <p className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
@@ -693,7 +622,7 @@ function LandingPage() {
 function VideoCard({ src, eyebrow, title }: { src: string; eyebrow: string; title: string }) {
   return (
     <Reveal>
-      <article className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-night shadow-xl shadow-black/25">
+      <article className="overflow-hidden rounded-2xl border border-white/10 bg-night shadow-xl shadow-black/25">
         <div className="relative aspect-[9/12] overflow-hidden bg-black">
           <video
             className="h-full w-full object-cover"
@@ -732,9 +661,9 @@ function AuthorCard({
   return (
     <Reveal>
       <article
-        className="group grid h-full overflow-hidden rounded-[1.6rem] border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr] hover:scale-[1.02] transition-transform duration-300"
+        className="group grid h-full overflow-hidden rounded-2xl border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr] hover:scale-[1.02] transition-transform duration-300"
       >
-        <div className="relative min-h-72 overflow-hidden">
+        <div className="relative min-h-80 overflow-hidden">
           <img
             src={image}
             alt={name}
@@ -783,7 +712,7 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
     exit: (step: number) => ({ x: step > 0 ? "-12%" : "12%", opacity: 0, scale: 0.98 }),
   };
   return (
-    <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-[1.75rem] border border-white/10 bg-night shadow-2xl shadow-black/35">
+    <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-night shadow-2xl shadow-black/35">
       <div className="relative aspect-[4/5]">
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
