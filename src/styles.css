@@ -162,3 +162,61 @@
     color: var(--color-foreground);
   }
 }
+
+@utility text-gold-gradient {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn-gold {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-soft));
+  color: var(--night);
+  box-shadow: 0 10px 40px -10px color-mix(in oklab, var(--gold) 55%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.08);
+    box-shadow: 0 16px 50px -10px color-mix(in oklab, var(--gold) 70%, transparent);
+  }
+}
+
+@utility card-glass {
+  background: color-mix(in oklab, var(--night-3) 55%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
+}
