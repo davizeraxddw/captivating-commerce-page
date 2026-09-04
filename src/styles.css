@@ -220,3 +220,8 @@
 @utility animate-pulse-ring {
   animation: pulse-ring 2.2s ease-out infinite;
 }
+
+@utility shadow-gold-outline {
+  text-shadow: 0 0 30px color-mix(in oklab, var(--gold) 50%, transparent),
+    0 0 50px color-mix(in oklab, var(--gold) 30%, transparent);
+}

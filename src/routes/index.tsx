@@ -41,7 +41,7 @@ const KIWIFY_URL = "#oferta";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Atividade Policial na Ponta da Linha — E-book + 42 Videoaulas" },
+      { title: "Atividade Policial na Ponta da Linha: E-book + 42 Videoaulas" },
       {
         name: "description",
         content:
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Atividade Policial na Ponta da Linha — Evite erros que podem custar sua carreira",
+        content: "Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira",
       },
       {
         property: "og:description",
@@ -143,7 +143,7 @@ const topicos = [
     icon: Gavel,
     titulo: "O papel do policial no processo",
     texto:
-      "A ocorrência não termina na rua. O que foi registrado pode chegar ao processo judicial — entenda o seu papel.",
+      "Agir certo é essencial. Entender o próximo passo pode salvar sua carreira.",
   },
   {
     icon: Cannabis,
@@ -162,7 +162,7 @@ const objecoes = [
   {
     pergunta: "“Eu não sou da área jurídica.”",
     resposta:
-      "Justamente por isso o material foi pensado para ser objetivo e aplicado à realidade operacional — sem transformar o conteúdo em um tratado jurídico.",
+      "Justamente por isso o material foi pensado para ser objetivo e aplicar na realidade operacional, sem transformar em tratado jurídico.",
   },
   {
     pergunta: "“Eu já tenho experiência de rua.”",
@@ -229,10 +229,11 @@ function LandingPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display text-5xl leading-[1.05] uppercase sm:text-6xl lg:text-7xl"
+              className="font-display text-5xl leading-[1.05] uppercase sm:text-6xl lg:text-7xl shadow-gold-outline"
             >
-              Evite erros que podem{" "}
-              <span className="text-gold-gradient">custar sua carreira</span>
+              O Guia que Todo Policial Precisa
+              <br />
+              <span className="text-gold-gradient">para Sobreviver na Rua</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -250,12 +251,13 @@ function LandingPage() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-8 flex flex-wrap items-center gap-6"
             >
-              <CtaButton>
-                Quero o meu agora <ShieldCheck className="h-5 w-5" />
+              <CtaButton className="animate-pulse">
+                <span className="font-display font-bold">QUERO GARANTIR MEU ACESSO</span>
+                <ShieldCheck className="h-5 w-5 ml-2" />
               </CtaButton>
-              <div>
-                <p className="text-sm tracking-widest text-white/50 uppercase">Apenas</p>
-                <p className="font-display text-4xl text-gold-gradient">
+              <div className="grid grid-cols-2 gap-4 items-end">
+                <p className="text-sm tracking-widest text-white/50 uppercase">Investimento</p>
+                <p className="font-display text-5xl font-bold text-gold-gradient">
                   R$ 35<span className="text-2xl">,00</span>
                 </p>
               </div>
@@ -292,7 +294,7 @@ function LandingPage() {
             <div className="animate-float-slow">
               <img
                 src={ebookCover.url}
-                alt="E-book Atividade Policial na Ponta da Linha — Evite erros que podem custar sua carreira"
+                alt="E-book Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira"
                 className="w-full rounded-xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-gold/30"
               />
             </div>
@@ -315,9 +317,8 @@ function LandingPage() {
           <Reveal delay={0.1}>
             <p className="mt-6 text-lg leading-relaxed text-white/70">
               Uma decisão tomada em segundos pode ser analisada anos depois. E aquilo que não foi
-              devidamente registrado — ou foi registrado de maneira equivocada — pode gerar
-              consequências para a ocorrência, para a prova e, principalmente,{" "}
-              <strong className="text-white">para a sua carreira</strong>.
+              registrado da forma correta pode gerar consequências para a ocorrência, para a prova e,
+              principalmente, para <strong className="text-white">sua carreira</strong>.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -483,9 +484,7 @@ function LandingPage() {
                 20 anos de farda. <span className="text-gold-gradient">Formação jurídica.</span>
               </h2>
               <p className="mt-6 leading-relaxed text-white/70">
-                Em 16 de agosto de 2006, Walace ingressou na Polícia Militar de Minas Gerais. Desde
-                então, construiu uma trajetória reconhecida pela atuação operacional — incluindo um
-                parto realizado em via pública, ocorrência que virou até tema de questão de concurso.
+                Em 16 de agosto de 2006, Walace ingressou na Polícia Militar de Minas Gerais. Desde então, construiu uma trajetória reconhecida pela atuação operacional, incluindo um parto realizado em via pública, ocorrência que virou até tema de questão de concurso.
               </p>
               <div className="mt-8 space-y-5">
                 {[
@@ -586,9 +585,8 @@ function LandingPage() {
             <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
               Não espere uma situação difícil acontecer
             </p>
-            <h2 className="mt-4 font-display text-4xl leading-tight uppercase sm:text-6xl">
-              Esteja mais preparado para a{" "}
-              <span className="text-gold-gradient">atividade policial</span>
+            <h2 className="mt-4 font-display text-4xl leading-tight uppercase sm:text-6xl text-gold-gradient">
+              Seu Futuro na Atividade Policial Começa Agora
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -599,12 +597,12 @@ function LandingPage() {
                 ))}
               </div>
               <p className="mt-6 text-sm tracking-[0.3em] text-white/50 uppercase">
-                E-book + 42 videoaulas
+                <strong className="text-gold-gradient">E-book + 42 videoaulas</strong>
               </p>
-              <p className="mt-3 font-display text-7xl text-gold-gradient">R$ 35,00</p>
+              <p className="mt-3 font-display text-8xl text-gold-gradient">R$ 35,00</p>
               <p className="mt-2 text-sm text-white/60">Pagamento único • Acesso imediato</p>
-              <CtaButton className="mt-8 w-full">
-                Quero garantir o meu acesso
+              <CtaButton className="mt-8 w-full bg-gold text-night">
+                <span className="font-display font-bold">QUERO GARANTIR POR R$ 35</span>
               </CtaButton>
               <p className="mt-4 flex items-center justify-center gap-2 text-xs text-white/50">
                 <ShieldCheck className="h-4 w-4 text-gold" /> Compra segura • Checkout Kiwify
@@ -629,7 +627,7 @@ function LandingPage() {
             <AtSign className="h-4 w-4" /> @walacef.costa
           </a>
           <p className="max-w-md text-xs leading-relaxed text-white/40">
-            Atividade Policial Operacional na Ponta da Linha — desenvolvido por Sargento Walace
+            Atividade Policial Operacional na Ponta da Linha: desenvolvido por Sargento Walace
             Costa e Tenente Walison Tardelly. Conhecimento para quem está na ponta da linha.
           </p>
         </div>

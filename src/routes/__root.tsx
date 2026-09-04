@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Atividade Policial na Ponta da Linha — E-book + 42 Videoaulas" },
+      { title: "Atividade Policial na Ponta da Linha: E-book + 42 Videoaulas" },
       {
         name: "description",
         content:
           "E-book com apontamentos jurídicos para agir, escrever e registrar com segurança na atividade policial. Por Sargento Walace Costa e Tenente Walison Tardelly. Apenas R$ 35.",
       },
       { name: "author", content: "Walace Costa" },
-      { property: "og:title", content: "Atividade Policial na Ponta da Linha — Evite erros que podem custar sua carreira" },
+      { property: "og:title", content: "Atividade Policial na Ponta da Linha: Evite erros que podem custar sua carreira" },
       {
         property: "og:description",
         content:
