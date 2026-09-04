@@ -683,9 +683,20 @@ function LandingPage() {
         </div>
       </footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-night/92 p-3 backdrop-blur-xl sm:hidden">
-        <a href={KIWIFY_URL} className="btn-gold w-full py-3 text-sm">
-          Quero o material por R$ 35 <ArrowRight className="h-4 w-4" />
+      <div className="floating-sales-wrap">
+        <a
+          href={KIWIFY_URL}
+          className="floating-sales-cta"
+          aria-label="Comprar o material por R$ 35"
+        >
+          <span className="floating-sales-icon">
+            <ShieldCheck className="h-5 w-5" />
+          </span>
+          <span className="min-w-0 flex-1 text-left">
+            <small>Invista na sua preparação</small>
+            <strong>Quero o material por R$ 35</strong>
+          </span>
+          <ArrowRight className="h-5 w-5 shrink-0" />
         </a>
       </div>
     </div>
