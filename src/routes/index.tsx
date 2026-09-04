@@ -7,8 +7,6 @@ import {
   Award,
   BadgeCheck,
   BookOpen,
-  Check,
-  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -113,15 +111,6 @@ const topicos = [
     titulo: "Lei de Drogas",
     texto: "O que mudou, o que permanece e quais pontos merecem atenção durante a atuação.",
   },
-];
-
-const paraQuem = [
-  "Está no curso de formação e quer começar mais preparado",
-  "Já atua na Polícia Militar ou em outra força de segurança",
-  "Quer elaborar documentos e registros com mais clareza",
-  "Busca compreender os aspectos jurídicos da rotina operacional",
-  "Quer reduzir falhas de atuação e documentação",
-  "Deseja conhecer melhor os limites da própria atuação",
 ];
 
 const objecoes = [
@@ -448,53 +437,6 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_.85fr]">
-            <Reveal>
-              <Eyebrow>Um material para usar de verdade</Eyebrow>
-              <h2 className="section-title">
-                Leia para compreender. Assista para aprofundar. Volte quando precisar.
-              </h2>
-              <p className="section-copy mt-6">
-                O PDF organiza os fundamentos. As 42 videoaulas complementam os temas com
-                explicações objetivas para você estudar no seu ritmo.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  "E-book completo em PDF",
-                  "42 videoaulas expositivas",
-                  "Conteúdo direto ao ponto",
-                  "Acesso para consulta e revisão",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.025] p-4 text-sm text-white/75"
-                  >
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-gold" /> {item}
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <div className="offer-mini">
-                <p className="text-xs font-bold tracking-[0.22em] text-gold uppercase">
-                  Acesso completo
-                </p>
-                <div className="mt-5 flex items-end gap-2">
-                  <span className="font-display text-7xl leading-none text-white">R$ 35</span>
-                  <span className="mb-2 text-sm text-white/40">pagamento único</span>
-                </div>
-                <div className="my-7 h-px bg-white/10" />
-                <p className="text-sm leading-relaxed text-white/60">
-                  Um investimento acessível para reunir conteúdo escrito e audiovisual em um só
-                  lugar.
-                </p>
-                <CtaButton className="mt-7 w-full">Quero o conteúdo completo</CtaButton>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
         <section id="autores" className="section-shell mx-auto max-w-7xl scroll-mt-20">
           <Reveal className="mx-auto max-w-3xl text-center">
             <Eyebrow>Quem está por trás do material</Eyebrow>
@@ -576,27 +518,6 @@ function LandingPage() {
                 ))}
               </div>
             </Reveal>
-          </div>
-        </section>
-
-        <section className="section-shell mx-auto max-w-6xl">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <Eyebrow>Para quem é</Eyebrow>
-            <h2 className="section-title">
-              Para quem prefere se preparar antes que o problema aconteça.
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-3 md:grid-cols-2">
-            {paraQuem.map((item, index) => (
-              <Reveal key={item} delay={(index % 2) * 0.06}>
-                <div className="flex h-full items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.025] p-5">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold text-night">
-                    <Check className="h-4 w-4" />
-                  </span>
-                  <p className="leading-relaxed text-white/72">{item}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </section>
 
