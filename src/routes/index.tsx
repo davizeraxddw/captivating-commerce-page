@@ -17,6 +17,8 @@ import {
   GraduationCap,
   AtSign,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Star,
   Clock3,
