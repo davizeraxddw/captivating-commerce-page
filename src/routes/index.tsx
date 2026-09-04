@@ -236,90 +236,135 @@ function LandingPage() {
       </header>
 
       <main>
-        <section id="inicio" className="hero-grid relative isolate overflow-hidden">
-          <div className="hero-orb hero-orb-one" />
-          <div className="hero-orb hero-orb-two" />
-          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:py-20">
+        <section id="inicio" className="hero-cinematic relative isolate overflow-hidden">
+          <div className="hero-horizon" aria-hidden="true" />
+          <div className="hero-siren hero-siren-red" aria-hidden="true" />
+          <div className="hero-siren hero-siren-blue" aria-hidden="true" />
+          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-[90rem] items-center gap-10 px-5 pb-10 pt-14 sm:px-8 lg:grid-cols-[.88fr_1.12fr] lg:gap-4 lg:py-12">
             <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55 }}
-                className="inline-flex items-center gap-2 rounded-full border border-gold/35 bg-gold/8 px-4 py-2 text-xs font-bold tracking-[0.16em] text-gold uppercase"
+                className="inline-flex items-center gap-2 rounded-full border border-gold/35 bg-black/30 px-4 py-2 text-xs font-bold tracking-[0.16em] text-gold uppercase backdrop-blur"
               >
-                <Sparkles className="h-4 w-4" /> E-book em PDF + 42 videoaulas
+                <Sparkles className="h-4 w-4" /> Novo e-book • acesso imediato
               </motion.div>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.08 }}
-                className="mt-7 max-w-3xl font-display text-[clamp(3.2rem,8vw,6.8rem)] leading-[0.92] tracking-[-0.025em] uppercase"
+                className="mt-6 max-w-3xl font-display text-[clamp(3.15rem,7vw,6.6rem)] leading-[0.88] tracking-[-0.025em] uppercase"
               >
-                Sua atuação termina na rua.
-                <span className="mt-2 block text-gold-gradient">O registro permanece.</span>
+                Evite erros
+                <span className="block text-gold-gradient">que podem custar</span>
+                sua carreira.
               </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.14 }}
+                className="mt-5 font-display text-xl tracking-[0.08em] text-white uppercase sm:text-2xl"
+              >
+                Atividade policial <span className="text-gold">na ponta da linha</span>
+              </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18 }}
-                className="mt-7 max-w-2xl text-base leading-relaxed text-white/70 sm:text-xl"
+                className="mt-4 max-w-xl text-base leading-relaxed text-white/66 sm:text-lg"
               >
-                Um guia prático para compreender, fundamentar e documentar a atividade policial com
-                mais segurança — criado por quem reúne experiência operacional e formação jurídica.
+                Guia prático com apontamentos jurídicos para agir, fundamentar e registrar com mais
+                segurança nas atividades policiais.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.28 }}
-                className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
+                className="mt-7 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
               >
-                <CtaButton>Quero me preparar melhor</CtaButton>
-                <div className="flex items-center gap-3">
-                  <span className="font-display text-4xl text-gold">R$ 35</span>
-                  <span className="max-w-24 text-xs leading-snug text-white/45">
-                    pagamento único
+                <CtaButton>Quero o material completo</CtaButton>
+                <div className="flex items-end gap-2">
+                  <span className="pb-1 text-xs font-bold tracking-[0.16em] text-white/42 uppercase">
+                    apenas
                   </span>
+                  <span className="font-display text-5xl leading-none text-gold">R$ 35</span>
                 </div>
               </motion.div>
-              <motion.ul
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.42 }}
-                className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/62"
+                className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-black/25 backdrop-blur-sm"
               >
-                {["Linguagem objetiva", "Aplicação prática", "Acesso para revisar"].map((item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-gold" /> {item}
-                  </li>
+                {[
+                  { icon: BookOpen, value: "PDF", label: "material completo" },
+                  { icon: PlayCircle, value: "42", label: "videoaulas" },
+                  { icon: Medal, value: "20 anos", label: "experiência" },
+                ].map((item) => (
+                  <div key={item.value} className="hero-proof">
+                    <item.icon className="h-5 w-5 shrink-0 text-gold" />
+                    <span>
+                      <strong>{item.value}</strong>
+                      <small>{item.label}</small>
+                    </span>
+                  </div>
                 ))}
-              </motion.ul>
+              </motion.div>
             </div>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.94, x: 24 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mx-auto w-full max-w-[520px]"
+              className="hero-showcase relative mx-auto w-full max-w-[760px]"
             >
-              <div className="absolute -inset-8 rounded-full bg-gold/10 blur-3xl" />
-              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/45 backdrop-blur-sm sm:p-6">
-                <img
-                  src={ebookCover.url}
-                  alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
-                  className="w-full rounded-[1.35rem] object-cover shadow-2xl"
-                />
-                <div className="absolute -bottom-6 -left-3 rounded-2xl border border-gold/30 bg-night-2/95 px-5 py-4 shadow-xl backdrop-blur sm:-left-9">
-                  <p className="text-xs font-bold tracking-[0.16em] text-gold uppercase">
-                    Experiência real
-                  </p>
-                  <p className="mt-1 text-sm font-semibold text-white">
-                    20 anos de atividade policial
-                  </p>
+              <div className="hero-arch" aria-hidden="true" />
+              <div className="hero-author hero-author-left">
+                <img src="/images/sgt-walace-cutout.png" alt="Sargento Walace Costa" />
+                <div className="hero-author-name">
+                  <span>Sargento</span>
+                  <strong>Walace Costa</strong>
                 </div>
-                <div className="absolute -right-3 top-10 flex h-24 w-24 rotate-6 flex-col items-center justify-center rounded-full border border-gold/50 bg-gold text-center text-night shadow-xl sm:-right-8">
-                  <span className="font-display text-3xl leading-none">42</span>
-                  <span className="text-[10px] font-bold tracking-wide uppercase">videoaulas</span>
+              </div>
+              <div className="hero-author hero-author-right">
+                <img src="/images/ten-tardelly-cutout.png" alt="Tenente Walison Tardelly" />
+                <div className="hero-author-name">
+                  <span>Tenente</span>
+                  <strong>Walison Tardelly</strong>
                 </div>
+              </div>
+              <div className="hero-book-wrap">
+                <div className="hero-book-glow" aria-hidden="true" />
+                <div className="hero-book">
+                  <span className="hero-book-spine" aria-hidden="true" />
+                  <span className="hero-book-pages" aria-hidden="true" />
+                  <img
+                    src="/images/ebook-cover-hero.jpg"
+                    alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
+                  />
+                </div>
+                <div className="hero-stamp">
+                  <ShieldCheck className="h-5 w-5" />
+                  <span>
+                    <strong>Feito por policiais</strong>
+                    <small>para policiais</small>
+                  </span>
+                </div>
+              </div>
+              <div className="hero-floating-card hero-floating-top">
+                <FileCheck2 className="h-6 w-6 text-gold" />
+                <span>
+                  <small>Material completo</small>
+                  <strong>E-book em PDF</strong>
+                </span>
+              </div>
+              <div className="hero-floating-card hero-floating-bottom">
+                <PlayCircle className="h-7 w-7 text-gold" />
+                <span>
+                  <strong>42 aulas</strong>
+                  <small>expositivas</small>
+                </span>
               </div>
             </motion.div>
           </div>
