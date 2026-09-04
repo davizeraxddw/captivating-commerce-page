@@ -61,10 +61,30 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-soft: var(--gold-soft);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-night-3: var(--night-3);
+  --color-line: var(--line);
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
+  /* Landing page palette — dark navy + gold */
+  --night: oklch(0.16 0.03 255);
+  --night-2: oklch(0.2 0.035 255);
+  --night-3: oklch(0.24 0.04 255);
+  --gold: oklch(0.78 0.14 85);
+  --gold-bright: oklch(0.86 0.15 88);
+  --gold-soft: oklch(0.72 0.12 85);
+  --line: oklch(1 0 0 / 10%);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -141,4 +161,62 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+@utility text-gold-gradient {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn-gold {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-soft));
+  color: var(--night);
+  box-shadow: 0 10px 40px -10px color-mix(in oklab, var(--gold) 55%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.08);
+    box-shadow: 0 16px 50px -10px color-mix(in oklab, var(--gold) 70%, transparent);
+  }
+}
+
+@utility card-glass {
+  background: color-mix(in oklab, var(--night-3) 55%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@utility animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
 }

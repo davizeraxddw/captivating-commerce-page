@@ -77,11 +77,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Atividade Policial na Ponta da Linha — E-book + 42 Videoaulas" },
+      {
+        name: "description",
+        content:
+          "E-book com apontamentos jurídicos para agir, escrever e registrar com segurança na atividade policial. Por Sargento Walace Costa e Tenente Walison Tardelly. Apenas R$ 35.",
+      },
+      { name: "author", content: "Walace Costa" },
+      { property: "og:title", content: "Atividade Policial na Ponta da Linha — Evite erros que podem custar sua carreira" },
+      {
+        property: "og:description",
+        content:
+          "Guia prático com apontamentos jurídicos + 42 videoaulas. Feito por quem vive a atividade policial há 20 anos. Apenas R$ 35.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -92,6 +100,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
