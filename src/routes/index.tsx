@@ -39,6 +39,29 @@ import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 // Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
 
+const authorIntro = {
+  sgtWalace: {
+    name: "Sargento Walace Costa",
+    role: "3º Sargento da PMMG · Tático Móvel",
+    avatar: "/images/sgt-walace-original.jpg",
+    facts: [
+      "20 anos de serviço na Polícia Militar de Minas Gerais",
+      "Medalha de Mérito Militar e reconhecimentos operacionais",
+      "Bacharel em Direito e pós-graduado em Advocacia Criminal e Atividade Policial",
+    ],
+  },
+  tenTardelly: {
+    name: "Tenente Walison Tardelly",
+    role: "Tenente da PMMG",
+    avatar: "/images/ten-tardelly-original.jpg",
+    facts: [
+      "Experiência operacional na atividade policial",
+      "Vivência prática de quem conhece a rotina do serviço",
+      "Coautor com foco na realidade da ponta da linha",
+    ],
+  },
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -157,7 +180,7 @@ function Reveal({
       initial={reduceMotion ? false : { opacity: 0, y: 30 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-70px" }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: reduceMotion ? 0.01 : 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
@@ -166,9 +189,13 @@ function Reveal({
 
 function CtaButton({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <a href={KIWIFY_URL} className={`btn-gold group ${className}`}>
+    <a
+      href={KIWIFY_URL}
+      className={`btn-gold group relative transition-colors ${className}`}>
       <span>{children}</span>
-      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+      <ArrowRight
+        className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 hover:fill-gold/80"
+      />
     </a>
   );
 }
@@ -182,12 +209,66 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
+function IntroPresentation({ reduceMotion }: { reduceMotion: boolean }) {
+  return (
+    <section className="min-h-screen bg-night overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 py-24 sm:px-8 lg:px-12">
+        <div className="grid max-w-6xl mx-auto grid-cols-1 gap-8 md:grid-cols-2 items-center">
+          <div>
+            <h2 className="text-4xl font-display font-bold tracking-[0.1em] text-gold uppercase mb-6">
+              Quem está por trás do material
+            </h2>
+            <p className="text-lg text-white/60 leading-relaxed mb-8">
+              Sargento Walace Costa e Tenente Walison Tardelly compartilham um objetivo
+              claro: fornecer conhecimento de qualidade para a comunidade policial, baseado
+              em décadas de experiência real e fundamentação jurídica sólida.
+            </p>
+            <div className="space-y-4">
+              {Object.entries(authorIntro).map(([key, author]) => (
+                <div
+                  key={key}
+                  className="flex items-start gap-4 p-6 rounded-2xl border border-white/10 bg-white/[0.025]"
+                >
+                  <img
+                    src={author.avatar}
+                    alt={author.name}
+                    className={`h-16 w-16 rounded-full object-cover flex-shrink-0 transition-transform ${reduceMotion ? "" : "hover:scale-105"}`}
+                  />
+                  <div>
+                    <p className="text-xl font-semibold text-white">
+                      {author.name}
+                    </p>
+                    <p className="text-base text-white/50">{author.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div
+              className="relative h-80 w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.025]"
+            >
+              <img
+                src="/images/walace-casual.jpeg.asset.json"
+                alt="Sargento Walace Costa em momento pessoal"
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LandingPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+  const reduceMotion = useReducedMotion();
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
+      <IntroPresentation reduceMotion={reduceMotion} />
       <motion.div
         className="fixed inset-x-0 top-0 z-[70] h-1 origin-left bg-gold"
         style={{ scaleX }}
@@ -230,7 +311,7 @@ function LandingPage() {
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.55 }}
                 className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-gold uppercase"
               >
                 <span className="h-px w-10 bg-gold" /> E-book + formação complementar
@@ -238,7 +319,7 @@ function LandingPage() {
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.08 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.7, delay: reduceMotion ? 0 : 0.08 }}
                 className="mt-6 max-w-3xl font-display text-[clamp(3.35rem,6.2vw,6.25rem)] leading-[0.9] tracking-[-0.025em] uppercase"
               >
                 Evite erros
@@ -247,7 +328,7 @@ function LandingPage() {
               <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.14 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.65, delay: reduceMotion ? 0 : 0.14 }}
                 className="mt-6 font-display text-lg tracking-[0.12em] text-white uppercase sm:text-xl"
               >
                 Atividade policial <span className="text-gold">na ponta da linha</span>
@@ -255,7 +336,7 @@ function LandingPage() {
               <motion.p
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.18 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.7, delay: reduceMotion ? 0 : 0.18 }}
                 className="mt-4 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
               >
                 Guia prático com apontamentos jurídicos para agir, fundamentar e registrar com mais
@@ -264,7 +345,7 @@ function LandingPage() {
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.24 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.65, delay: reduceMotion ? 0 : 0.24 }}
                 className="mt-7 flex flex-wrap gap-3"
               >
                 <span className="hero-detail">
@@ -280,7 +361,7 @@ function LandingPage() {
               <motion.div
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.28 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.7, delay: reduceMotion ? 0 : 0.28 }}
                 className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
               >
                 <CtaButton>Quero o material completo</CtaButton>
@@ -298,7 +379,7 @@ function LandingPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.42 }}
+                transition={{ duration: reduceMotion ? 0.2 : 0.8, delay: reduceMotion ? 0 : 0.42 }}
                 className="mt-9 flex items-center gap-4"
               >
                 <div className="flex -space-x-2">
@@ -325,7 +406,7 @@ function LandingPage() {
             <motion.div
               initial={{ opacity: 0, scale: 0.94, x: 24 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: reduceMotion ? 0.2 : 0.9, delay: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="hero-promo relative mx-auto w-full max-w-[570px]"
             >
               <img
@@ -372,7 +453,9 @@ function LandingPage() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {topicos.map((topico, index) => (
               <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
-                <article className="topic-card group">
+                <article
+                  className="topic-card group hover:scale-[1.02] transition-transform duration-300"
+                >
                   <div className="flex items-center justify-between">
                     <span className="icon-tile">
                       <topico.icon className="h-5 w-5" />
@@ -648,7 +731,9 @@ function AuthorCard({
 }) {
   return (
     <Reveal>
-      <article className="group grid h-full overflow-hidden rounded-[1.6rem] border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr]">
+      <article
+        className="group grid h-full overflow-hidden rounded-[1.6rem] border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr] hover:scale-[1.02] transition-transform duration-300"
+      >
         <div className="relative min-h-72 overflow-hidden">
           <img
             src={image}
