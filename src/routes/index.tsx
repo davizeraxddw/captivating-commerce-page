@@ -15,7 +15,7 @@ import {
   PenLine,
   Medal,
   GraduationCap,
-  Instagram,
+  AtSign,
   ChevronDown,
   CheckCircle2,
   Star,
@@ -639,7 +639,7 @@ function LandingPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-night"
           >
-            <Instagram className="h-4 w-4" /> @walacef.costa
+            <AtSign className="h-4 w-4" /> @walacef.costa
           </a>
           <p className="max-w-md text-xs leading-relaxed text-white/40">
             Atividade Policial Operacional na Ponta da Linha — desenvolvido por Sargento Walace
