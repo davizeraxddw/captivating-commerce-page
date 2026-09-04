@@ -346,54 +346,6 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="section-shell">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
-            <Reveal>
-              <Eyebrow>O ponto crítico</Eyebrow>
-              <h2 className="section-title">
-                Uma decisão de segundos pode ser analisada anos depois.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="space-y-5 text-base leading-relaxed text-white/68 sm:text-lg">
-                <p>
-                  A abordagem pode ter sido correta. A prova pode ter sido encontrada. Mas, se
-                  informações importantes forem omitidas ou descritas sem o contexto necessário, o
-                  problema pode começar justamente no papel.
-                </p>
-                <p className="border-l-2 border-gold pl-5 font-semibold text-white">
-                  Agir certo é importante. Saber fundamentar e registrar o que foi feito também.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto max-w-7xl">
-            <Reveal className="mx-auto max-w-3xl text-center">
-              <Eyebrow>Por dentro do projeto</Eyebrow>
-              <h2 className="section-title">Ouça de quem vive a atividade policial.</h2>
-              <p className="section-copy mx-auto mt-5 max-w-2xl">
-                Walace Costa e Walison Tardelly apresentam a ideia central do material: a atuação
-                não é formada apenas pela ação, mas também pela qualidade da documentação.
-              </p>
-            </Reveal>
-            <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
-              <VideoCard
-                src="/videos/apresentacao-ebook.mp4"
-                eyebrow="Mensagem de Walace Costa"
-                title="Bom policial não pode improvisar quando o assunto é documentação."
-              />
-              <VideoCard
-                src="/videos/conteudo-por-dentro.mp4"
-                eyebrow="Os autores apresentam"
-                title="A ocorrência não termina na ação: ela continua na redação."
-              />
-            </div>
-          </div>
-        </section>
-
         <section id="conteudo" className="section-shell mx-auto max-w-7xl scroll-mt-20">
           <Reveal className="max-w-3xl">
             <Eyebrow>Conteúdo programático</Eyebrow>
@@ -422,6 +374,54 @@ function LandingPage() {
                 </article>
               </Reveal>
             ))}
+          </div>
+        </section>
+
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="section-shell mx-auto max-w-7xl">
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <Eyebrow>Por dentro do projeto</Eyebrow>
+              <h2 className="section-title">Ouça de quem vive a atividade policial.</h2>
+              <p className="section-copy mx-auto mt-5 max-w-2xl">
+                Walace Costa e Walison Tardelly apresentam a ideia central do material: a atuação
+                não é formada apenas pela ação, mas também pela qualidade da documentação.
+              </p>
+            </Reveal>
+            <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+              <VideoCard
+                src="/videos/apresentacao-ebook.mp4"
+                eyebrow="Mensagem de Walace Costa"
+                title="Bom policial não pode improvisar quando o assunto é documentação."
+              />
+              <VideoCard
+                src="/videos/conteudo-por-dentro.mp4"
+                eyebrow="Os autores apresentam"
+                title="A ocorrência não termina na ação: ela continua na redação."
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell">
+          <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
+            <Reveal>
+              <Eyebrow>O ponto crítico</Eyebrow>
+              <h2 className="section-title">
+                Uma decisão de segundos pode ser analisada anos depois.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="space-y-5 text-base leading-relaxed text-white/68 sm:text-lg">
+                <p>
+                  A abordagem pode ter sido correta. A prova pode ter sido encontrada. Mas, se
+                  informações importantes forem omitidas ou descritas sem o contexto necessário, o
+                  problema pode começar justamente no papel.
+                </p>
+                <p className="border-l-2 border-gold pl-5 font-semibold text-white">
+                  Agir certo é importante. Saber fundamentar e registrar o que foi feito também.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </section>
 
