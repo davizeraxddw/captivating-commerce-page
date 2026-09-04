@@ -236,35 +236,31 @@ function LandingPage() {
       </header>
 
       <main>
-        <section id="inicio" className="hero-cinematic relative isolate overflow-hidden">
-          <div className="hero-horizon" aria-hidden="true" />
-          <div className="hero-siren hero-siren-red" aria-hidden="true" />
-          <div className="hero-siren hero-siren-blue" aria-hidden="true" />
-          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-[90rem] items-center gap-10 px-5 pb-10 pt-14 sm:px-8 lg:grid-cols-[.88fr_1.12fr] lg:gap-4 lg:py-12">
+        <section id="inicio" className="hero-professional relative isolate overflow-hidden">
+          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_.88fr] lg:gap-16 lg:py-20">
             <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55 }}
-                className="inline-flex items-center gap-2 rounded-full border border-gold/35 bg-black/30 px-4 py-2 text-xs font-bold tracking-[0.16em] text-gold uppercase backdrop-blur"
+                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-gold uppercase"
               >
-                <Sparkles className="h-4 w-4" /> Novo e-book • acesso imediato
+                <span className="h-px w-10 bg-gold" /> E-book + formação complementar
               </motion.div>
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.08 }}
-                className="mt-6 max-w-3xl font-display text-[clamp(3.15rem,7vw,6.6rem)] leading-[0.88] tracking-[-0.025em] uppercase"
+                className="mt-6 max-w-3xl font-display text-[clamp(3.35rem,6.2vw,6.25rem)] leading-[0.9] tracking-[-0.025em] uppercase"
               >
                 Evite erros
-                <span className="block text-gold-gradient">que podem custar</span>
-                sua carreira.
+                <span className="block text-gold-gradient">que podem custar sua carreira.</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.14 }}
-                className="mt-5 font-display text-xl tracking-[0.08em] text-white uppercase sm:text-2xl"
+                className="mt-6 font-display text-lg tracking-[0.12em] text-white uppercase sm:text-xl"
               >
                 Atividade policial <span className="text-gold">na ponta da linha</span>
               </motion.p>
@@ -272,44 +268,69 @@ function LandingPage() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18 }}
-                className="mt-4 max-w-xl text-base leading-relaxed text-white/66 sm:text-lg"
+                className="mt-4 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
               >
                 Guia prático com apontamentos jurídicos para agir, fundamentar e registrar com mais
                 segurança nas atividades policiais.
               </motion.p>
               <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.24 }}
+                className="mt-7 flex flex-wrap gap-3"
+              >
+                <span className="hero-detail">
+                  <BookOpen className="h-4 w-4" /> E-book em PDF
+                </span>
+                <span className="hero-detail">
+                  <PlayCircle className="h-4 w-4" /> 42 videoaulas
+                </span>
+                <span className="hero-detail">
+                  <Medal className="h-4 w-4" /> Experiência real
+                </span>
+              </motion.div>
+              <motion.div
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.28 }}
-                className="mt-7 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
+                className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
               >
                 <CtaButton>Quero o material completo</CtaButton>
-                <div className="flex items-end gap-2">
-                  <span className="pb-1 text-xs font-bold tracking-[0.16em] text-white/42 uppercase">
-                    apenas
+                <div className="flex items-center gap-3 border-l border-white/12 pl-5">
+                  <span className="text-[10px] font-bold tracking-[0.16em] text-white/38 uppercase">
+                    Pagamento
+                    <br />
+                    único
                   </span>
-                  <span className="font-display text-5xl leading-none text-gold">R$ 35</span>
+                  <span className="font-display text-5xl leading-none text-white">
+                    R$ <span className="text-gold">35</span>
+                  </span>
                 </div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.42 }}
-                className="mt-8 grid max-w-xl grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-black/25 backdrop-blur-sm"
+                className="mt-9 flex items-center gap-4"
               >
-                {[
-                  { icon: BookOpen, value: "PDF", label: "material completo" },
-                  { icon: PlayCircle, value: "42", label: "videoaulas" },
-                  { icon: Medal, value: "20 anos", label: "experiência" },
-                ].map((item) => (
-                  <div key={item.value} className="hero-proof">
-                    <item.icon className="h-5 w-5 shrink-0 text-gold" />
-                    <span>
-                      <strong>{item.value}</strong>
-                      <small>{item.label}</small>
-                    </span>
-                  </div>
-                ))}
+                <div className="flex -space-x-2">
+                  <img
+                    className="hero-avatar"
+                    src="/images/sgt-walace-original.jpg"
+                    alt="Sargento Walace Costa"
+                  />
+                  <img
+                    className="hero-avatar"
+                    src="/images/ten-tardelly-original.jpg"
+                    alt="Tenente Walison Tardelly"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed text-white/45">
+                  Desenvolvido por{" "}
+                  <strong className="font-semibold text-white/78">Sargento Walace Costa</strong>
+                  <br />e{" "}
+                  <strong className="font-semibold text-white/78">Tenente Walison Tardelly</strong>
+                </p>
               </motion.div>
             </div>
 
@@ -317,54 +338,34 @@ function LandingPage() {
               initial={{ opacity: 0, scale: 0.94, x: 24 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-showcase relative mx-auto w-full max-w-[760px]"
+              className="hero-product-stage relative mx-auto w-full max-w-[570px]"
             >
-              <div className="hero-arch" aria-hidden="true" />
-              <div className="hero-author hero-author-left">
-                <img src="/images/sgt-walace-cutout.png" alt="Sargento Walace Costa" />
-                <div className="hero-author-name">
-                  <span>Sargento</span>
-                  <strong>Walace Costa</strong>
-                </div>
+              <div className="hero-product-frame" aria-hidden="true">
+                <span>ATIVIDADE POLICIAL</span>
               </div>
-              <div className="hero-author hero-author-right">
-                <img src="/images/ten-tardelly-cutout.png" alt="Tenente Walison Tardelly" />
-                <div className="hero-author-name">
-                  <span>Tenente</span>
-                  <strong>Walison Tardelly</strong>
-                </div>
+              <div className="hero-product-kicker">
+                <span>Guia prático</span>
+                <strong>Aplicável na rotina real</strong>
               </div>
-              <div className="hero-book-wrap">
-                <div className="hero-book-glow" aria-hidden="true" />
-                <div className="hero-book">
-                  <span className="hero-book-spine" aria-hidden="true" />
-                  <span className="hero-book-pages" aria-hidden="true" />
-                  <img
-                    src="/images/ebook-cover-hero.jpg"
-                    alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
-                  />
-                </div>
-                <div className="hero-stamp">
-                  <ShieldCheck className="h-5 w-5" />
-                  <span>
-                    <strong>Feito por policiais</strong>
-                    <small>para policiais</small>
-                  </span>
-                </div>
+              <div className="hero-product-book">
+                <img
+                  src="/images/ebook-cover-hero.jpg"
+                  alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
+                />
               </div>
-              <div className="hero-floating-card hero-floating-top">
-                <FileCheck2 className="h-6 w-6 text-gold" />
+              <div className="hero-product-badge">
+                <PlayCircle className="h-6 w-6" />
                 <span>
-                  <small>Material completo</small>
-                  <strong>E-book em PDF</strong>
+                  <strong>42 videoaulas</strong>
+                  <small>Conteúdo complementar</small>
                 </span>
               </div>
-              <div className="hero-floating-card hero-floating-bottom">
-                <PlayCircle className="h-7 w-7 text-gold" />
-                <span>
-                  <strong>42 aulas</strong>
-                  <small>expositivas</small>
-                </span>
+              <div className="hero-product-note">
+                <ShieldCheck className="h-5 w-5 text-gold" />
+                <p>
+                  <strong>Direto ao ponto.</strong>
+                  <span>Feito por quem vive a atividade policial.</span>
+                </p>
               </div>
             </motion.div>
           </div>
