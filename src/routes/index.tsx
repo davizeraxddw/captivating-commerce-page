@@ -519,28 +519,14 @@ function LandingPage() {
               </div>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="grid grid-cols-2 gap-4">
-                {[
+              <ImageCarousel
+                images={[
+                  { src: walaceCasual.url, alt: "Walace Costa — mais do que policial" },
                   { src: walaceFarda.url, alt: "Walace Costa em uniforme de gala da PMMG" },
                   { src: walaceMedalhas.url, alt: "Condecorações recebidas pela PMMG" },
                   { src: walaceDireito.url, alt: "Formação em Direito e certificados" },
-                  { src: walaceCasual.url, alt: "Walace Costa fora da farda" },
-                ].map((img, i) => (
-                  <motion.img
-                    key={img.alt}
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    initial={{ opacity: 0, scale: 0.94 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: i * 0.1 }}
-                    className={`aspect-[4/5] w-full rounded-xl object-cover object-top ring-1 ring-line transition-transform duration-500 hover:scale-[1.03] hover:ring-gold/50 ${
-                      i % 2 === 1 ? "mt-8" : ""
-                    }`}
-                  />
-                ))}
-              </div>
+                ]}
+              />
             </Reveal>
           </div>
         </div>
