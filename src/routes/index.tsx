@@ -638,6 +638,95 @@ function LandingPage() {
   );
 }
 
+function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const paginate = useCallback(
+    (newDirection: number) => {
+      setDirection(newDirection);
+      setIndex((prev) => {
+        const next = prev + newDirection;
+        if (next < 0) return images.length - 1;
+        if (next >= images.length) return 0;
+        return next;
+      });
+    },
+    [images.length],
+  );
+
+  useEffect(() => {
+    const timer = setInterval(() => paginate(1), 5000);
+    return () => clearInterval(timer);
+  }, [paginate]);
+
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? "100%" : "-100%",
+      opacity: 0,
+      scale: 0.96,
+    }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (dir: number) => ({
+      x: dir > 0 ? "-100%" : "100%",
+      opacity: 0,
+      scale: 0.96,
+    }),
+  };
+
+  return (
+    <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl ring-1 ring-line">
+      <div className="relative aspect-[4/5] w-full">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.img
+            key={index}
+            src={images[index].src}
+            alt={images[index].alt}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+        </AnimatePresence>
+      </div>
+
+      <button
+        onClick={() => paginate(-1)}
+        className="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-night/70 text-gold backdrop-blur-sm ring-1 ring-gold/30 transition-colors hover:bg-night hover:text-gold-bright"
+        aria-label="Imagem anterior"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => paginate(1)}
+        className="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-night/70 text-gold backdrop-blur-sm ring-1 ring-gold/30 transition-colors hover:bg-night hover:text-gold-bright"
+        aria-label="Próxima imagem"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              setDirection(i > index ? 1 : -1);
+              setIndex(i);
+            }}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === index ? "w-6 bg-gold" : "w-2 bg-white/40 hover:bg-white/70"
+            }`}
+            aria-label={`Ir para imagem ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function FaqItem({
   pergunta,
   resposta,
