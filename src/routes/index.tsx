@@ -31,7 +31,6 @@ import {
   Users,
 } from "lucide-react";
 
-import ebookCover from "@/assets/ebook-cover.jpeg.asset.json";
 import sgtWalace from "@/assets/sgt-walace.jpeg.asset.json";
 import tenTardelly from "@/assets/ten-tardelly.jpeg.asset.json";
 import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
@@ -338,35 +337,17 @@ function LandingPage() {
               initial={{ opacity: 0, scale: 0.94, x: 24 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-product-stage relative mx-auto w-full max-w-[570px]"
+              className="hero-promo relative mx-auto w-full max-w-[570px]"
             >
-              <div className="hero-product-frame" aria-hidden="true">
-                <span>ATIVIDADE POLICIAL</span>
-              </div>
-              <div className="hero-product-kicker">
-                <span>Guia prático</span>
-                <strong>Aplicável na rotina real</strong>
-              </div>
-              <div className="hero-product-book">
-                <img
-                  src="/images/ebook-cover-hero.jpg"
-                  alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
-                />
-              </div>
-              <div className="hero-product-badge">
-                <PlayCircle className="h-6 w-6" />
-                <span>
-                  <strong>42 videoaulas</strong>
-                  <small>Conteúdo complementar</small>
-                </span>
-              </div>
-              <div className="hero-product-note">
-                <ShieldCheck className="h-5 w-5 text-gold" />
-                <p>
-                  <strong>Direto ao ponto.</strong>
-                  <span>Feito por quem vive a atividade policial.</span>
-                </p>
-              </div>
+              <img
+                src="/images/oferta-ponta-da-linha.png"
+                alt="Evite erros que podem custar sua carreira — e-book Atividade Policial Operacional na Ponta da Linha"
+                className="hero-promo-image"
+              />
+              <a href={KIWIFY_URL} className="hero-promo-cta" aria-label="Quero acessar o material">
+                <span>Quero acessar</span>
+                <ArrowRight className="h-5 w-5" />
+              </a>
             </motion.div>
           </div>
         </section>
