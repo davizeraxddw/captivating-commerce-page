@@ -40,6 +40,12 @@ import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
 const INSTAGRAM_URL = "https://www.instagram.com/walacef.costa/";
+const occurrenceVideos = [
+  { src: "/videos/ocorrencia-01.mp4", title: "Ocorrência 01" },
+  { src: "/videos/ocorrencia-02.mp4", title: "Ocorrência 02" },
+  { src: "/videos/ocorrencia-03.mp4", title: "Ocorrência 03" },
+  { src: "/videos/ocorrencia-04.mp4", title: "Ocorrência 04" },
+];
 
 function scrollToMainCta(event: ReactMouseEvent<HTMLAnchorElement>) {
   event.preventDefault();
@@ -305,6 +311,9 @@ function LandingPage() {
             <a className="nav-link" href="#walace">
               Trajetória
             </a>
+            <a className="nav-link" href="#ocorrencias">
+              Ocorrências
+            </a>
             <a className="nav-link" href="#conteudo">
               Conteúdo
             </a>
@@ -563,13 +572,47 @@ function LandingPage() {
           </div>
         </section>
 
+        {/* ---------- Ocorrências ---------- */}
+        <section
+          id="ocorrencias"
+          className="relative scroll-mt-16 overflow-hidden border-y border-white/8 bg-night"
+        >
+          <span className="section-watermark" aria-hidden="true">
+            02
+          </span>
+          <div className="section-shell relative z-10 mx-auto max-w-7xl">
+            <Reveal>
+              <Eyebrow>Ocorrências</Eyebrow>
+              <h2 className="section-title max-w-4xl">
+                Experiência construída <span className="text-gold">na realidade operacional.</span>
+              </h2>
+              <p className="section-copy mt-6 max-w-2xl">
+                Registros em vídeo que aproximam o conteúdo da rotina e das situações encontradas na
+                atividade policial.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 [scrollbar-width:none] md:grid md:grid-cols-2 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
+              {occurrenceVideos.map((video, index) => (
+                <Reveal
+                  key={video.src}
+                  delay={index * 0.06}
+                  className="min-w-[88%] snap-center md:min-w-0"
+                >
+                  <OccurrenceVideoCard {...video} index={index + 1} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ---------- Conteúdo programático ---------- */}
         <section
           id="conteudo"
           className="relative scroll-mt-20 overflow-hidden border-y border-white/8 bg-night-2"
         >
           <span className="section-watermark" aria-hidden="true">
-            02
+            03
           </span>
           <div className="section-shell relative z-10 mx-auto max-w-7xl">
             <Reveal className="max-w-3xl">
@@ -654,7 +697,7 @@ function LandingPage() {
         {/* ---------- Vídeo + produto ---------- */}
         <section className="relative overflow-hidden">
           <span className="section-watermark" aria-hidden="true">
-            03
+            04
           </span>
           <div className="section-shell relative z-10 mx-auto max-w-7xl">
             <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
@@ -705,7 +748,7 @@ function LandingPage() {
           className="relative scroll-mt-20 overflow-hidden border-b border-white/8 bg-night-2"
         >
           <span className="section-watermark" aria-hidden="true">
-            04
+            05
           </span>
           <div className="section-shell relative z-10 mx-auto max-w-4xl">
             <Reveal>
@@ -816,6 +859,38 @@ function LandingPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function OccurrenceVideoCard({ src, title, index }: { src: string; title: string; index: number }) {
+  return (
+    <article className="overflow-hidden border border-white/10 bg-night shadow-2xl shadow-black/35">
+      <div className="relative flex min-h-64 items-center justify-center bg-black">
+        <video
+          controls
+          preload="metadata"
+          playsInline
+          className="block max-h-[34rem] w-full bg-black object-contain"
+          aria-label={title}
+        >
+          <source src={src} type="video/mp4" />
+          Seu navegador não oferece suporte à reprodução deste vídeo.
+        </video>
+      </div>
+      <div className="flex items-center justify-between gap-4 border-t border-white/10 px-5 py-4">
+        <div>
+          <p className="text-[0.62rem] font-bold tracking-[0.2em] text-gold uppercase">
+            Registro em vídeo
+          </p>
+          <h3 className="mt-1 font-display text-base tracking-wide text-white uppercase">
+            {title}
+          </h3>
+        </div>
+        <span className="font-display text-3xl text-white/12" aria-hidden="true">
+          {String(index).padStart(2, "0")}
+        </span>
+      </div>
+    </article>
   );
 }
 
