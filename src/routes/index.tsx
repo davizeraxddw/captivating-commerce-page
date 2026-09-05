@@ -230,7 +230,7 @@ function LandingPage() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-night/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
-            <span className="flex h-10 w-10 items-center justify-center border border-gold/45 bg-black p-1 shadow-[0_0_18px_rgba(245,179,1,0.16)]">
+            <span className="flex h-10 w-10 items-center justify-center">
               <img
                 src="/images/walace-costa-emblema.png"
                 alt=""
@@ -405,13 +405,6 @@ function LandingPage() {
                     Polícia Militar de Minas Gerais
                   </span>
                 </div>
-              </div>
-              {/* bloco decorativo flutuante */}
-              <div
-                className="absolute -right-5 -bottom-5 z-30 hidden bg-gold p-5 shadow-2xl md:block"
-                aria-hidden="true"
-              >
-                <div className="h-7 w-7 border-4 border-night" />
               </div>
             </motion.div>
           </div>
