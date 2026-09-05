@@ -21,6 +21,7 @@ import {
   Scale,
   Search,
   ShieldCheck,
+  Siren,
   UserCheck,
   Users,
 } from "lucide-react";
@@ -29,7 +30,6 @@ import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
 import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
-import ebookCover from "@/assets/ebook-cover.jpeg.asset.json";
 
 // Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
@@ -227,10 +227,10 @@ function LandingPage() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
             <span className="flex h-8 w-8 items-center justify-center bg-gold">
-              <ShieldCheck className="h-4.5 w-4.5 text-night" />
+              <Siren className="h-4.5 w-4.5 text-night" aria-hidden="true" />
             </span>
             <span className="font-display text-xs tracking-[0.12em] text-white uppercase sm:text-sm">
-              Ponta da Linha
+              Walace Costa
             </span>
           </a>
           <nav className="hidden items-center gap-8 text-white/55 md:flex" aria-label="Principal">
@@ -596,25 +596,6 @@ function LandingPage() {
                   Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
                   pela ação, mas também pela qualidade da documentação.
                 </p>
-                <div className="mt-10 flex items-center gap-6 border border-white/10 bg-night-2 p-5">
-                  <img
-                    src={ebookCover.url}
-                    alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
-                    className="w-20 flex-none border border-gold/30 object-cover"
-                    loading="lazy"
-                  />
-                  <div>
-                    <p className="text-[0.65rem] font-bold tracking-[0.2em] text-gold uppercase">
-                      O material
-                    </p>
-                    <p className="mt-1.5 font-display text-sm leading-snug text-white uppercase">
-                      E-book em PDF + 42 videoaulas complementares
-                    </p>
-                    <p className="mt-1.5 text-xs text-white/45">
-                      Acesso imediato após a confirmação do pagamento.
-                    </p>
-                  </div>
-                </div>
               </Reveal>
               <Reveal delay={0.12}>
                 <VideoCard
