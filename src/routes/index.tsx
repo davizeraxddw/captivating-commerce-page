@@ -3,8 +3,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
-  AtSign,
   BadgeCheck,
+  Camera,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -32,6 +32,7 @@ import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
+const INSTAGRAM_URL = "https://www.instagram.com/walacef.costa/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -727,12 +728,16 @@ function LandingPage() {
             </p>
           </div>
           <a
-            href="https://www.instagram.com/walacef.costa/"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(event) => {
+              event.preventDefault();
+              window.open(INSTAGRAM_URL, "_blank", "noopener,noreferrer");
+            }}
             className="btn-outline"
           >
-            <AtSign className="h-4 w-4" /> @walacef.costa
+            <Camera className="h-4 w-4" aria-hidden="true" /> walacef.costa
           </a>
         </div>
       </footer>
