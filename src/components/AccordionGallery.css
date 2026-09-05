@@ -1,0 +1,102 @@
+.occurrence-accordion {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: 540px;
+  perspective: 1400px;
+}
+.occurrence-panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 16px;
+  background: #000;
+  transform: rotateY(-5deg);
+  transition:
+    transform 600ms,
+    border-color 600ms;
+}
+.occurrence-panel--active {
+  transform: rotateY(0);
+  border-color: var(--color-gold, #d9a936);
+}
+.occurrence-panel__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.6);
+  pointer-events: none;
+  transition: filter 600ms;
+}
+.occurrence-panel--active .occurrence-panel__video {
+  object-fit: contain;
+  filter: none;
+  pointer-events: auto;
+}
+.occurrence-panel__select {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgb(0 0 0 / 75%), transparent 45%);
+}
+.occurrence-panel--active .occurrence-panel__select {
+  bottom: auto;
+}
+.occurrence-panel__number {
+  flex-shrink: 0;
+  border-left: 3px solid var(--color-gold, #d9a936);
+  padding-left: 10px;
+  font-weight: 700;
+}
+.occurrence-panel__title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 400ms;
+}
+.occurrence-panel--active .occurrence-panel__title {
+  opacity: 1;
+}
+.occurrence-panel__select:focus-visible {
+  outline: 2px solid var(--color-gold, #d9a936);
+  outline-offset: -4px;
+  border-radius: 14px;
+}
+@media (max-width: 640px) {
+  .occurrence-accordion {
+    flex-direction: column;
+    height: 660px;
+    perspective: none;
+  }
+  .occurrence-panel {
+    min-height: 64px;
+    transform: none;
+    flex-basis: 0;
+  }
+  .occurrence-panel--active {
+    flex-grow: 6 !important;
+  }
+  .occurrence-panel__select {
+    padding: 18px;
+  }
+  .occurrence-panel__title {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .occurrence-panel,
+  .occurrence-panel__video,
+  .occurrence-panel__title {
+    transition: none;
+  }
+}
