@@ -280,7 +280,7 @@ a {
   .topic-carousel {
     display: flex;
     margin-inline: -1.25rem;
-    padding: 0.25rem 1.25rem 1rem;
+    padding: 1rem 1.25rem 1.25rem;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
     scroll-padding-inline: 1.25rem;
@@ -297,6 +297,10 @@ a {
   }
   .topic-slide .topic-card {
     min-height: 17rem;
+  }
+  .topic-slide .topic-card:hover {
+    transform: none;
+    box-shadow: 0 6px 0 0 rgb(245 179 1 / 18%);
   }
   .topic-carousel-controls {
     display: grid;
