@@ -31,14 +31,13 @@ A abertura deve apresentar primeiro Walace Costa, sua trajetória e sua autorida
 
 - Hero em tela cheia, dividido entre biografia e retrato de Walace, sem cards comerciais.
 - Uma mensagem principal por dobra.
-- Linhas finas e coordenadas técnicas como linguagem gráfica.
-- Cantos menos arredondados na abertura para evitar aparência de template genérico.
+- Poucos elementos simultâneos, alinhamento editorial e fotografia sem molduras decorativas extras.
+- Cantos retos e divisórias finas na abertura para evitar aparência de template genérico.
 
 ## Movimento
 
-- Texto em palavras escalonadas, inspirado em Staggered/Split Text do React Bits.
-- Grade com varredura vertical lenta, inspirada em Grid Scan/Dark Veil.
-- Faixa horizontal contínua, inspirada em Scroll Velocity.
+- Aurora oficial do React Bits como único efeito de destaque na abertura.
+- Entradas curtas de opacidade e deslocamento para texto e retrato.
 - Entrada por scroll curta e discreta nas seções existentes.
 - Todo movimento deve ser desativado com `prefers-reduced-motion`.
 
@@ -46,13 +45,13 @@ A abertura deve apresentar primeiro Walace Costa, sua trajetória e sua autorida
 
 1. Navegação discreta, sem chamada de compra.
 2. Hero pessoal: nome, função, trajetória e retrato de Walace.
-3. Faixa contínua com palavras-chave da carreira.
+3. Três dados objetivos: início na PMMG, atuação e formação.
 4. Seção biográfica com três pilares: experiência, formação e propósito.
 5. Somente depois: conteúdo programático e apresentação do material.
 
 ## Instruções de implementação
 
 - Usar React, Framer Motion e CSS já presentes no projeto.
-- Não adicionar efeitos WebGL pesados nem dependências desnecessárias.
-- Não copiar componentes pagos ou código fechado do React Bits; reproduzir apenas princípios de interação com implementação própria.
+- Usar o componente Aurora JS-CSS do registro público oficial do React Bits e sua dependência `ogl`.
+- Manter o Aurora atrás do conteúdo, com contraste suficiente para preservar a leitura.
 - Manter contraste, navegação por teclado, semântica e fallback para movimento reduzido.

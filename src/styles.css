@@ -711,124 +711,58 @@ a {
 }
 .presentation-hero {
   min-height: 100svh;
-  background:
-    radial-gradient(circle at 50% 42%, oklch(0.19 0.04 74 / 32%), transparent 31%),
-    radial-gradient(circle at 8% 82%, oklch(0.24 0.07 250 / 16%), transparent 28%), #070b10;
+  background: #070b10;
 }
-.presentation-hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  z-index: 4;
-  height: 18rem;
-  pointer-events: none;
-  background: linear-gradient(to top, #070b10, transparent);
-}
-.presentation-grid {
+.aurora-stage {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  opacity: 0.56;
+}
+.aurora-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.aurora-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
   background:
-    linear-gradient(oklch(1 0 0 / 3.5%) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
-  background-size: 76px 76px;
-  mask-image: radial-gradient(circle at 50% 45%, black 0%, transparent 72%);
-}
-.presentation-grid::before,
-.presentation-grid::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(transparent, oklch(1 0 0 / 12%), transparent);
-}
-.presentation-grid::before {
-  left: max(1.25rem, calc((100% - 80rem) / 2));
-}
-.presentation-grid::after {
-  right: max(1.25rem, calc((100% - 80rem) / 2));
-}
-.presentation-scan {
-  position: absolute;
-  inset: -20% 0 auto;
-  z-index: 2;
-  height: 16rem;
-  background: linear-gradient(to bottom, transparent, oklch(0.79 0.14 82 / 7%), transparent);
-  animation: presentation-scan 8s linear infinite;
-}
-.presentation-glow {
-  position: absolute;
-  width: 28rem;
-  height: 28rem;
-  border-radius: 999px;
-  opacity: 0.18;
-  filter: blur(110px);
-  animation: presentation-drift 10s ease-in-out infinite alternate;
-}
-.presentation-glow-left {
-  bottom: -16rem;
-  left: -10rem;
-  background: #155cb7;
-}
-.presentation-glow-right {
-  top: 14%;
-  right: -16rem;
-  background: var(--gold);
-  animation-delay: -4s;
-}
-.presentation-index,
-.presentation-footer {
-  position: relative;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: oklch(1 0 0 / 34%);
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.presentation-index {
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid oklch(1 0 0 / 10%);
+    linear-gradient(90deg, #070b10 4%, oklch(0.08 0.02 255 / 83%) 48%, oklch(0.07 0.02 255 / 28%)),
+    linear-gradient(to top, #070b10 0%, transparent 34%);
 }
 .presentation-title {
-  max-width: 72rem;
-  margin-top: 1.6rem;
+  max-width: 42rem;
+  margin-top: 1.25rem;
   font-family: var(--font-display);
-  font-size: clamp(3.7rem, 9.4vw, 9.25rem);
-  line-height: 0.86;
-  letter-spacing: -0.035em;
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
 }
-.presentation-title > span:last-child {
-  color: var(--gold-bright);
+.presentation-title span {
+  display: block;
+  color: white;
 }
 .walace-hero-layout {
   display: grid;
   align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
-}
-.walace-hero-layout .presentation-title {
-  max-width: 48rem;
-  font-size: clamp(3.7rem, 6.7vw, 7rem);
+  gap: clamp(2.5rem, 7vw, 7rem);
 }
 .walace-hero-portrait {
   position: relative;
-  width: min(100%, 28rem);
+  width: min(100%, 30rem);
   margin-inline: auto;
 }
 .walace-portrait-frame {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid oklch(1 0 0 / 16%);
+  border: 1px solid oklch(1 0 0 / 14%);
   background: #d9e1ef;
-  box-shadow:
-    0 35px 90px oklch(0 0 0 / 48%),
-    0 0 0 1px oklch(0.79 0.14 82 / 9%);
+  box-shadow: 0 35px 90px oklch(0 0 0 / 42%);
 }
 .walace-portrait-frame::before {
   content: "";
@@ -836,16 +770,8 @@ a {
   inset: 0;
   z-index: 2;
   background:
-    linear-gradient(to top, #070b10 0%, transparent 34%),
-    linear-gradient(115deg, oklch(0.12 0.04 250 / 24%), transparent 48%);
-  pointer-events: none;
-}
-.walace-portrait-frame::after {
-  content: "";
-  position: absolute;
-  inset: 1rem;
-  z-index: 3;
-  border: 1px solid oklch(1 0 0 / 13%);
+    linear-gradient(to top, #070b10 0%, transparent 24%),
+    linear-gradient(115deg, oklch(0.12 0.04 250 / 16%), transparent 50%);
   pointer-events: none;
 }
 .walace-portrait-frame img {
@@ -853,48 +779,49 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  filter: saturate(0.82) contrast(1.04);
+  filter: saturate(0.78) contrast(1.04);
 }
-.walace-portrait-caption {
-  position: absolute;
-  right: -1.25rem;
-  bottom: 2rem;
-  z-index: 5;
+.presentation-kicker {
+  color: oklch(1 0 0 / 58%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.walace-facts {
   display: grid;
-  min-width: 13rem;
-  border-left: 2px solid var(--gold);
-  padding: 0.85rem 1rem;
-  background: oklch(0.095 0.025 255 / 88%);
-  backdrop-filter: blur(12px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 37rem;
+  margin-top: 2rem;
+  border-block: 1px solid oklch(1 0 0 / 12%);
 }
-.walace-portrait-caption span {
-  color: var(--gold);
-  font-size: 0.58rem;
-  font-weight: 800;
+.walace-facts div {
+  padding: 1rem 1rem 1rem 0;
+}
+.walace-facts div + div {
+  padding-left: 1rem;
+  border-left: 1px solid oklch(1 0 0 / 12%);
+}
+.walace-facts dt {
+  color: oklch(1 0 0 / 38%);
+  font-size: 0.6rem;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.walace-portrait-caption strong {
-  margin-top: 0.2rem;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.presentation-kicker {
-  color: var(--gold);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+.walace-facts dd {
+  margin-top: 0.3rem;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 .presentation-enter {
   display: inline-flex;
   min-height: 3.2rem;
   align-items: center;
   gap: 0.7rem;
-  border: 1px solid oklch(1 0 0 / 20%);
-  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid oklch(1 0 0 / 34%);
+  padding: 0.75rem 0;
   color: white;
   font-size: 0.7rem;
   font-weight: 700;
@@ -906,50 +833,8 @@ a {
     background-color 220ms ease;
 }
 .presentation-enter:hover {
-  border-color: var(--gold);
-  background: color-mix(in oklab, var(--gold) 8%, transparent);
-  color: var(--gold-bright);
-}
-.presentation-footer {
-  justify-content: center;
-  gap: clamp(1.4rem, 6vw, 5rem);
-}
-.presentation-footer span {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(1.4rem, 6vw, 5rem);
-}
-.presentation-footer span:not(:last-child)::after {
-  content: "";
-  width: 3px;
-  height: 3px;
-  border-radius: 999px;
-  background: var(--gold);
-}
-.signal-marquee {
-  overflow: hidden;
-  border-block: 1px solid oklch(1 0 0 / 10%);
-  background: var(--gold);
-  color: #070b10;
-}
-.signal-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: signal-marquee 28s linear infinite;
-}
-.signal-marquee-track > span {
-  padding-block: 0.9rem;
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 1.8vw, 1.35rem);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.signal-marquee-track i {
-  width: 0.34rem;
-  height: 0.34rem;
-  margin-inline: 1.8rem;
-  transform: rotate(45deg);
-  background: currentColor;
+  border-color: white;
+  color: white;
 }
 .context-section {
   position: relative;
@@ -1012,52 +897,32 @@ a {
 }
 
 @media (max-width: 639px) {
-  .presentation-index span:last-child {
-    display: none;
-  }
   .presentation-title {
-    font-size: clamp(3.25rem, 17vw, 5.4rem);
-  }
-  .walace-hero-layout .presentation-title {
-    font-size: clamp(3.2rem, 15.5vw, 5rem);
+    font-size: clamp(3.4rem, 16vw, 5.2rem);
   }
   .walace-hero-portrait {
     width: min(88vw, 24rem);
-    margin-top: -1rem;
+    margin-top: 0;
   }
-  .walace-portrait-caption {
-    right: -0.5rem;
-    bottom: 1.25rem;
+  .walace-facts {
+    grid-template-columns: 1fr;
   }
-  .presentation-footer {
-    gap: 0.8rem;
-    font-size: 0.52rem;
-    letter-spacing: 0.12em;
+  .walace-facts div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 0;
   }
-  .presentation-footer span,
-  .presentation-footer span:not(:last-child)::after {
-    gap: 0.8rem;
+  .walace-facts div + div {
+    padding-left: 0;
+    border-top: 1px solid oklch(1 0 0 / 10%);
+    border-left: 0;
   }
-  .signal-marquee-track i {
-    margin-inline: 1.2rem;
-  }
-}
-
-@keyframes presentation-scan {
-  to {
-    transform: translateY(calc(100svh + 20rem));
-  }
-}
-
-@keyframes presentation-drift {
-  to {
-    transform: translate3d(2.5rem, -1.5rem, 0) scale(1.08);
-  }
-}
-
-@keyframes signal-marquee {
-  to {
-    transform: translateX(-50%);
+  .aurora-shade {
+    background:
+      linear-gradient(to bottom, #070b10 5%, oklch(0.08 0.02 255 / 62%) 45%, #070b10 100%),
+      linear-gradient(to top, #070b10, transparent 30%);
   }
 }
 .hero-orb {

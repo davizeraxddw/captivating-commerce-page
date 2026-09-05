@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight,
@@ -29,6 +29,7 @@ import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
 import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
+import Aurora from "@/components/Aurora";
 
 // Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
@@ -176,55 +177,19 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-function StaggeredHeadline({ lines }: { lines: string[] }) {
+function LandingPage() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <h1 className="presentation-title" aria-label={lines.join(" ")}>
-      {lines.map((line, lineIndex) => (
-        <span key={line} className="block overflow-hidden pb-[0.08em]">
-          <span aria-hidden="true" className="block">
-            {line.split(" ").map((word, wordIndex) => (
-              <motion.span
-                key={`${line}-${word}`}
-                className="mr-[0.2em] inline-block last:mr-0"
-                initial={reduceMotion ? false : { y: "115%", opacity: 0, filter: "blur(10px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                transition={{
-                  duration: 0.72,
-                  delay: 0.16 + lineIndex * 0.16 + wordIndex * 0.055,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
-        </span>
-      ))}
-    </h1>
-  );
-}
-
-function LandingPage() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
-
-  return (
     <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
-      <motion.div
-        className="fixed inset-x-0 top-0 z-[70] h-1 origin-left bg-gold"
-        style={{ scaleX }}
-      />
-
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-[#070b10]/72 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-[#070b10]/68 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold/10">
-              <ShieldCheck className="h-5 w-5 text-gold" />
+            <span className="flex h-8 w-8 items-center justify-center border border-white/20">
+              <span className="h-2 w-2 bg-gold" />
             </span>
-            <span className="font-display text-lg tracking-[0.08em] text-white sm:text-xl">
-              PONTA <span className="text-gold">DA LINHA</span>
+            <span className="text-sm font-semibold tracking-[0.16em] text-white uppercase sm:text-base">
+              Walace Costa
             </span>
           </a>
           <nav
@@ -245,59 +210,83 @@ function LandingPage() {
             </a>
           </nav>
           <a href="#walace" className="presentation-nav-cta hidden sm:inline-flex">
-            Conheça o Walace
+            Conheça a trajetória
           </a>
         </div>
       </header>
 
       <main>
         <section id="inicio" className="presentation-hero relative isolate overflow-hidden">
-          <div className="presentation-grid" aria-hidden="true" />
-          <div className="presentation-scan" aria-hidden="true" />
-          <div className="presentation-glow presentation-glow-left" aria-hidden="true" />
-          <div className="presentation-glow presentation-glow-right" aria-hidden="true" />
+          <div className="aurora-stage" aria-hidden="true">
+            {!reduceMotion && (
+              <Aurora
+                colorStops={["#7cff67", "#B497CF", "#5227FF"]}
+                blend={0.5}
+                amplitude={1.0}
+                speed={0.5}
+              />
+            )}
+          </div>
+          <div className="aurora-shade" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-center px-5 pt-28 pb-16 sm:px-8 sm:pt-32">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="presentation-index"
-            >
-              <span>Apresentação / Walace Costa</span>
-              <span>PMMG · Desde 2006</span>
-            </motion.div>
-
-            <div className="walace-hero-layout my-auto">
-              <div className="relative z-10 py-14 sm:py-20">
+          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl items-center px-5 pt-24 pb-12 sm:px-8 sm:pt-28">
+            <div className="walace-hero-layout w-full">
+              <div className="relative z-10 py-10 sm:py-16">
                 <motion.p
-                  initial={{ opacity: 0, y: 14 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.08 }}
+                  transition={{ duration: 0.55 }}
                   className="presentation-kicker"
                 >
-                  3º Sargento da PMMG · Tático Móvel
+                  Apresentação
                 </motion.p>
 
-                <StaggeredHeadline lines={["Walace Costa.", "20 anos na ponta da linha."]} />
+                <motion.h1
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="presentation-title"
+                >
+                  Sargento
+                  <span>Walace Costa</span>
+                </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.72 }}
+                  transition={{ duration: 0.65, delay: 0.18 }}
                   className="mt-7 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
                 >
-                  Policial militar, bacharel em Direito e pós-graduado. Uma trajetória construída
-                  entre a experiência operacional, o estudo e a responsabilidade de compartilhar
-                  conhecimento.
+                  Há 20 anos na Polícia Militar de Minas Gerais. Experiência operacional, formação
+                  em Direito e uma carreira dedicada a transformar vivência em conhecimento.
                 </motion.p>
+
+                <motion.dl
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.65, delay: 0.26 }}
+                  className="walace-facts"
+                >
+                  <div>
+                    <dt>Desde</dt>
+                    <dd>2006</dd>
+                  </div>
+                  <div>
+                    <dt>Atuação</dt>
+                    <dd>Tático Móvel</dd>
+                  </div>
+                  <div>
+                    <dt>Formação</dt>
+                    <dd>Direito</dd>
+                  </div>
+                </motion.dl>
 
                 <motion.a
                   href="#walace"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.9 }}
-                  className="presentation-enter group mt-10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.55, delay: 0.34 }}
+                  className="presentation-enter group mt-9"
                 >
                   Conheça a trajetória
                   <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
@@ -305,9 +294,9 @@ function LandingPage() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, x: 40, scale: 0.96 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.85, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
                 className="walace-hero-portrait"
               >
                 <div className="walace-portrait-frame">
@@ -316,36 +305,10 @@ function LandingPage() {
                     alt="Sargento Walace Costa, da Polícia Militar de Minas Gerais"
                   />
                 </div>
-                <div className="walace-portrait-caption">
-                  <span>Experiência operacional</span>
-                  <strong>Walace Costa</strong>
-                </div>
               </motion.div>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="presentation-footer"
-            >
-              <span>Experiência</span>
-              <span>Formação</span>
-              <span>Propósito</span>
-            </motion.div>
           </div>
         </section>
-
-        <div className="signal-marquee" aria-hidden="true">
-          <div className="signal-marquee-track">
-            {[0, 1].map((group) => (
-              <span key={group} className="flex shrink-0 items-center">
-                Experiência operacional <i /> Direito <i /> Tático Móvel <i /> Formação <i />
-                Conhecimento <i />
-              </span>
-            ))}
-          </div>
-        </div>
 
         <section id="walace" className="context-section scroll-mt-16">
           <div className="section-shell mx-auto max-w-7xl">
