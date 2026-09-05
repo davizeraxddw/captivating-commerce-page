@@ -668,8 +668,11 @@ function LandingPage() {
           <div className="section-shell relative z-10 mx-auto max-w-5xl text-center">
             <Reveal>
               <Eyebrow>Oferta de lançamento</Eyebrow>
-              <h2 className="mx-auto max-w-4xl font-display text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[0.9] uppercase">
-                Domine o procedimento. <span className="text-gold">Proteja sua carreira.</span>
+              <h2 className="mx-auto max-w-4xl font-display text-[clamp(2rem,9.2vw,2.4rem)] leading-[0.92] tracking-[-0.035em] uppercase sm:text-[clamp(2.6rem,6.5vw,5.5rem)] sm:tracking-normal">
+                <span className="block sm:inline">Domine o </span>
+                <span className="block sm:inline">procedimento. </span>
+                <span className="block text-gold sm:inline">Proteja sua </span>
+                <span className="block text-gold sm:inline">carreira.</span>
               </h2>
               <p className="section-copy mx-auto mt-6 max-w-2xl">
                 Tenha o e-book em PDF e 42 videoaulas complementares para estudar, consultar e
@@ -677,18 +680,20 @@ function LandingPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="corner-frame relative mx-auto mt-14 max-w-2xl border border-gold/30 bg-night-2 p-7 sm:p-10">
+              <div className="corner-frame relative mx-auto mt-12 w-full max-w-2xl border border-gold/30 bg-night-2 p-5 sm:mt-14 sm:p-10">
                 <div className="flex flex-col items-center justify-between gap-7 sm:flex-row">
                   <div className="text-center sm:text-left">
                     <p className="text-[0.65rem] font-bold tracking-[0.24em] text-white/40 uppercase">
                       E-book + 42 videoaulas
                     </p>
-                    <p className="mt-2 font-display text-7xl leading-none text-gold">R$ 35</p>
+                    <p className="mt-2 font-display text-6xl leading-none text-gold sm:text-7xl">
+                      R$ 35
+                    </p>
                     <p className="mt-2 text-xs font-bold tracking-[0.18em] text-white/40 uppercase">
                       Pagamento único
                     </p>
                   </div>
-                  <div className="space-y-3 text-left text-sm text-white/65">
+                  <div className="w-full max-w-xs space-y-3 text-left text-sm text-white/65">
                     <p className="flex items-center gap-3">
                       <BadgeCheck className="h-4 w-4 flex-none text-gold" /> Conteúdo completo e
                       direto
