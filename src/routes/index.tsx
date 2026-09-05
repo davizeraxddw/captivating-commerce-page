@@ -5,7 +5,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Camera,
-  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -33,8 +32,7 @@ import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
-const INSTAGRAM_USERNAME = "@walacef.costa";
-const INSTAGRAM_APP_URL = "instagram://user?username=walacef.costa";
+const INSTAGRAM_URL = "https://www.instagram.com/walacef.costa/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -187,32 +185,6 @@ function LandingPage() {
   const reduceMotion = useReducedMotion();
   const topicsTrackRef = useRef<HTMLDivElement>(null);
   const [activeTopic, setActiveTopic] = useState(0);
-  const [instagramCopied, setInstagramCopied] = useState(false);
-
-  const handleInstagram = useCallback(async () => {
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      window.location.href = INSTAGRAM_APP_URL;
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(INSTAGRAM_USERNAME);
-    } catch {
-      const helper = document.createElement("textarea");
-      helper.value = INSTAGRAM_USERNAME;
-      helper.style.position = "fixed";
-      helper.style.opacity = "0";
-      document.body.appendChild(helper);
-      helper.select();
-      document.execCommand("copy");
-      helper.remove();
-    }
-
-    setInstagramCopied(true);
-    window.setTimeout(() => setInstagramCopied(false), 2500);
-  }, []);
 
   const goToTopic = useCallback(
     (nextIndex: number) => {
@@ -755,23 +727,15 @@ function LandingPage() {
               Conteúdo educacional desenvolvido por Sargento Walace Costa.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={handleInstagram}
+          <a
+            href={INSTAGRAM_URL}
+            target="_top"
+            rel="external"
             className="btn-outline"
-            aria-label={
-              instagramCopied
-                ? "Usuário do Instagram copiado"
-                : "Abrir Instagram no celular ou copiar usuário no computador"
-            }
+            aria-label="Abrir o perfil de Walace Costa no Instagram"
           >
-            {instagramCopied ? (
-              <Check className="h-4 w-4" aria-hidden="true" />
-            ) : (
-              <Camera className="h-4 w-4" aria-hidden="true" />
-            )}
-            {instagramCopied ? "Usuário copiado" : "Instagram • walacef.costa"}
-          </button>
+            <Camera className="h-4 w-4" aria-hidden="true" /> Instagram • walacef.costa
+          </a>
         </div>
       </footer>
     </div>
