@@ -46,7 +46,7 @@ A abertura deve apresentar primeiro Walace Costa, sua trajetória e sua autorida
 1. Navegação discreta, sem chamada de compra.
 2. Hero pessoal: nome, função, trajetória e retrato de Walace.
 3. Três dados objetivos: início na PMMG, atuação e formação.
-4. Seção biográfica com três pilares: experiência, formação e propósito.
+4. Trajetória completa logo após o hero, com carrossel, formação e três pilares: experiência, formação e propósito.
 5. Somente depois: conteúdo programático e apresentação do material.
 
 ## Instruções de implementação

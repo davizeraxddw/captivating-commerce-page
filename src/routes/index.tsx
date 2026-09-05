@@ -202,9 +202,6 @@ function LandingPage() {
             <a className="nav-link" href="#conteudo">
               Conteúdo
             </a>
-            <a className="nav-link" href="#trajetoria">
-              Trajetória
-            </a>
             <a className="nav-link" href="#duvidas">
               Dúvidas
             </a>
@@ -310,106 +307,7 @@ function LandingPage() {
           </div>
         </section>
 
-        <section id="walace" className="context-section scroll-mt-16">
-          <div className="section-shell mx-auto max-w-7xl">
-            <Reveal className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-20">
-              <div>
-                <Eyebrow>Quem é Walace Costa</Eyebrow>
-                <p className="context-code">TRAJETÓRIA / EXPERIÊNCIA / FORMAÇÃO</p>
-              </div>
-              <div>
-                <h2 className="context-statement">
-                  A prática ensinou o peso de cada decisão. O estudo mostrou como sustentá-la.
-                </h2>
-                <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/58 sm:text-lg">
-                  Desde 2006 na Polícia Militar de Minas Gerais, Walace reúne vivência de rua e
-                  formação jurídica para ajudar outros profissionais a atuarem com mais consciência.
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="mt-16 grid border-t border-white/12 md:grid-cols-3">
-              {[
-                {
-                  number: "01",
-                  title: "Experiência",
-                  text: "Duas décadas de serviço na Polícia Militar de Minas Gerais e atuação no Tático Móvel.",
-                },
-                {
-                  number: "02",
-                  title: "Formação",
-                  text: "Bacharel em Direito e pós-graduado em Advocacia Criminal e Atividade Policial.",
-                },
-                {
-                  number: "03",
-                  title: "Propósito",
-                  text: "Transformar experiência e conhecimento em orientação clara para quem vive a rotina policial.",
-                },
-              ].map((item, index) => (
-                <Reveal key={item.number} delay={index * 0.08}>
-                  <article className="context-principle">
-                    <span>{item.number}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="conteudo" className="section-shell mx-auto max-w-7xl scroll-mt-20">
-          <Reveal className="max-w-3xl">
-            <Eyebrow>Conteúdo programático</Eyebrow>
-            <h2 className="section-title">
-              Nove temas para conectar a rua ao fundamento jurídico.
-            </h2>
-            <p className="section-copy mt-5">
-              Conteúdo pensado para consulta, revisão e aplicação consciente no cotidiano
-              profissional.
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {topicos.map((topico, index) => (
-              <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
-                <article className="topic-card group">
-                  <div className="flex items-center justify-between">
-                    <span className="icon-tile">
-                      <topico.icon className="h-5 w-5" />
-                    </span>
-                    <span className="font-display text-4xl text-white/8">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 text-lg font-bold text-white">{topico.titulo}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/55">{topico.texto}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto max-w-7xl">
-            <Reveal className="mx-auto max-w-3xl text-center">
-              <Eyebrow>Por dentro do projeto</Eyebrow>
-              <h2 className="section-title">Ouça quem vive a atividade policial.</h2>
-              <p className="section-copy mx-auto mt-5 max-w-2xl">
-                Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
-                pela ação, mas também pela qualidade da documentação.
-              </p>
-            </Reveal>
-            <div className="mx-auto mt-12 max-w-2xl">
-              <VideoCard
-                src="/videos/apresentacao-ebook.mp4"
-                eyebrow="Mensagem de Walace Costa"
-                title="Bom policial não pode improvisar quando o assunto é documentação."
-              />
-            </div>
-          </div>
-        </section>
-
-        <section id="trajetoria" className="border-y border-white/8 bg-night-2 scroll-mt-16">
+        <section id="walace" className="border-y border-white/8 bg-night-2 scroll-mt-16">
           <div className="section-shell mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.9fr_1.1fr]">
             <Reveal>
               <ImageCarousel
@@ -461,6 +359,57 @@ function LandingPage() {
                 ))}
               </div>
             </Reveal>
+          </div>
+        </section>
+
+        <section id="conteudo" className="section-shell mx-auto max-w-7xl scroll-mt-20">
+          <Reveal className="max-w-3xl">
+            <Eyebrow>Conteúdo programático</Eyebrow>
+            <h2 className="section-title">
+              Nove temas para conectar a rua ao fundamento jurídico.
+            </h2>
+            <p className="section-copy mt-5">
+              Conteúdo pensado para consulta, revisão e aplicação consciente no cotidiano
+              profissional.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {topicos.map((topico, index) => (
+              <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
+                <article className="topic-card group">
+                  <div className="flex items-center justify-between">
+                    <span className="icon-tile">
+                      <topico.icon className="h-5 w-5" />
+                    </span>
+                    <span className="font-display text-4xl text-white/8">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 text-lg font-bold text-white">{topico.titulo}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{topico.texto}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section className="border-y border-white/8 bg-night-2">
+          <div className="section-shell mx-auto max-w-7xl">
+            <Reveal className="mx-auto max-w-3xl text-center">
+              <Eyebrow>Por dentro do projeto</Eyebrow>
+              <h2 className="section-title">Ouça quem vive a atividade policial.</h2>
+              <p className="section-copy mx-auto mt-5 max-w-2xl">
+                Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
+                pela ação, mas também pela qualidade da documentação.
+              </p>
+            </Reveal>
+            <div className="mx-auto mt-12 max-w-2xl">
+              <VideoCard
+                src="/videos/apresentacao-ebook.mp4"
+                eyebrow="Mensagem de Walace Costa"
+                title="Bom policial não pode improvisar quando o assunto é documentação."
+              />
+            </div>
           </div>
         </section>
 

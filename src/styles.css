@@ -836,63 +836,9 @@ a {
   border-color: white;
   color: white;
 }
-.context-section {
-  position: relative;
-  background:
-    linear-gradient(90deg, transparent 49.95%, oklch(1 0 0 / 4%) 50%, transparent 50.05%), #070b10;
-}
-.context-code {
-  color: oklch(1 0 0 / 28%);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
-.context-statement {
-  max-width: 52rem;
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 6.4vw, 6.6rem);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
-  text-transform: uppercase;
-}
-.context-principle {
-  min-height: 17rem;
-  padding: 2.2rem 2rem 2.6rem 0;
-  border-bottom: 1px solid oklch(1 0 0 / 10%);
-}
-.context-principle span {
-  color: var(--gold);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-}
-.context-principle h3 {
-  margin-top: 3.6rem;
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-}
-.context-principle p {
-  max-width: 21rem;
-  margin-top: 0.8rem;
-  color: oklch(1 0 0 / 52%);
-  line-height: 1.65;
-}
-
 @media (min-width: 768px) {
   .walace-hero-layout {
     grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.68fr);
-  }
-  .context-principle {
-    padding-left: 2rem;
-    border-right: 1px solid oklch(1 0 0 / 10%);
-  }
-  .context-principle:first-child {
-    padding-left: 0;
-  }
-  .context-principle:last-child {
-    border-right: 0;
   }
 }
 
