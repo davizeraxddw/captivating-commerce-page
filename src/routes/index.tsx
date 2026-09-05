@@ -29,7 +29,7 @@ import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
 import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
-import Aurora from "@/components/Aurora";
+import ebookCover from "@/assets/ebook-cover.jpeg.asset.json";
 
 // Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
 const KIWIFY_URL = "#oferta";
@@ -149,7 +149,7 @@ function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 34 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-70px" }}
       transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -163,7 +163,7 @@ function CtaButton({ children, className = "" }: { children: ReactNode; classNam
   return (
     <a href={KIWIFY_URL} className={`btn-gold group ${className}`}>
       <span>{children}</span>
-      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
     </a>
   );
 }
@@ -171,8 +171,7 @@ function CtaButton({ children, className = "" }: { children: ReactNode; classNam
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p className="eyebrow">
-      <span className="h-px w-8 bg-gold/60" />
-      {children}
+      <span>{children}</span>
     </p>
   );
 }
@@ -181,23 +180,23 @@ function LandingPage() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased selection:bg-gold selection:text-night">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-[#070b10]/68 backdrop-blur-xl">
+    <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased">
+      <div className="grain-overlay" aria-hidden="true" />
+
+      {/* ---------- Header ---------- */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-night/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
-            <span className="flex h-8 w-8 items-center justify-center border border-white/20">
-              <span className="h-2 w-2 bg-gold" />
+            <span className="flex h-8 w-8 items-center justify-center bg-gold">
+              <ShieldCheck className="h-4.5 w-4.5 text-night" />
             </span>
-            <span className="text-sm font-semibold tracking-[0.16em] text-white uppercase sm:text-base">
-              Walace Costa
+            <span className="font-display text-xs tracking-[0.12em] text-white uppercase sm:text-sm">
+              Ponta da Linha
             </span>
           </a>
-          <nav
-            className="hidden items-center gap-7 text-sm text-white/60 md:flex"
-            aria-label="Principal"
-          >
+          <nav className="hidden items-center gap-8 text-white/55 md:flex" aria-label="Principal">
             <a className="nav-link" href="#walace">
-              Walace
+              Trajetória
             </a>
             <a className="nav-link" href="#conteudo">
               Conteúdo
@@ -206,179 +205,199 @@ function LandingPage() {
               Dúvidas
             </a>
           </nav>
-          <a href="#walace" className="presentation-nav-cta hidden sm:inline-flex">
-            Conheça a trajetória
+          <a
+            href={KIWIFY_URL}
+            className="hidden bg-gold px-4 py-2 font-display text-[0.7rem] tracking-wider text-night uppercase transition-colors hover:bg-white sm:inline-flex"
+          >
+            Acesso • R$ 35
           </a>
         </div>
       </header>
 
       <main>
-        <section id="inicio" className="presentation-hero relative isolate overflow-hidden">
-          <div className="aurora-stage" aria-hidden="true">
-            {!reduceMotion && (
-              <Aurora
-                colorStops={["#7cff67", "#B497CF", "#5227FF"]}
-                blend={0.5}
-                amplitude={1.0}
-                speed={0.5}
-              />
-            )}
+        {/* ---------- HERO ---------- */}
+        <section id="inicio" className="relative isolate overflow-hidden">
+          {/* marca d'água */}
+          <div
+            className="pointer-events-none absolute -top-10 -left-6 z-0 opacity-[0.05] select-none"
+            aria-hidden="true"
+          >
+            <span className="font-display text-[16rem] leading-none text-gold md:text-[22rem]">
+              PDL
+            </span>
           </div>
-          <div className="aurora-shade" aria-hidden="true" />
-          <div className="presentation-grid" aria-hidden="true" />
-          <div className="presentation-glow presentation-glow-one" aria-hidden="true" />
-          <div className="presentation-glow presentation-glow-two" aria-hidden="true" />
+          {/* linhas técnicas */}
+          <div className="tech-lines tech-lines-h right-0 bottom-0 w-72" aria-hidden="true" />
+          <div className="tech-lines tech-lines-v right-0 bottom-0 h-72" aria-hidden="true" />
+          <div
+            className="dot-grid absolute top-24 right-8 hidden h-40 w-40 opacity-15 lg:block"
+            aria-hidden="true"
+          />
 
-          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl items-center px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-28">
-            <div className="walace-hero-layout w-full">
-              <div className="relative z-10 py-10 sm:py-16">
-                <motion.div
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.55 }}
-                  className="presentation-signal"
-                >
-                  <span className="presentation-signal-dot" />
-                  20 anos de serviço e experiência operacional
-                </motion.div>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55, delay: 0.08 }}
-                  className="presentation-kicker"
-                >
-                  Uma trajetória construída na prática
-                </motion.p>
-
-                <motion.h1
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-                  className="presentation-title"
-                >
-                  <span className="presentation-rank">Sargento</span>
-                  <span className="presentation-name">Walace Costa</span>
-                </motion.h1>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.24 }}
-                  className="presentation-copy"
-                >
-                  Há 20 anos na Polícia Militar de Minas Gerais, unindo experiência operacional,
-                  formação em Direito e uma carreira dedicada a transformar vivência em
-                  conhecimento.
-                </motion.p>
-
-                <motion.dl
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.32 }}
-                  className="walace-facts"
-                >
-                  <div>
-                    <dt>Desde</dt>
-                    <dd>2006</dd>
-                  </div>
-                  <div>
-                    <dt>Atuação</dt>
-                    <dd>Tático Móvel</dd>
-                  </div>
-                  <div>
-                    <dt>Formação</dt>
-                    <dd>Direito</dd>
-                  </div>
-                </motion.dl>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.55, delay: 0.42 }}
-                  className="mt-9 flex flex-wrap items-center gap-5"
-                >
-                  <a href="#walace" className="presentation-enter group">
-                    Conheça a trajetória
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </a>
-                  <span className="presentation-proof">
-                    <ShieldCheck className="h-4 w-4" /> Experiência e formação
+          <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 pt-32 pb-24 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:pt-40 lg:pb-32">
+            {/* Texto */}
+            <div className="space-y-8 lg:col-span-7">
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.55 }}
+              >
+                <span className="inline-block -skew-x-12 bg-gold px-4 py-1.5">
+                  <span className="block skew-x-12 text-xs font-bold tracking-[0.2em] text-night uppercase sm:text-sm">
+                    PMMG • Sargento Walace Costa
                   </span>
-                </motion.div>
-              </div>
+                </span>
+              </motion.div>
+
+              <motion.h1
+                initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display text-[2.9rem] leading-[0.88] tracking-tight text-white uppercase sm:text-6xl lg:text-[5rem]"
+              >
+                Atividade <br />
+                <span className="text-gold">Policial</span> <br />
+                <span className="relative inline-block">
+                  na ponta
+                  <span
+                    className="absolute -bottom-1 left-0 h-2 w-full bg-gold opacity-50"
+                    aria-hidden="true"
+                  />
+                </span>{" "}
+                <br />
+                da linha
+              </motion.h1>
 
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.85, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-                className="walace-hero-portrait"
+                transition={{ duration: 0.6, delay: 0.22 }}
+                className="max-w-lg border-l-4 border-gold py-1 pl-6"
               >
-                <div className="portrait-radar portrait-radar-one" aria-hidden="true" />
-                <div className="portrait-radar portrait-radar-two" aria-hidden="true" />
-                <div className="walace-portrait-frame">
-                  <span className="portrait-corner portrait-corner-top" aria-hidden="true" />
-                  <span className="portrait-corner portrait-corner-bottom" aria-hidden="true" />
-                  <img
-                    src="/images/sgt-walace-original.jpg"
-                    alt="Sargento Walace Costa, da Polícia Militar de Minas Gerais"
-                  />
-                  <div className="portrait-caption">
-                    <span>Polícia Militar de Minas Gerais</span>
-                    <strong>Sargento Walace Costa</strong>
-                  </div>
+                <p className="text-lg leading-relaxed text-white/60">
+                  20 anos de rua condensados em um guia direto:{" "}
+                  <span className="font-semibold text-white">e-book + 42 videoaulas</span> para
+                  agir, escrever e registrar com segurança jurídica na atividade policial.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.32 }}
+                className="flex flex-col items-start gap-8 pt-2 sm:flex-row sm:items-center"
+              >
+                <div className="relative">
+                  <CtaButton>Quero acessar agora</CtaButton>
+                  <span className="absolute -bottom-7 left-0 text-xs font-bold tracking-[0.2em] text-gold uppercase">
+                    Apenas R$ 35,00
+                  </span>
                 </div>
-                <motion.div
-                  className="portrait-float portrait-float-top"
-                  animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <Medal className="h-5 w-5" />
-                  <span>
-                    <small>Carreira</small>
-                    <strong>Desde 2006</strong>
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="portrait-float portrait-float-bottom"
-                  animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
-                  transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <GraduationCap className="h-5 w-5" />
-                  <span>
-                    <small>Formação</small>
-                    <strong>Bacharel em Direito</strong>
-                  </span>
-                </motion.div>
+                <dl className="grid grid-cols-3 gap-6 border-l border-white/15 pl-6">
+                  <div>
+                    <dt className="text-[0.6rem] font-bold tracking-[0.18em] text-white/40 uppercase">
+                      Desde
+                    </dt>
+                    <dd className="font-display text-lg text-white">2006</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[0.6rem] font-bold tracking-[0.18em] text-white/40 uppercase">
+                      Atuação
+                    </dt>
+                    <dd className="font-display text-lg text-white">Tático</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[0.6rem] font-bold tracking-[0.18em] text-white/40 uppercase">
+                      Aulas
+                    </dt>
+                    <dd className="font-display text-lg text-gold">42</dd>
+                  </div>
+                </dl>
               </motion.div>
             </div>
-          </div>
 
-          <div className="presentation-marquee" aria-hidden="true">
-            <div>
-              <span>Disciplina</span>
-              <i />
-              <span>Experiência operacional</span>
-              <i />
-              <span>Formação jurídica</span>
-              <i />
-              <span>Conhecimento aplicado</span>
-              <i />
-              <span>Disciplina</span>
-              <i />
-              <span>Experiência operacional</span>
-              <i />
-              <span>Formação jurídica</span>
-              <i />
-              <span>Conhecimento aplicado</span>
-              <i />
-            </div>
+            {/* Retrato */}
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              className="relative lg:col-span-5"
+            >
+              {/* moldura deslocada */}
+              <div
+                className="absolute top-8 right-8 hidden h-full w-full border-2 border-gold/25 md:block"
+                aria-hidden="true"
+              />
+              <div className="group relative aspect-[4/5] overflow-hidden border-r-8 border-b-8 border-gold bg-night-2">
+                <div
+                  className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-night via-transparent to-transparent"
+                  aria-hidden="true"
+                />
+                <img
+                  src="/images/sgt-walace-original.jpg"
+                  alt="Sargento Walace Costa, da Polícia Militar de Minas Gerais"
+                  className="h-full w-full object-cover object-top transition-transform duration-1000 group-hover:scale-[1.03]"
+                />
+                {/* badge 42 */}
+                <div className="absolute top-6 right-6 z-20 flex flex-col items-end">
+                  <span className="font-display text-5xl leading-none text-gold">42</span>
+                  <span className="mt-1 bg-night px-2 py-1 text-[0.6rem] font-bold tracking-[0.2em] text-white uppercase">
+                    Videoaulas
+                  </span>
+                </div>
+                {/* legenda */}
+                <div className="absolute bottom-7 left-7 z-20 space-y-1.5">
+                  <span className="block font-display text-2xl leading-none tracking-tight text-white uppercase sm:text-3xl">
+                    Walace Costa
+                  </span>
+                  <div className="h-1 w-12 bg-gold" aria-hidden="true" />
+                  <span className="block text-[0.65rem] font-bold tracking-[0.22em] text-white/55 uppercase">
+                    Polícia Militar de Minas Gerais
+                  </span>
+                </div>
+              </div>
+              {/* bloco decorativo flutuante */}
+              <div
+                className="absolute -right-5 -bottom-5 z-30 hidden bg-gold p-5 shadow-2xl md:block"
+                aria-hidden="true"
+              >
+                <div className="h-7 w-7 border-4 border-night" />
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        <section id="walace" className="border-y border-white/8 bg-night-2 scroll-mt-16">
-          <div className="section-shell mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.9fr_1.1fr]">
-            <Reveal>
+        {/* ---------- Marquee âmbar ---------- */}
+        <div className="marquee-band marquee-band-amber" aria-hidden="true">
+          <div className="marquee-track text-night">
+            {[0, 1].map((copy) => (
+              <div key={copy}>
+                <span>Disciplina</span>
+                <i />
+                <span>Experiência operacional</span>
+                <i />
+                <span>Formação jurídica</span>
+                <i />
+                <span>Registro sem erro</span>
+                <i />
+                <span>E-book + 42 videoaulas</span>
+                <i />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ---------- Trajetória ---------- */}
+        <section id="walace" className="relative scroll-mt-16 overflow-hidden">
+          <span className="section-watermark" aria-hidden="true">
+            01
+          </span>
+          <div className="section-shell relative z-10 mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+            <Reveal className="relative">
+              <div
+                className="absolute -top-6 -left-6 hidden h-24 w-24 border-t-2 border-l-2 border-gold/50 lg:block"
+                aria-hidden="true"
+              />
               <ImageCarousel
                 images={[
                   { src: walaceCasual.url, alt: "Walace Costa em momento pessoal" },
@@ -388,17 +407,18 @@ function LandingPage() {
                 ]}
               />
             </Reveal>
-            <Reveal delay={0.12}>
-              <Eyebrow>A trajetória de Walace Costa</Eyebrow>
+            <Reveal delay={0.12} className="lg:-translate-y-6">
+              <Eyebrow>A trajetória</Eyebrow>
               <h2 className="section-title">
-                20 anos de farda, formação jurídica e compromisso com o aprendizado.
+                20 anos de farda, <span className="text-gold">formação jurídica</span> e compromisso
+                com o aprendizado.
               </h2>
               <p className="section-copy mt-6">
                 Desde 2006 na Polícia Militar de Minas Gerais, Walace construiu uma trajetória de
                 atuação operacional, estudo e aprimoramento. É bacharel em Direito, pós-graduado em
                 Advocacia Criminal e em Atividade Policial.
               </p>
-              <div className="mt-8 space-y-5">
+              <div className="mt-9 space-y-6">
                 {[
                   {
                     icon: Medal,
@@ -416,13 +436,15 @@ function LandingPage() {
                     text: "Compartilhar conhecimento acessível para fortalecer a atuação de outros profissionais.",
                   },
                 ].map((item) => (
-                  <div key={item.title} className="flex gap-4">
-                    <span className="icon-tile mt-0.5">
+                  <div key={item.title} className="group flex gap-5">
+                    <span className="icon-tile mt-0.5 transition-colors group-hover:bg-gold group-hover:text-night">
                       <item.icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="font-bold">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-white/55">{item.text}</p>
+                      <h3 className="font-display text-sm tracking-wide text-white uppercase">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-white/50">{item.text}</p>
                     </div>
                   </div>
                 ))}
@@ -431,64 +453,136 @@ function LandingPage() {
           </div>
         </section>
 
-        <section id="conteudo" className="section-shell mx-auto max-w-7xl scroll-mt-20">
-          <Reveal className="max-w-3xl">
-            <Eyebrow>Conteúdo programático</Eyebrow>
-            <h2 className="section-title">
-              Nove temas para conectar a rua ao fundamento jurídico.
-            </h2>
-            <p className="section-copy mt-5">
-              Conteúdo pensado para consulta, revisão e aplicação consciente no cotidiano
-              profissional.
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {topicos.map((topico, index) => (
-              <Reveal key={topico.titulo} delay={(index % 3) * 0.07}>
-                <article className="topic-card group">
-                  <div className="flex items-center justify-between">
-                    <span className="icon-tile">
-                      <topico.icon className="h-5 w-5" />
-                    </span>
-                    <span className="font-display text-4xl text-white/8">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 text-lg font-bold text-white">{topico.titulo}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/55">{topico.texto}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-y border-white/8 bg-night-2">
-          <div className="section-shell mx-auto max-w-7xl">
-            <Reveal className="mx-auto max-w-3xl text-center">
-              <Eyebrow>Por dentro do projeto</Eyebrow>
-              <h2 className="section-title">Ouça quem vive a atividade policial.</h2>
-              <p className="section-copy mx-auto mt-5 max-w-2xl">
-                Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
-                pela ação, mas também pela qualidade da documentação.
+        {/* ---------- Conteúdo programático ---------- */}
+        <section
+          id="conteudo"
+          className="relative scroll-mt-20 overflow-hidden border-y border-white/8 bg-night-2"
+        >
+          <span className="section-watermark" aria-hidden="true">
+            02
+          </span>
+          <div className="section-shell relative z-10 mx-auto max-w-7xl">
+            <Reveal className="max-w-3xl">
+              <Eyebrow>Conteúdo programático</Eyebrow>
+              <h2 className="section-title">
+                Nove temas para conectar a rua ao{" "}
+                <span className="text-gold">fundamento jurídico</span>.
+              </h2>
+              <p className="section-copy mt-5">
+                Conteúdo pensado para consulta, revisão e aplicação consciente no cotidiano
+                profissional.
               </p>
             </Reveal>
-            <div className="mx-auto mt-12 max-w-2xl">
-              <VideoCard
-                src="/videos/apresentacao-ebook.mp4"
-                eyebrow="Mensagem de Walace Costa"
-                title="Bom policial não pode improvisar quando o assunto é documentação."
-              />
+            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {topicos.map((topico, index) => (
+                <Reveal
+                  key={topico.titulo}
+                  delay={(index % 3) * 0.07}
+                  className={index % 3 === 1 ? "lg:translate-y-6" : ""}
+                >
+                  <article className="topic-card group">
+                    <div className="flex items-center justify-between">
+                      <span className="icon-tile">
+                        <topico.icon className="h-5 w-5" />
+                      </span>
+                      <span className="font-display text-4xl text-white/8 transition-colors group-hover:text-gold/25">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <h3 className="mt-7 font-display text-base leading-tight tracking-wide text-white uppercase">
+                      {topico.titulo}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-white/50">{topico.texto}</p>
+                  </article>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="duvidas" className="border-y border-white/8 bg-night-2 scroll-mt-20">
-          <div className="section-shell mx-auto max-w-4xl">
-            <Reveal className="text-center">
+        {/* ---------- Vídeo + produto ---------- */}
+        <section className="relative overflow-hidden">
+          <span className="section-watermark" aria-hidden="true">
+            03
+          </span>
+          <div className="section-shell relative z-10 mx-auto max-w-7xl">
+            <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
+              <Reveal>
+                <Eyebrow>Por dentro do projeto</Eyebrow>
+                <h2 className="section-title">
+                  Ouça quem <span className="text-gold">vive</span> a atividade policial.
+                </h2>
+                <p className="section-copy mt-5 max-w-xl">
+                  Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
+                  pela ação, mas também pela qualidade da documentação.
+                </p>
+                <div className="mt-10 flex items-center gap-6 border border-white/10 bg-night-2 p-5">
+                  <img
+                    src={ebookCover.url}
+                    alt="Capa do e-book Atividade Policial Operacional na Ponta da Linha"
+                    className="w-20 flex-none border border-gold/30 object-cover"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p className="text-[0.65rem] font-bold tracking-[0.2em] text-gold uppercase">
+                      O material
+                    </p>
+                    <p className="mt-1.5 font-display text-sm leading-snug text-white uppercase">
+                      E-book em PDF + 42 videoaulas complementares
+                    </p>
+                    <p className="mt-1.5 text-xs text-white/45">
+                      Acesso imediato após a confirmação do pagamento.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <VideoCard
+                  src="/videos/apresentacao-ebook.mp4"
+                  eyebrow="Mensagem de Walace Costa"
+                  title="Bom policial não pode improvisar quando o assunto é documentação."
+                />
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- Marquee secundária ---------- */}
+        <div className="marquee-band" aria-hidden="true">
+          <div className="marquee-track text-white/45">
+            {[0, 1].map((copy) => (
+              <div key={copy}>
+                <span>Redação policial</span>
+                <i />
+                <span>Cadeia de custódia</span>
+                <i />
+                <span>Direitos do investigado</span>
+                <i />
+                <span>Lei de drogas</span>
+                <i />
+                <span>Prova e nulidades</span>
+                <i />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ---------- FAQ ---------- */}
+        <section
+          id="duvidas"
+          className="relative scroll-mt-20 overflow-hidden border-b border-white/8 bg-night-2"
+        >
+          <span className="section-watermark" aria-hidden="true">
+            04
+          </span>
+          <div className="section-shell relative z-10 mx-auto max-w-4xl">
+            <Reveal>
               <Eyebrow>Dúvidas frequentes</Eyebrow>
-              <h2 className="section-title">O que você precisa saber antes de começar.</h2>
+              <h2 className="section-title">
+                O que você precisa saber <span className="text-gold">antes de começar</span>.
+              </h2>
             </Reveal>
-            <div className="mt-10 space-y-3">
+            <div className="mt-12 space-y-4">
               {objecoes.map((item, index) => (
                 <FaqItem key={item.pergunta} {...item} delay={index * 0.04} />
               ))}
@@ -496,19 +590,21 @@ function LandingPage() {
           </div>
         </section>
 
-        <section
-          id="oferta"
-          className="offer-section relative isolate overflow-hidden scroll-mt-16"
-        >
-          <div className="hero-orb hero-orb-three" />
-          <div className="section-shell relative mx-auto max-w-5xl text-center">
+        {/* ---------- Oferta ---------- */}
+        <section id="oferta" className="relative isolate scroll-mt-16 overflow-hidden">
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.04]"
+            aria-hidden="true"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, #f5b301 0 2px, transparent 2px 26px)",
+            }}
+          />
+          <div className="section-shell relative z-10 mx-auto max-w-5xl text-center">
             <Reveal>
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10">
-                <ShieldCheck className="h-7 w-7 text-gold" />
-              </div>
-              <Eyebrow>Atividade Policial Operacional na Ponta da Linha</Eyebrow>
-              <h2 className="mx-auto max-w-4xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.95] uppercase">
-                Prepare-se hoje para registrar melhor amanhã.
+              <Eyebrow>Oferta de lançamento</Eyebrow>
+              <h2 className="mx-auto max-w-4xl font-display text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[0.9] uppercase">
+                Prepare-se hoje. <span className="text-gold">Registre melhor</span> amanhã.
               </h2>
               <p className="section-copy mx-auto mt-6 max-w-2xl">
                 Tenha o e-book em PDF e 42 videoaulas complementares para estudar, consultar e
@@ -516,25 +612,34 @@ function LandingPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="mx-auto mt-10 max-w-xl rounded-[2rem] border border-gold/25 bg-night-2/85 p-6 shadow-2xl shadow-black/35 backdrop-blur sm:p-9">
-                <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
+              <div className="corner-frame relative mx-auto mt-14 max-w-2xl border border-gold/30 bg-night-2 p-7 sm:p-10">
+                <div className="flex flex-col items-center justify-between gap-7 sm:flex-row">
                   <div className="text-center sm:text-left">
-                    <p className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
+                    <p className="text-[0.65rem] font-bold tracking-[0.24em] text-white/40 uppercase">
                       E-book + 42 videoaulas
                     </p>
-                    <p className="mt-2 font-display text-6xl text-gold">R$ 35</p>
-                  </div>
-                  <div className="space-y-2 text-left text-sm text-white/65">
-                    <p className="flex items-center gap-2">
-                      <BadgeCheck className="h-4 w-4 text-gold" /> Conteúdo completo
+                    <p className="mt-2 font-display text-7xl leading-none text-gold">R$ 35</p>
+                    <p className="mt-2 text-xs font-bold tracking-[0.18em] text-white/40 uppercase">
+                      Pagamento único
                     </p>
-                    <p className="flex items-center gap-2">
-                      <Clock3 className="h-4 w-4 text-gold" /> Acesso para revisão
+                  </div>
+                  <div className="space-y-3 text-left text-sm text-white/65">
+                    <p className="flex items-center gap-3">
+                      <BadgeCheck className="h-4 w-4 flex-none text-gold" /> Conteúdo completo e
+                      direto
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <Clock3 className="h-4 w-4 flex-none text-gold" /> Acesso para revisão no seu
+                      ritmo
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <ShieldCheck className="h-4 w-4 flex-none text-gold" /> Feito por quem vive a
+                      rua
                     </p>
                   </div>
                 </div>
-                <CtaButton className="mt-7 w-full">Quero garantir meu acesso</CtaButton>
-                <p className="mt-4 flex items-center justify-center gap-2 text-xs text-white/38">
+                <CtaButton className="mt-9 w-full">Quero garantir meu acesso</CtaButton>
+                <p className="mt-5 flex items-center justify-center gap-2 text-xs text-white/38">
                   <LockKeyhole className="h-3.5 w-3.5" /> Checkout seguro pela Kiwify
                 </p>
               </div>
@@ -543,11 +648,12 @@ function LandingPage() {
         </section>
       </main>
 
+      {/* ---------- Footer ---------- */}
       <footer className="border-t border-white/8 bg-night-2">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-10 text-center sm:px-8 md:flex-row md:text-left">
           <div>
-            <p className="font-display text-xl tracking-wide">
-              PONTA <span className="text-gold">DA LINHA</span>
+            <p className="font-display text-lg tracking-wide uppercase">
+              Ponta <span className="text-gold">da linha</span>
             </p>
             <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/38">
               Conteúdo educacional desenvolvido por Sargento Walace Costa.
@@ -569,29 +675,31 @@ function LandingPage() {
 
 function VideoCard({ src, eyebrow, title }: { src: string; eyebrow: string; title: string }) {
   return (
-    <Reveal>
-      <article className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-night shadow-xl shadow-black/25">
-        <div className="relative aspect-[9/12] overflow-hidden bg-black">
-          <video
-            className="h-full w-full object-cover"
-            src={src}
-            controls
-            playsInline
-            preload="metadata"
-            aria-label={title}
-          >
-            Seu navegador não suporta a reprodução deste vídeo.
-          </video>
-          <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-night/80 px-3 py-1.5 text-[10px] font-bold tracking-wider text-white uppercase backdrop-blur">
-            <Play className="h-3 w-3 fill-gold text-gold" /> Aperte o play
-          </div>
+    <article className="relative border border-white/10 bg-night shadow-2xl shadow-black/50">
+      <div
+        className="absolute -top-3 -right-3 h-full w-full border border-gold/25"
+        aria-hidden="true"
+      />
+      <div className="relative aspect-[9/12] max-h-[34rem] w-full overflow-hidden bg-black">
+        <video
+          className="h-full w-full object-cover"
+          src={src}
+          controls
+          playsInline
+          preload="metadata"
+          aria-label={title}
+        >
+          Seu navegador não suporta a reprodução deste vídeo.
+        </video>
+        <div className="pointer-events-none absolute top-4 left-4 flex items-center gap-2 bg-night/85 px-3 py-1.5 text-[10px] font-bold tracking-[0.18em] text-white uppercase backdrop-blur">
+          <Play className="h-3 w-3 fill-gold text-gold" /> Aperte o play
         </div>
-        <div className="p-5">
-          <p className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">{eyebrow}</p>
-          <h3 className="mt-2 text-base font-semibold leading-snug text-white/88">{title}</h3>
-        </div>
-      </article>
-    </Reveal>
+      </div>
+      <div className="relative border-t-2 border-gold p-5">
+        <p className="text-[10px] font-bold tracking-[0.2em] text-gold uppercase">{eyebrow}</p>
+        <h3 className="mt-2 text-base leading-snug font-semibold text-white/88">{title}</h3>
+      </div>
+    </article>
   );
 }
 
@@ -617,8 +725,8 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
     exit: (step: number) => ({ x: step > 0 ? "-12%" : "12%", opacity: 0, scale: 0.98 }),
   };
   return (
-    <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-[1.75rem] border border-white/10 bg-night shadow-2xl shadow-black/35">
-      <div className="relative aspect-[4/5]">
+    <div className="relative mx-auto w-full max-w-lg border-r-8 border-b-8 border-gold bg-night-2 shadow-2xl shadow-black/50">
+      <div className="relative aspect-[4/5] overflow-hidden">
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={index}
@@ -633,23 +741,21 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
             className="absolute inset-0 h-full w-full object-cover object-top"
           />
         </AnimatePresence>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/55 via-transparent to-transparent" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-transparent"
+          aria-hidden="true"
+        />
+        <div className="absolute top-4 left-4 z-10 bg-night/85 px-3 py-1.5 font-display text-[0.6rem] tracking-[0.2em] text-gold uppercase backdrop-blur">
+          {String(index + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+        </div>
       </div>
-      <button
-        onClick={() => paginate(-1)}
-        className="carousel-button left-4"
-        aria-label="Imagem anterior"
-      >
+      <button onClick={() => paginate(-1)} className="carousel-button left-4" aria-label="Imagem anterior">
         <ChevronLeft className="h-5 w-5" />
       </button>
-      <button
-        onClick={() => paginate(1)}
-        className="carousel-button right-4"
-        aria-label="Próxima imagem"
-      >
+      <button onClick={() => paginate(1)} className="carousel-button right-4" aria-label="Próxima imagem">
         <ChevronRight className="h-5 w-5" />
       </button>
-      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {images.map((image, itemIndex) => (
           <button
             key={image.alt}
@@ -657,7 +763,7 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
               setDirection(itemIndex > index ? 1 : -1);
               setIndex(itemIndex);
             }}
-            className={`h-1.5 rounded-full transition-all ${itemIndex === index ? "w-8 bg-gold" : "w-2 bg-white/45"}`}
+            className={`h-1.5 transition-all ${itemIndex === index ? "w-8 bg-gold" : "w-2 bg-white/45"}`}
             aria-label={`Mostrar imagem ${itemIndex + 1}`}
           />
         ))}
@@ -681,12 +787,22 @@ function FaqItem({
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="w-full rounded-2xl border border-white/9 bg-white/[0.025] p-5 text-left transition-colors hover:border-gold/35 sm:p-6"
+        className={`w-full border p-5 text-left transition-colors sm:p-6 ${
+          open
+            ? "border-gold/60 bg-gold/[0.05]"
+            : "border-white/10 bg-white/[0.02] hover:border-gold/35"
+        }`}
         aria-expanded={open}
       >
         <span className="flex items-center justify-between gap-5">
-          <span className="font-semibold text-white/88">{pergunta}</span>
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+          <span className="font-display text-sm leading-snug tracking-wide text-white/90 uppercase sm:text-base">
+            {pergunta}
+          </span>
+          <span
+            className={`flex h-8 w-8 flex-none items-center justify-center transition-colors ${
+              open ? "bg-gold text-night" : "bg-gold/10 text-gold"
+            }`}
+          >
             <ChevronDown
               className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
             />
