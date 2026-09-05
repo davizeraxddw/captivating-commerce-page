@@ -871,6 +871,382 @@ a {
       linear-gradient(to top, #070b10, transparent 30%);
   }
 }
+
+/* Abertura de alto impacto — apresentação de Walace */
+.presentation-hero {
+  background:
+    radial-gradient(circle at 82% 44%, oklch(0.32 0.09 80 / 14%), transparent 24%),
+    linear-gradient(120deg, #070b10 0%, #080d14 52%, #0f0d08 100%);
+}
+.presentation-hero .aurora-stage {
+  inset: -25% -20% 12% 43%;
+  opacity: 0.45;
+  filter: saturate(0.7) blur(2px);
+}
+.presentation-hero .aurora-shade {
+  background:
+    linear-gradient(90deg, #070b10 2%, oklch(0.08 0.02 255 / 88%) 48%, oklch(0.07 0.02 255 / 20%)),
+    linear-gradient(to top, #070b10 0%, transparent 38%);
+}
+.presentation-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(oklch(1 0 0 / 2.8%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 2.8%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg, black, transparent 72%);
+}
+.presentation-glow {
+  position: absolute;
+  z-index: 1;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(95px);
+}
+.presentation-glow-one {
+  right: 8%;
+  top: 22%;
+  background: color-mix(in oklab, var(--gold) 22%, transparent);
+}
+.presentation-glow-two {
+  right: 32%;
+  bottom: -16%;
+  background: oklch(0.55 0.18 250 / 12%);
+}
+.presentation-title {
+  max-width: 46rem;
+  margin-top: 1rem;
+  font-size: clamp(4.6rem, 7.7vw, 8.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+}
+.presentation-rank,
+.presentation-name {
+  display: block;
+}
+.presentation-rank {
+  color: white;
+  text-shadow: 0 14px 45px oklch(0 0 0 / 55%);
+}
+.presentation-name {
+  width: max-content;
+  max-width: 100%;
+  padding-right: 0.08em;
+  background: linear-gradient(
+    105deg,
+    #fff5c6 0%,
+    var(--gold-bright) 38%,
+    var(--gold) 72%,
+    #c48219 100%
+  );
+  background-size: 180% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: title-shimmer 6s ease-in-out infinite;
+  filter: drop-shadow(0 15px 32px color-mix(in oklab, var(--gold) 18%, transparent));
+}
+.walace-hero-layout {
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+.walace-hero-portrait {
+  width: min(100%, 31rem);
+  isolation: isolate;
+}
+.walace-portrait-frame {
+  overflow: visible;
+  border-color: color-mix(in oklab, var(--gold) 34%, white 10%);
+  box-shadow:
+    0 35px 90px oklch(0 0 0 / 50%),
+    0 0 70px color-mix(in oklab, var(--gold) 13%, transparent);
+}
+.walace-portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 32%, oklch(1 0 0 / 16%) 50%, transparent 68%);
+  background-size: 220% 100%;
+  animation: portrait-scan 7s ease-in-out infinite;
+}
+.portrait-corner {
+  position: absolute;
+  z-index: 5;
+  width: 4rem;
+  height: 4rem;
+  pointer-events: none;
+}
+.portrait-corner-top {
+  top: -0.65rem;
+  right: -0.65rem;
+  border-top: 2px solid var(--gold-bright);
+  border-right: 2px solid var(--gold-bright);
+}
+.portrait-corner-bottom {
+  bottom: -0.65rem;
+  left: -0.65rem;
+  border-bottom: 2px solid var(--gold-bright);
+  border-left: 2px solid var(--gold-bright);
+}
+.portrait-caption {
+  position: absolute;
+  z-index: 4;
+  right: 1.25rem;
+  bottom: 1.2rem;
+  left: 1.25rem;
+  display: grid;
+  padding-top: 1rem;
+  border-top: 1px solid oklch(1 0 0 / 20%);
+}
+.portrait-caption span {
+  color: var(--gold-bright);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.portrait-caption strong {
+  margin-top: 0.25rem;
+  color: white;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.presentation-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
+  padding: 0.5rem 0.7rem;
+  background: color-mix(in oklab, var(--gold) 7%, transparent);
+  color: oklch(1 0 0 / 66%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.presentation-signal-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--gold-bright);
+  animation: signal-pulse 2s ease-out infinite;
+}
+.presentation-kicker {
+  margin-top: 1.2rem;
+  color: var(--gold-bright);
+}
+.presentation-copy {
+  max-width: 39rem;
+  margin-top: 1.75rem;
+  padding-left: 1rem;
+  border-left: 2px solid color-mix(in oklab, var(--gold) 65%, transparent);
+  color: oklch(1 0 0 / 62%);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.walace-facts {
+  background: linear-gradient(90deg, oklch(1 0 0 / 2.5%), transparent);
+}
+.presentation-enter {
+  min-height: 3.45rem;
+  justify-content: center;
+  border: 1px solid var(--gold-bright);
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold) 60%, var(--gold-soft));
+  color: var(--night);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  box-shadow: 0 18px 45px -18px color-mix(in oklab, var(--gold) 72%, transparent);
+}
+.presentation-enter:hover {
+  transform: translateY(-3px);
+  color: var(--night);
+  filter: brightness(1.08);
+  box-shadow: 0 24px 55px -16px color-mix(in oklab, var(--gold) 88%, transparent);
+}
+.presentation-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: oklch(1 0 0 / 42%);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.presentation-proof svg {
+  color: var(--gold);
+}
+.portrait-radar {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+  border-radius: 999px;
+  animation: radar-spin 20s linear infinite;
+}
+.portrait-radar::after {
+  content: "";
+  position: absolute;
+  top: 14%;
+  left: 14%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--gold-bright);
+  box-shadow: 0 0 18px var(--gold);
+}
+.portrait-radar-one {
+  inset: -7% -9%;
+}
+.portrait-radar-two {
+  inset: 6% -17%;
+  animation-direction: reverse;
+  animation-duration: 27s;
+}
+.portrait-float {
+  position: absolute;
+  z-index: 7;
+  display: flex;
+  min-width: 11.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid color-mix(in oklab, var(--gold) 32%, transparent);
+  padding: 0.75rem 0.85rem;
+  background: oklch(0.13 0.025 255 / 88%);
+  color: var(--gold-bright);
+  box-shadow: 0 16px 35px oklch(0 0 0 / 42%);
+  backdrop-filter: blur(14px);
+}
+.portrait-float span {
+  display: grid;
+}
+.portrait-float small {
+  color: oklch(1 0 0 / 40%);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.portrait-float strong {
+  margin-top: 0.15rem;
+  color: white;
+  font-size: 0.72rem;
+}
+.portrait-float-top {
+  top: 13%;
+  right: -18%;
+}
+.portrait-float-bottom {
+  bottom: 18%;
+  left: -22%;
+}
+.presentation-marquee {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 12;
+  overflow: hidden;
+  border-block: 1px solid color-mix(in oklab, var(--gold) 26%, transparent);
+  background: oklch(0.1 0.024 255 / 84%);
+  backdrop-filter: blur(14px);
+}
+.presentation-marquee div {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.8rem 0;
+  animation: marquee-flow 28s linear infinite;
+}
+.presentation-marquee span {
+  color: oklch(1 0 0 / 58%);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.presentation-marquee i {
+  width: 0.35rem;
+  height: 0.35rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+@keyframes title-shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+@keyframes signal-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 58%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@keyframes radar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes portrait-scan {
+  0%,
+  72%,
+  100% {
+    background-position: 180% 0;
+  }
+  38% {
+    background-position: -120% 0;
+  }
+}
+@keyframes marquee-flow {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+  .walace-hero-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.68fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .presentation-title {
+    font-size: clamp(3.6rem, 16vw, 5.5rem);
+  }
+  .presentation-copy {
+    font-size: 0.95rem;
+  }
+  .walace-hero-portrait {
+    width: min(88vw, 24rem);
+    margin-top: 1rem;
+  }
+  .portrait-radar {
+    display: none;
+  }
+  .portrait-float-top {
+    right: -2%;
+  }
+  .portrait-float-bottom {
+    left: -2%;
+  }
+}
+
 .hero-orb {
   pointer-events: none;
   position: absolute;

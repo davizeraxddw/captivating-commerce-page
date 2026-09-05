@@ -225,43 +225,57 @@ function LandingPage() {
             )}
           </div>
           <div className="aurora-shade" aria-hidden="true" />
+          <div className="presentation-grid" aria-hidden="true" />
+          <div className="presentation-glow presentation-glow-one" aria-hidden="true" />
+          <div className="presentation-glow presentation-glow-two" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl items-center px-5 pt-24 pb-12 sm:px-8 sm:pt-28">
+          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl items-center px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-28">
             <div className="walace-hero-layout w-full">
               <div className="relative z-10 py-10 sm:py-16">
+                <motion.div
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.55 }}
+                  className="presentation-signal"
+                >
+                  <span className="presentation-signal-dot" />
+                  20 anos de serviço e experiência operacional
+                </motion.div>
+
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.55 }}
+                  transition={{ duration: 0.55, delay: 0.08 }}
                   className="presentation-kicker"
                 >
-                  Apresentação
+                  Uma trajetória construída na prática
                 </motion.p>
 
                 <motion.h1
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
                   className="presentation-title"
                 >
-                  Sargento
-                  <span>Walace Costa</span>
+                  <span className="presentation-rank">Sargento</span>
+                  <span className="presentation-name">Walace Costa</span>
                 </motion.h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.18 }}
-                  className="mt-7 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
+                  transition={{ duration: 0.65, delay: 0.24 }}
+                  className="presentation-copy"
                 >
-                  Há 20 anos na Polícia Militar de Minas Gerais. Experiência operacional, formação
-                  em Direito e uma carreira dedicada a transformar vivência em conhecimento.
+                  Há 20 anos na Polícia Militar de Minas Gerais, unindo experiência operacional,
+                  formação em Direito e uma carreira dedicada a transformar vivência em
+                  conhecimento.
                 </motion.p>
 
                 <motion.dl
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, delay: 0.26 }}
+                  transition={{ duration: 0.65, delay: 0.32 }}
                   className="walace-facts"
                 >
                   <div>
@@ -278,16 +292,20 @@ function LandingPage() {
                   </div>
                 </motion.dl>
 
-                <motion.a
-                  href="#walace"
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.55, delay: 0.34 }}
-                  className="presentation-enter group mt-9"
+                  transition={{ duration: 0.55, delay: 0.42 }}
+                  className="mt-9 flex flex-wrap items-center gap-5"
                 >
-                  Conheça a trajetória
-                  <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
-                </motion.a>
+                  <a href="#walace" className="presentation-enter group">
+                    Conheça a trajetória
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                  <span className="presentation-proof">
+                    <ShieldCheck className="h-4 w-4" /> Experiência e formação
+                  </span>
+                </motion.div>
               </div>
 
               <motion.div
@@ -296,13 +314,64 @@ function LandingPage() {
                 transition={{ duration: 0.85, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
                 className="walace-hero-portrait"
               >
+                <div className="portrait-radar portrait-radar-one" aria-hidden="true" />
+                <div className="portrait-radar portrait-radar-two" aria-hidden="true" />
                 <div className="walace-portrait-frame">
+                  <span className="portrait-corner portrait-corner-top" aria-hidden="true" />
+                  <span className="portrait-corner portrait-corner-bottom" aria-hidden="true" />
                   <img
                     src="/images/sgt-walace-original.jpg"
                     alt="Sargento Walace Costa, da Polícia Militar de Minas Gerais"
                   />
+                  <div className="portrait-caption">
+                    <span>Polícia Militar de Minas Gerais</span>
+                    <strong>Sargento Walace Costa</strong>
+                  </div>
                 </div>
+                <motion.div
+                  className="portrait-float portrait-float-top"
+                  animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+                  transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Medal className="h-5 w-5" />
+                  <span>
+                    <small>Carreira</small>
+                    <strong>Desde 2006</strong>
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="portrait-float portrait-float-bottom"
+                  animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
+                  transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  <span>
+                    <small>Formação</small>
+                    <strong>Bacharel em Direito</strong>
+                  </span>
+                </motion.div>
               </motion.div>
+            </div>
+          </div>
+
+          <div className="presentation-marquee" aria-hidden="true">
+            <div>
+              <span>Disciplina</span>
+              <i />
+              <span>Experiência operacional</span>
+              <i />
+              <span>Formação jurídica</span>
+              <i />
+              <span>Conhecimento aplicado</span>
+              <i />
+              <span>Disciplina</span>
+              <i />
+              <span>Experiência operacional</span>
+              <i />
+              <span>Formação jurídica</span>
+              <i />
+              <span>Conhecimento aplicado</span>
+              <i />
             </div>
           </div>
         </section>

@@ -31,13 +31,13 @@ A abertura deve apresentar primeiro Walace Costa, sua trajetória e sua autorida
 
 - Hero em tela cheia, dividido entre biografia e retrato de Walace, sem cards comerciais.
 - Uma mensagem principal por dobra.
-- Poucos elementos simultâneos, alinhamento editorial e fotografia sem molduras decorativas extras.
+- Hierarquia forte, alinhamento editorial e fotografia tratada como peça central, com moldura técnica e credenciais flutuantes.
 - Cantos retos e divisórias finas na abertura para evitar aparência de template genérico.
 
 ## Movimento
 
-- Aurora oficial do React Bits como único efeito de destaque na abertura.
-- Entradas curtas de opacidade e deslocamento para texto e retrato.
+- Aurora oficial do React Bits como luz ambiente na abertura.
+- Entradas curtas de opacidade e deslocamento para texto e retrato, com brilho móvel, órbitas lentas e faixa tipográfica contínua.
 - Entrada por scroll curta e discreta nas seções existentes.
 - Todo movimento deve ser desativado com `prefers-reduced-motion`.
 
