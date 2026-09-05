@@ -9,7 +9,7 @@
 
 ## Direção
 
-A abertura deve apresentar primeiro o contexto e a tensão da atividade policial. O produto só aparece depois que a pessoa entende o problema. A referência do Gorgonoid é usada para ritmo — impacto inicial, faixa contínua e progressão narrativa — sem copiar marca, imagens ou textos.
+A abertura deve apresentar primeiro Walace Costa, sua trajetória e sua autoridade profissional. O produto só aparece depois que a pessoa conhece quem está por trás do conteúdo. A referência do Gorgonoid é usada para ritmo — impacto inicial, faixa contínua e progressão narrativa — sem copiar marca, imagens ou textos.
 
 ## Sistema visual
 
@@ -29,7 +29,7 @@ A abertura deve apresentar primeiro o contexto e a tensão da atividade policial
 
 ### Layout
 
-- Hero em tela cheia, centralizado e sem cards comerciais.
+- Hero em tela cheia, dividido entre biografia e retrato de Walace, sem cards comerciais.
 - Uma mensagem principal por dobra.
 - Linhas finas e coordenadas técnicas como linguagem gráfica.
 - Cantos menos arredondados na abertura para evitar aparência de template genérico.
@@ -45,9 +45,9 @@ A abertura deve apresentar primeiro o contexto e a tensão da atividade policial
 ## Estrutura da abertura
 
 1. Navegação discreta, sem chamada de compra.
-2. Hero-manifesto: tensão, responsabilidade e convite para continuar.
-3. Faixa contínua com palavras-chave da atuação.
-4. Seção de contexto com três princípios: decisão, fundamento e registro.
+2. Hero pessoal: nome, função, trajetória e retrato de Walace.
+3. Faixa contínua com palavras-chave da carreira.
+4. Seção biográfica com três pilares: experiência, formação e propósito.
 5. Somente depois: conteúdo programático e apresentação do material.
 
 ## Instruções de implementação

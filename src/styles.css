@@ -806,6 +806,81 @@ a {
 .presentation-title > span:last-child {
   color: var(--gold-bright);
 }
+.walace-hero-layout {
+  display: grid;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+.walace-hero-layout .presentation-title {
+  max-width: 48rem;
+  font-size: clamp(3.7rem, 6.7vw, 7rem);
+}
+.walace-hero-portrait {
+  position: relative;
+  width: min(100%, 28rem);
+  margin-inline: auto;
+}
+.walace-portrait-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid oklch(1 0 0 / 16%);
+  background: #d9e1ef;
+  box-shadow:
+    0 35px 90px oklch(0 0 0 / 48%),
+    0 0 0 1px oklch(0.79 0.14 82 / 9%);
+}
+.walace-portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(to top, #070b10 0%, transparent 34%),
+    linear-gradient(115deg, oklch(0.12 0.04 250 / 24%), transparent 48%);
+  pointer-events: none;
+}
+.walace-portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  z-index: 3;
+  border: 1px solid oklch(1 0 0 / 13%);
+  pointer-events: none;
+}
+.walace-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.82) contrast(1.04);
+}
+.walace-portrait-caption {
+  position: absolute;
+  right: -1.25rem;
+  bottom: 2rem;
+  z-index: 5;
+  display: grid;
+  min-width: 13rem;
+  border-left: 2px solid var(--gold);
+  padding: 0.85rem 1rem;
+  background: oklch(0.095 0.025 255 / 88%);
+  backdrop-filter: blur(12px);
+}
+.walace-portrait-caption span {
+  color: var(--gold);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.walace-portrait-caption strong {
+  margin-top: 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 .presentation-kicker {
   color: var(--gold);
   font-size: 0.7rem;
@@ -921,6 +996,9 @@ a {
 }
 
 @media (min-width: 768px) {
+  .walace-hero-layout {
+    grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.68fr);
+  }
   .context-principle {
     padding-left: 2rem;
     border-right: 1px solid oklch(1 0 0 / 10%);
@@ -939,6 +1017,17 @@ a {
   }
   .presentation-title {
     font-size: clamp(3.25rem, 17vw, 5.4rem);
+  }
+  .walace-hero-layout .presentation-title {
+    font-size: clamp(3.2rem, 15.5vw, 5rem);
+  }
+  .walace-hero-portrait {
+    width: min(88vw, 24rem);
+    margin-top: -1rem;
+  }
+  .walace-portrait-caption {
+    right: -0.5rem;
+    bottom: 1.25rem;
   }
   .presentation-footer {
     gap: 0.8rem;

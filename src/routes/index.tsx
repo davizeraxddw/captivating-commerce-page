@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   AtSign,
-  Award,
   BadgeCheck,
   ChevronDown,
   ChevronLeft,
@@ -22,13 +21,10 @@ import {
   Scale,
   Search,
   ShieldCheck,
-  Sparkles,
   UserCheck,
   Users,
 } from "lucide-react";
 
-import sgtWalace from "@/assets/sgt-walace.jpeg.asset.json";
-import tenTardelly from "@/assets/ten-tardelly.jpeg.asset.json";
 import walaceCasual from "@/assets/walace-casual.jpeg.asset.json";
 import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
@@ -235,21 +231,21 @@ function LandingPage() {
             className="hidden items-center gap-7 text-sm text-white/60 md:flex"
             aria-label="Principal"
           >
-            <a className="nav-link" href="#contexto">
-              Contexto
+            <a className="nav-link" href="#walace">
+              Walace
             </a>
             <a className="nav-link" href="#conteudo">
               Conteúdo
             </a>
-            <a className="nav-link" href="#autores">
-              Autores
+            <a className="nav-link" href="#trajetoria">
+              Trajetória
             </a>
             <a className="nav-link" href="#duvidas">
               Dúvidas
             </a>
           </nav>
-          <a href="#contexto" className="presentation-nav-cta hidden sm:inline-flex">
-            Iniciar apresentação
+          <a href="#walace" className="presentation-nav-cta hidden sm:inline-flex">
+            Conheça o Walace
           </a>
         </div>
       </header>
@@ -268,42 +264,63 @@ function LandingPage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="presentation-index"
             >
-              <span>Apresentação / 01</span>
-              <span>Atividade policial operacional</span>
+              <span>Apresentação / Walace Costa</span>
+              <span>PMMG · Desde 2006</span>
             </motion.div>
 
-            <div className="my-auto flex flex-col items-center py-16 text-center sm:py-20">
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.08 }}
-                className="presentation-kicker"
-              >
-                Na ponta da linha, não existe ensaio
-              </motion.p>
+            <div className="walace-hero-layout my-auto">
+              <div className="relative z-10 py-14 sm:py-20">
+                <motion.p
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.08 }}
+                  className="presentation-kicker"
+                >
+                  3º Sargento da PMMG · Tático Móvel
+                </motion.p>
 
-              <StaggeredHeadline lines={["Segundos decidem.", "Os detalhes permanecem."]} />
+                <StaggeredHeadline lines={["Walace Costa.", "20 anos na ponta da linha."]} />
 
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.72 }}
-                className="mt-7 max-w-2xl text-base leading-relaxed text-white/58 sm:text-lg"
-              >
-                Uma apresentação sobre o que existe entre a decisão tomada na rua e a forma como ela
-                será compreendida depois.
-              </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.72 }}
+                  className="mt-7 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
+                >
+                  Policial militar, bacharel em Direito e pós-graduado. Uma trajetória construída
+                  entre a experiência operacional, o estudo e a responsabilidade de compartilhar
+                  conhecimento.
+                </motion.p>
 
-              <motion.a
-                href="#contexto"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.9 }}
-                className="presentation-enter group mt-10"
+                <motion.a
+                  href="#walace"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.65, delay: 0.9 }}
+                  className="presentation-enter group mt-10"
+                >
+                  Conheça a trajetória
+                  <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
+                </motion.a>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40, scale: 0.96 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                className="walace-hero-portrait"
               >
-                Continuar
-                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
-              </motion.a>
+                <div className="walace-portrait-frame">
+                  <img
+                    src="/images/sgt-walace-original.jpg"
+                    alt="Sargento Walace Costa, da Polícia Militar de Minas Gerais"
+                  />
+                </div>
+                <div className="walace-portrait-caption">
+                  <span>Experiência operacional</span>
+                  <strong>Walace Costa</strong>
+                </div>
+              </motion.div>
             </div>
 
             <motion.div
@@ -312,9 +329,9 @@ function LandingPage() {
               transition={{ duration: 0.8, delay: 1 }}
               className="presentation-footer"
             >
-              <span>Decisão</span>
-              <span>Fundamento</span>
-              <span>Registro</span>
+              <span>Experiência</span>
+              <span>Formação</span>
+              <span>Propósito</span>
             </motion.div>
           </div>
         </section>
@@ -323,27 +340,27 @@ function LandingPage() {
           <div className="signal-marquee-track">
             {[0, 1].map((group) => (
               <span key={group} className="flex shrink-0 items-center">
-                Decisão <i /> Fundamento <i /> Procedimento <i /> Registro <i /> Responsabilidade
-                <i />
+                Experiência operacional <i /> Direito <i /> Tático Móvel <i /> Formação <i />
+                Conhecimento <i />
               </span>
             ))}
           </div>
         </div>
 
-        <section id="contexto" className="context-section scroll-mt-16">
+        <section id="walace" className="context-section scroll-mt-16">
           <div className="section-shell mx-auto max-w-7xl">
             <Reveal className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-20">
               <div>
-                <Eyebrow>Antes de qualquer material</Eyebrow>
-                <p className="context-code">CONTEXTO / RESPONSABILIDADE</p>
+                <Eyebrow>Quem é Walace Costa</Eyebrow>
+                <p className="context-code">TRAJETÓRIA / EXPERIÊNCIA / FORMAÇÃO</p>
               </div>
               <div>
                 <h2 className="context-statement">
-                  A ocorrência pode terminar na rua. A responsabilidade sobre ela, não.
+                  A prática ensinou o peso de cada decisão. O estudo mostrou como sustentá-la.
                 </h2>
                 <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/58 sm:text-lg">
-                  Cada escolha precisa fazer sentido no momento da ação e continuar fazendo sentido
-                  quando for reconstituída por quem não estava lá.
+                  Desde 2006 na Polícia Militar de Minas Gerais, Walace reúne vivência de rua e
+                  formação jurídica para ajudar outros profissionais a atuarem com mais consciência.
                 </p>
               </div>
             </Reveal>
@@ -352,18 +369,18 @@ function LandingPage() {
               {[
                 {
                   number: "01",
-                  title: "Decidir",
-                  text: "Ler o cenário, agir sob pressão e reconhecer os limites da própria atuação.",
+                  title: "Experiência",
+                  text: "Duas décadas de serviço na Polícia Militar de Minas Gerais e atuação no Tático Móvel.",
                 },
                 {
                   number: "02",
-                  title: "Fundamentar",
-                  text: "Compreender por que a ação foi necessária e quais elementos a sustentam.",
+                  title: "Formação",
+                  text: "Bacharel em Direito e pós-graduado em Advocacia Criminal e Atividade Policial.",
                 },
                 {
                   number: "03",
-                  title: "Registrar",
-                  text: "Transformar uma situação dinâmica em uma narrativa precisa, clara e verificável.",
+                  title: "Propósito",
+                  text: "Transformar experiência e conhecimento em orientação clara para quem vive a rotina policial.",
                 },
               ].map((item, index) => (
                 <Reveal key={item.number} delay={index * 0.08}>
@@ -413,57 +430,23 @@ function LandingPage() {
           <div className="section-shell mx-auto max-w-7xl">
             <Reveal className="mx-auto max-w-3xl text-center">
               <Eyebrow>Por dentro do projeto</Eyebrow>
-              <h2 className="section-title">Ouça de quem vive a atividade policial.</h2>
+              <h2 className="section-title">Ouça quem vive a atividade policial.</h2>
               <p className="section-copy mx-auto mt-5 max-w-2xl">
-                Walace Costa e Walison Tardelly apresentam a ideia central do material: a atuação
-                não é formada apenas pela ação, mas também pela qualidade da documentação.
+                Walace Costa apresenta a ideia central do material: a atuação não é formada apenas
+                pela ação, mas também pela qualidade da documentação.
               </p>
             </Reveal>
-            <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+            <div className="mx-auto mt-12 max-w-2xl">
               <VideoCard
                 src="/videos/apresentacao-ebook.mp4"
                 eyebrow="Mensagem de Walace Costa"
                 title="Bom policial não pode improvisar quando o assunto é documentação."
               />
-              <VideoCard
-                src="/videos/conteudo-por-dentro.mp4"
-                eyebrow="Os autores apresentam"
-                title="A ocorrência não termina na ação: ela continua na redação."
-              />
             </div>
           </div>
         </section>
 
-        <section id="autores" className="section-shell mx-auto max-w-7xl scroll-mt-20">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <Eyebrow>Quem está por trás do material</Eyebrow>
-            <h2 className="section-title">Conhecimento construído na prática.</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <AuthorCard
-              image={sgtWalace.url}
-              name="Sargento Walace Costa"
-              role="3º Sargento da PMMG · Tático Móvel"
-              facts={[
-                "20 anos de serviço na Polícia Militar de Minas Gerais",
-                "Medalha de Mérito Militar e reconhecimentos operacionais",
-                "Bacharel em Direito e pós-graduado em Advocacia Criminal e Atividade Policial",
-              ]}
-            />
-            <AuthorCard
-              image={tenTardelly.url}
-              name="Tenente Walison Tardelly"
-              role="Tenente da PMMG"
-              facts={[
-                "Experiência operacional na atividade policial",
-                "Vivência prática de quem conhece a rotina do serviço",
-                "Coautor com foco na realidade da ponta da linha",
-              ]}
-            />
-          </div>
-        </section>
-
-        <section className="border-y border-white/8 bg-night-2">
+        <section id="trajetoria" className="border-y border-white/8 bg-night-2 scroll-mt-16">
           <div className="section-shell mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.9fr_1.1fr]">
             <Reveal>
               <ImageCarousel
@@ -586,8 +569,7 @@ function LandingPage() {
               PONTA <span className="text-gold">DA LINHA</span>
             </p>
             <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/38">
-              Conteúdo educacional desenvolvido por Sargento Walace Costa e Tenente Walison
-              Tardelly.
+              Conteúdo educacional desenvolvido por Sargento Walace Costa.
             </p>
           </div>
           <a
@@ -626,47 +608,6 @@ function VideoCard({ src, eyebrow, title }: { src: string; eyebrow: string; titl
         <div className="p-5">
           <p className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">{eyebrow}</p>
           <h3 className="mt-2 text-base font-semibold leading-snug text-white/88">{title}</h3>
-        </div>
-      </article>
-    </Reveal>
-  );
-}
-
-function AuthorCard({
-  image,
-  name,
-  role,
-  facts,
-}: {
-  image: string;
-  name: string;
-  role: string;
-  facts: string[];
-}) {
-  return (
-    <Reveal>
-      <article className="group grid h-full overflow-hidden rounded-[1.6rem] border border-white/9 bg-white/[0.025] sm:grid-cols-[.72fr_1fr]">
-        <div className="relative min-h-72 overflow-hidden">
-          <img
-            src={image}
-            alt={name}
-            className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/75 via-transparent to-transparent sm:bg-gradient-to-r" />
-        </div>
-        <div className="flex flex-col justify-center p-6 sm:p-7">
-          <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">{role}</p>
-          <h3 className="mt-2 font-display text-3xl uppercase">{name}</h3>
-          <ul className="mt-6 space-y-3">
-            {facts.map((fact) => (
-              <li
-                key={fact}
-                className="flex items-start gap-3 text-sm leading-relaxed text-white/58"
-              >
-                <Award className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> {fact}
-              </li>
-            ))}
-          </ul>
         </div>
       </article>
     </Reveal>
