@@ -1,3 +1,4 @@
+import AccordionGallery from "@/components/AccordionGallery";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
@@ -592,16 +593,8 @@ function LandingPage() {
               </p>
             </Reveal>
 
-            <div className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 [scrollbar-width:none] md:grid md:grid-cols-2 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
-              {occurrenceVideos.map((video, index) => (
-                <Reveal
-                  key={video.src}
-                  delay={index * 0.06}
-                  className="min-w-[88%] snap-center md:min-w-0"
-                >
-                  <OccurrenceVideoCard {...video} index={index + 1} />
-                </Reveal>
-              ))}
+            <div className="mt-12">
+              <AccordionGallery items={occurrenceVideos} />
             </div>
           </div>
         </section>
@@ -859,38 +852,6 @@ function LandingPage() {
         </div>
       </footer>
     </div>
-  );
-}
-
-function OccurrenceVideoCard({ src, title, index }: { src: string; title: string; index: number }) {
-  return (
-    <article className="overflow-hidden border border-white/10 bg-night shadow-2xl shadow-black/35">
-      <div className="relative flex min-h-64 items-center justify-center bg-black">
-        <video
-          controls
-          preload="metadata"
-          playsInline
-          className="block max-h-[34rem] w-full bg-black object-contain"
-          aria-label={title}
-        >
-          <source src={src} type="video/mp4" />
-          Seu navegador não oferece suporte à reprodução deste vídeo.
-        </video>
-      </div>
-      <div className="flex items-center justify-between gap-4 border-t border-white/10 px-5 py-4">
-        <div>
-          <p className="text-[0.62rem] font-bold tracking-[0.2em] text-gold uppercase">
-            Registro em vídeo
-          </p>
-          <h3 className="mt-1 font-display text-base tracking-wide text-white uppercase">
-            {title}
-          </h3>
-        </div>
-        <span className="font-display text-3xl text-white/12" aria-hidden="true">
-          {String(index).padStart(2, "0")}
-        </span>
-      </div>
-    </article>
   );
 }
 
