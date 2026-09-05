@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+} from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -33,6 +40,42 @@ import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
 const INSTAGRAM_URL = "https://www.instagram.com/walacef.costa/";
+
+function scrollToMainCta(event: ReactMouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+
+  const target = document.getElementById("botao-principal");
+  if (!target) return;
+
+  const start = window.scrollY;
+  const targetTop = target.getBoundingClientRect().top + start;
+  const destination = Math.max(0, targetTop - window.innerHeight * 0.58);
+  const distance = destination - start;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.scrollTo(0, destination);
+    target.focus({ preventScroll: true });
+    return;
+  }
+
+  const duration = Math.min(3000, Math.max(1500, Math.abs(distance) * 0.45));
+  const startedAt = performance.now();
+
+  const animateScroll = (now: number) => {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+    window.scrollTo(0, start + distance * eased);
+
+    if (progress < 1) {
+      requestAnimationFrame(animateScroll);
+    } else {
+      target.focus({ preventScroll: true });
+    }
+  };
+
+  requestAnimationFrame(animateScroll);
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -159,12 +202,22 @@ function Reveal({
   );
 }
 
-function CtaButton({ children, className = "" }: { children: ReactNode; className?: string }) {
+function CtaButton({
+  children,
+  className = "",
+  checkout = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  checkout?: boolean;
+}) {
   return (
     <a
-      href={KIWIFY_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      id={checkout ? "botao-principal" : undefined}
+      href={checkout ? KIWIFY_URL : "#botao-principal"}
+      target={checkout ? "_blank" : undefined}
+      rel={checkout ? "noopener noreferrer" : undefined}
+      onClick={checkout ? undefined : scrollToMainCta}
       className={`btn-gold group ${className}`}
     >
       <span>{children}</span>
@@ -255,9 +308,8 @@ function LandingPage() {
             </a>
           </nav>
           <a
-            href={KIWIFY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#botao-principal"
+            onClick={scrollToMainCta}
             className="hidden bg-gold px-4 py-2 font-display text-[0.7rem] tracking-wider text-night uppercase transition-colors hover:bg-white sm:inline-flex"
           >
             Acesso • R$ 35
@@ -718,7 +770,9 @@ function LandingPage() {
                     </p>
                   </div>
                 </div>
-                <CtaButton className="mt-9 w-full">Quero garantir meu acesso</CtaButton>
+                <CtaButton checkout className="mt-9 w-full">
+                  Quero garantir meu acesso
+                </CtaButton>
                 <p className="mt-5 flex items-center justify-center gap-2 text-xs text-white/38">
                   <LockKeyhole className="h-3.5 w-3.5" /> Checkout seguro pela Kiwify
                 </p>
