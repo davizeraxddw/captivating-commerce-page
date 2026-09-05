@@ -31,8 +31,7 @@ import walaceDireito from "@/assets/walace-direito.jpeg.asset.json";
 import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
-// Substitua apenas este valor pelo checkout da Kiwify quando o link estiver disponível.
-const KIWIFY_URL = "#oferta";
+const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -161,7 +160,12 @@ function Reveal({
 
 function CtaButton({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <a href={KIWIFY_URL} className={`btn-gold group ${className}`}>
+    <a
+      href={KIWIFY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn-gold group ${className}`}
+    >
       <span>{children}</span>
       <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
     </a>
@@ -246,6 +250,8 @@ function LandingPage() {
           </nav>
           <a
             href={KIWIFY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden bg-gold px-4 py-2 font-display text-[0.7rem] tracking-wider text-night uppercase transition-colors hover:bg-white sm:inline-flex"
           >
             Acesso • R$ 35
@@ -721,7 +727,7 @@ function LandingPage() {
             </p>
           </div>
           <a
-            href="https://instagram.com/walacef.costa"
+            href="https://www.instagram.com/walacef.costa/"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline"
