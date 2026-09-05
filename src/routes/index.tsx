@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   AtSign,
@@ -178,6 +178,45 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 function LandingPage() {
   const reduceMotion = useReducedMotion();
+  const topicsTrackRef = useRef<HTMLDivElement>(null);
+  const [activeTopic, setActiveTopic] = useState(0);
+
+  const goToTopic = useCallback(
+    (nextIndex: number) => {
+      const normalizedIndex = (nextIndex + topicos.length) % topicos.length;
+      const track = topicsTrackRef.current;
+      const slide = track?.children.item(normalizedIndex) as HTMLElement | null;
+
+      setActiveTopic(normalizedIndex);
+      if (track && slide) {
+        track.scrollTo({
+          left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+      }
+    },
+    [reduceMotion],
+  );
+
+  const syncActiveTopic = useCallback(() => {
+    const track = topicsTrackRef.current;
+    if (!track || window.matchMedia("(min-width: 640px)").matches) return;
+
+    const trackCenter = track.scrollLeft + track.clientWidth / 2;
+    let nearestIndex = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+
+    Array.from(track.children).forEach((child, index) => {
+      const slide = child as HTMLElement;
+      const distance = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - trackCenter);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    setActiveTopic(nearestIndex);
+  }, []);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-night font-body text-white antialiased">
@@ -473,12 +512,30 @@ function LandingPage() {
                 profissional.
               </p>
             </Reveal>
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              id="conteudo-carousel"
+              ref={topicsTrackRef}
+              className="topic-carousel mt-14"
+              onScroll={syncActiveTopic}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowLeft") {
+                  event.preventDefault();
+                  goToTopic(activeTopic - 1);
+                }
+                if (event.key === "ArrowRight") {
+                  event.preventDefault();
+                  goToTopic(activeTopic + 1);
+                }
+              }}
+              role="region"
+              aria-label="Temas do conteúdo programático"
+              tabIndex={0}
+            >
               {topicos.map((topico, index) => (
                 <Reveal
                   key={topico.titulo}
                   delay={(index % 3) * 0.07}
-                  className={index % 3 === 1 ? "lg:translate-y-6" : ""}
+                  className={`topic-slide ${index % 3 === 1 ? "lg:translate-y-6" : ""}`}
                 >
                   <article className="topic-card group">
                     <div className="flex items-center justify-between">
@@ -496,6 +553,29 @@ function LandingPage() {
                   </article>
                 </Reveal>
               ))}
+            </div>
+            <div className="topic-carousel-controls" aria-label="Controles do carrossel">
+              <button
+                type="button"
+                onClick={() => goToTopic(activeTopic - 1)}
+                aria-label="Tema anterior"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <div className="topic-carousel-progress">
+                <span style={{ width: `${((activeTopic + 1) / topicos.length) * 100}%` }} />
+              </div>
+              <strong>
+                {String(activeTopic + 1).padStart(2, "0")}
+                <small>/ {String(topicos.length).padStart(2, "0")}</small>
+              </strong>
+              <button
+                type="button"
+                onClick={() => goToTopic(activeTopic + 1)}
+                aria-label="Próximo tema"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </section>
@@ -749,10 +829,18 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
           {String(index + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
         </div>
       </div>
-      <button onClick={() => paginate(-1)} className="carousel-button left-4" aria-label="Imagem anterior">
+      <button
+        onClick={() => paginate(-1)}
+        className="carousel-button left-4"
+        aria-label="Imagem anterior"
+      >
         <ChevronLeft className="h-5 w-5" />
       </button>
-      <button onClick={() => paginate(1)} className="carousel-button right-4" aria-label="Próxima imagem">
+      <button
+        onClick={() => paginate(1)}
+        className="carousel-button right-4"
+        aria-label="Próxima imagem"
+      >
         <ChevronRight className="h-5 w-5" />
       </button>
       <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">
