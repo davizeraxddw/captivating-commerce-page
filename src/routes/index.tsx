@@ -60,6 +60,11 @@ function scrollToMainCta(event: ReactMouseEvent<HTMLAnchorElement>) {
 
   const duration = Math.min(2500, Math.max(1300, Math.abs(distance) * 0.39));
   const startedAt = performance.now();
+  const page = document.documentElement;
+  const previousScrollBehavior = page.style.scrollBehavior;
+
+  // Impede que o smooth scroll global crie uma segunda animação sobre cada quadro.
+  page.style.scrollBehavior = "auto";
 
   const animateScroll = (now: number) => {
     const progress = Math.min((now - startedAt) / duration, 1);
@@ -69,6 +74,7 @@ function scrollToMainCta(event: ReactMouseEvent<HTMLAnchorElement>) {
     if (progress < 1) {
       requestAnimationFrame(animateScroll);
     } else {
+      page.style.scrollBehavior = previousScrollBehavior;
       target.focus({ preventScroll: true });
     }
   };
