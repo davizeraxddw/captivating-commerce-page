@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Clock3,
   Crosshair,
+  Dumbbell,
   FileCheck2,
   FileWarning,
   Gavel,
@@ -232,7 +233,7 @@ function LandingPage() {
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
             <span className="flex h-10 w-10 items-center justify-center">
               <img
-                src="/images/walace-costa-emblema.png"
+                src="/images/logo-pmmg.png"
                 alt=""
                 className="h-full w-full object-contain"
                 aria-hidden="true"
@@ -447,6 +448,10 @@ function LandingPage() {
                   { src: walaceFarda.url, alt: "Walace Costa em uniforme da PMMG" },
                   { src: walaceMedalhas.url, alt: "Condecorações da carreira de Walace Costa" },
                   { src: walaceDireito.url, alt: "Formação acadêmica de Walace Costa" },
+                  {
+                    src: "/images/walace-esportista.jpg",
+                    alt: "Walace Costa praticando Jiu-jitsu, corrida e musculação",
+                  },
                 ]}
               />
             </Reveal>
@@ -477,6 +482,11 @@ function LandingPage() {
                     icon: Users,
                     title: "Um propósito claro",
                     text: "Compartilhar conhecimento acessível para fortalecer a atuação de outros profissionais.",
+                  },
+                  {
+                    icon: Dumbbell,
+                    title: "Esportista",
+                    text: "Faixa-roxa de Jiu-jitsu, corredor e praticante de musculação.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="group flex gap-5">
