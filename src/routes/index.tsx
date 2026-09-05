@@ -58,14 +58,13 @@ function scrollToMainCta(event: ReactMouseEvent<HTMLAnchorElement>) {
     return;
   }
 
-  const duration = Math.min(3000, Math.max(1500, Math.abs(distance) * 0.45));
+  const duration = Math.min(2200, Math.max(1100, Math.abs(distance) * 0.34));
   const startedAt = performance.now();
 
   const animateScroll = (now: number) => {
     const progress = Math.min((now - startedAt) / duration, 1);
-    const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
-    window.scrollTo(0, start + distance * eased);
+    window.scrollTo(0, start + distance * progress);
 
     if (progress < 1) {
       requestAnimationFrame(animateScroll);
