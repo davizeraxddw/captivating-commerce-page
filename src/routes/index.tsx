@@ -21,7 +21,6 @@ import {
   Scale,
   Search,
   ShieldCheck,
-  Siren,
   UserCheck,
   Users,
 } from "lucide-react";
@@ -231,8 +230,13 @@ function LandingPage() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-night/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
-            <span className="flex h-8 w-8 items-center justify-center bg-gold">
-              <Siren className="h-4.5 w-4.5 text-night" aria-hidden="true" />
+            <span className="flex h-10 w-10 items-center justify-center border border-gold/45 bg-black p-1 shadow-[0_0_18px_rgba(245,179,1,0.16)]">
+              <img
+                src="/images/walace-costa-emblema.png"
+                alt=""
+                className="h-full w-full object-contain"
+                aria-hidden="true"
+              />
             </span>
             <span className="font-display text-xs tracking-[0.12em] text-white uppercase sm:text-sm">
               Walace Costa
