@@ -692,93 +692,283 @@ a {
   }
 }
 
-.hero-professional {
-  min-height: calc(100svh - 4rem);
-  background:
-    radial-gradient(
-      circle at 82% 46%,
-      color-mix(in oklab, var(--gold) 10%, transparent),
-      transparent 32%
-    ),
-    linear-gradient(115deg, #080d14 0%, #0b1119 54%, #070b10 100%);
+.presentation-nav-cta {
+  min-height: 2.55rem;
+  align-items: center;
+  border-bottom: 1px solid var(--gold);
+  color: var(--gold-bright);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
-.hero-professional::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(oklch(1 0 0 / 1.6%) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(1 0 0 / 1.6%) 1px, transparent 1px);
-  background-size: 88px 88px;
-  mask-image: linear-gradient(to right, black, transparent 58%);
+.presentation-nav-cta:hover {
+  border-color: white;
+  color: white;
 }
-.hero-professional::after {
+.presentation-hero {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 42%, oklch(0.19 0.04 74 / 32%), transparent 31%),
+    radial-gradient(circle at 8% 82%, oklch(0.24 0.07 250 / 16%), transparent 28%), #070b10;
+}
+.presentation-hero::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
-  height: 9rem;
+  z-index: 4;
+  height: 18rem;
   pointer-events: none;
-  background: linear-gradient(to top, var(--night), transparent);
+  background: linear-gradient(to top, #070b10, transparent);
 }
-.hero-detail {
+.presentation-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(oklch(1 0 0 / 3.5%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(circle at 50% 45%, black 0%, transparent 72%);
+}
+.presentation-grid::before,
+.presentation-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(transparent, oklch(1 0 0 / 12%), transparent);
+}
+.presentation-grid::before {
+  left: max(1.25rem, calc((100% - 80rem) / 2));
+}
+.presentation-grid::after {
+  right: max(1.25rem, calc((100% - 80rem) / 2));
+}
+.presentation-scan {
+  position: absolute;
+  inset: -20% 0 auto;
+  z-index: 2;
+  height: 16rem;
+  background: linear-gradient(to bottom, transparent, oklch(0.79 0.14 82 / 7%), transparent);
+  animation: presentation-scan 8s linear infinite;
+}
+.presentation-glow {
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 999px;
+  opacity: 0.18;
+  filter: blur(110px);
+  animation: presentation-drift 10s ease-in-out infinite alternate;
+}
+.presentation-glow-left {
+  bottom: -16rem;
+  left: -10rem;
+  background: #155cb7;
+}
+.presentation-glow-right {
+  top: 14%;
+  right: -16rem;
+  background: var(--gold);
+  animation-delay: -4s;
+}
+.presentation-index,
+.presentation-footer {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: oklch(1 0 0 / 34%);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.presentation-index {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid oklch(1 0 0 / 10%);
+}
+.presentation-title {
+  max-width: 72rem;
+  margin-top: 1.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.7rem, 9.4vw, 9.25rem);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.presentation-title > span:last-child {
+  color: var(--gold-bright);
+}
+.presentation-kicker {
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.presentation-enter {
+  display: inline-flex;
+  min-height: 3.2rem;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid oklch(1 0 0 / 20%);
+  padding: 0.8rem 1.2rem;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    border-color 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease;
+}
+.presentation-enter:hover {
+  border-color: var(--gold);
+  background: color-mix(in oklab, var(--gold) 8%, transparent);
+  color: var(--gold-bright);
+}
+.presentation-footer {
+  justify-content: center;
+  gap: clamp(1.4rem, 6vw, 5rem);
+}
+.presentation-footer span {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 0.75rem;
-  border: 1px solid oklch(1 0 0 / 9%);
-  border-radius: 0.55rem;
-  background: oklch(1 0 0 / 2.5%);
-  color: oklch(1 0 0 / 62%);
-  font-size: 0.75rem;
-  font-weight: 600;
+  gap: clamp(1.4rem, 6vw, 5rem);
 }
-.hero-detail svg {
-  color: var(--gold);
-}
-.hero-avatar {
-  width: 3rem;
-  height: 3rem;
-  border: 2px solid var(--night);
+.presentation-footer span:not(:last-child)::after {
+  content: "";
+  width: 3px;
+  height: 3px;
   border-radius: 999px;
-  background: var(--night-3);
-  object-fit: cover;
-  object-position: 50% 16%;
+  background: var(--gold);
 }
-.hero-promo {
+.signal-marquee {
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--gold) 24%, transparent);
-  border-radius: 1.35rem;
-  background: #070b10;
-  box-shadow:
-    0 40px 100px oklch(0 0 0 / 48%),
-    0 0 70px color-mix(in oklab, var(--gold) 9%, transparent);
+  border-block: 1px solid oklch(1 0 0 / 10%);
+  background: var(--gold);
+  color: #070b10;
 }
-.hero-promo-image {
-  display: block;
-  width: 100%;
-  height: auto;
+.signal-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: signal-marquee 28s linear infinite;
+}
+.signal-marquee-track > span {
+  padding-block: 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.signal-marquee-track i {
+  width: 0.34rem;
+  height: 0.34rem;
+  margin-inline: 1.8rem;
+  transform: rotate(45deg);
+  background: currentColor;
+}
+.context-section {
+  position: relative;
+  background:
+    linear-gradient(90deg, transparent 49.95%, oklch(1 0 0 / 4%) 50%, transparent 50.05%), #070b10;
+}
+.context-code {
+  color: oklch(1 0 0 / 28%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.context-statement {
+  max-width: 52rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6.4vw, 6.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+.context-principle {
+  min-height: 17rem;
+  padding: 2.2rem 2rem 2.6rem 0;
+  border-bottom: 1px solid oklch(1 0 0 / 10%);
+}
+.context-principle span {
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+}
+.context-principle h3 {
+  margin-top: 3.6rem;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.context-principle p {
+  max-width: 21rem;
+  margin-top: 0.8rem;
+  color: oklch(1 0 0 / 52%);
+  line-height: 1.65;
 }
 
-@media (max-width: 1023px) {
-  .hero-professional {
-    background:
-      radial-gradient(
-        circle at 50% 76%,
-        color-mix(in oklab, var(--gold) 9%, transparent),
-        transparent 34%
-      ),
-      linear-gradient(155deg, #080d14, #0b1119 54%, #070b10);
+@media (min-width: 768px) {
+  .context-principle {
+    padding-left: 2rem;
+    border-right: 1px solid oklch(1 0 0 / 10%);
+  }
+  .context-principle:first-child {
+    padding-left: 0;
+  }
+  .context-principle:last-child {
+    border-right: 0;
   }
 }
 
 @media (max-width: 639px) {
-  .hero-detail {
-    padding: 0.5rem 0.6rem;
-    font-size: 0.68rem;
+  .presentation-index span:last-child {
+    display: none;
   }
-  .hero-promo {
-    border-radius: 1rem;
+  .presentation-title {
+    font-size: clamp(3.25rem, 17vw, 5.4rem);
+  }
+  .presentation-footer {
+    gap: 0.8rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+  }
+  .presentation-footer span,
+  .presentation-footer span:not(:last-child)::after {
+    gap: 0.8rem;
+  }
+  .signal-marquee-track i {
+    margin-inline: 1.2rem;
+  }
+}
+
+@keyframes presentation-scan {
+  to {
+    transform: translateY(calc(100svh + 20rem));
+  }
+}
+
+@keyframes presentation-drift {
+  to {
+    transform: translate3d(2.5rem, -1.5rem, 0) scale(1.08);
+  }
+}
+
+@keyframes signal-marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
 .hero-orb {

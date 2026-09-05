@@ -6,7 +6,6 @@ import {
   AtSign,
   Award,
   BadgeCheck,
-  BookOpen,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -20,7 +19,6 @@ import {
   Medal,
   PenLine,
   Play,
-  PlayCircle,
   Scale,
   Search,
   ShieldCheck,
@@ -182,6 +180,36 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
+function StaggeredHeadline({ lines }: { lines: string[] }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <h1 className="presentation-title" aria-label={lines.join(" ")}>
+      {lines.map((line, lineIndex) => (
+        <span key={line} className="block overflow-hidden pb-[0.08em]">
+          <span aria-hidden="true" className="block">
+            {line.split(" ").map((word, wordIndex) => (
+              <motion.span
+                key={`${line}-${word}`}
+                className="mr-[0.2em] inline-block last:mr-0"
+                initial={reduceMotion ? false : { y: "115%", opacity: 0, filter: "blur(10px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.72,
+                  delay: 0.16 + lineIndex * 0.16 + wordIndex * 0.055,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </span>
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 function LandingPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
@@ -193,7 +221,7 @@ function LandingPage() {
         style={{ scaleX }}
       />
 
-      <header className="sticky top-0 z-50 border-b border-white/8 bg-night/82 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-[#070b10]/72 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Voltar ao início">
             <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold/10">
@@ -207,6 +235,9 @@ function LandingPage() {
             className="hidden items-center gap-7 text-sm text-white/60 md:flex"
             aria-label="Principal"
           >
+            <a className="nav-link" href="#contexto">
+              Contexto
+            </a>
             <a className="nav-link" href="#conteudo">
               Conteúdo
             </a>
@@ -217,144 +248,133 @@ function LandingPage() {
               Dúvidas
             </a>
           </nav>
-          <a href={KIWIFY_URL} className="btn-outline hidden sm:inline-flex">
-            Quero o material
+          <a href="#contexto" className="presentation-nav-cta hidden sm:inline-flex">
+            Iniciar apresentação
           </a>
         </div>
       </header>
 
       <main>
-        <section id="inicio" className="hero-professional relative isolate overflow-hidden">
-          <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_.88fr] lg:gap-16 lg:py-20">
-            <div className="relative z-10">
-              <motion.div
+        <section id="inicio" className="presentation-hero relative isolate overflow-hidden">
+          <div className="presentation-grid" aria-hidden="true" />
+          <div className="presentation-scan" aria-hidden="true" />
+          <div className="presentation-glow presentation-glow-left" aria-hidden="true" />
+          <div className="presentation-glow presentation-glow-right" aria-hidden="true" />
+
+          <div className="relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-center px-5 pt-28 pb-16 sm:px-8 sm:pt-32">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="presentation-index"
+            >
+              <span>Apresentação / 01</span>
+              <span>Atividade policial operacional</span>
+            </motion.div>
+
+            <div className="my-auto flex flex-col items-center py-16 text-center sm:py-20">
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.08 }}
+                className="presentation-kicker"
+              >
+                Na ponta da linha, não existe ensaio
+              </motion.p>
+
+              <StaggeredHeadline lines={["Segundos decidem.", "Os detalhes permanecem."]} />
+
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.72 }}
+                className="mt-7 max-w-2xl text-base leading-relaxed text-white/58 sm:text-lg"
+              >
+                Uma apresentação sobre o que existe entre a decisão tomada na rua e a forma como ela
+                será compreendida depois.
+              </motion.p>
+
+              <motion.a
+                href="#contexto"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
-                className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-gold uppercase"
+                transition={{ duration: 0.65, delay: 0.9 }}
+                className="presentation-enter group mt-10"
               >
-                <span className="h-px w-10 bg-gold" /> E-book + formação complementar
-              </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.08 }}
-                className="mt-6 max-w-3xl font-display text-[clamp(3.35rem,6.2vw,6.25rem)] leading-[0.9] tracking-[-0.025em] uppercase"
-              >
-                Evite erros
-                <span className="block text-gold-gradient">que podem custar sua carreira.</span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.14 }}
-                className="mt-6 font-display text-lg tracking-[0.12em] text-white uppercase sm:text-xl"
-              >
-                Atividade policial <span className="text-gold">na ponta da linha</span>
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.18 }}
-                className="mt-4 max-w-xl text-base leading-relaxed text-white/62 sm:text-lg"
-              >
-                Guia prático com apontamentos jurídicos para agir, fundamentar e registrar com mais
-                segurança nas atividades policiais.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.24 }}
-                className="mt-7 flex flex-wrap gap-3"
-              >
-                <span className="hero-detail">
-                  <BookOpen className="h-4 w-4" /> E-book em PDF
-                </span>
-                <span className="hero-detail">
-                  <PlayCircle className="h-4 w-4" /> 42 videoaulas
-                </span>
-                <span className="hero-detail">
-                  <Medal className="h-4 w-4" /> Experiência real
-                </span>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.28 }}
-                className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center"
-              >
-                <CtaButton>Quero o material completo</CtaButton>
-                <div className="flex items-center gap-3 border-l border-white/12 pl-5">
-                  <span className="text-[10px] font-bold tracking-[0.16em] text-white/38 uppercase">
-                    Pagamento
-                    <br />
-                    único
-                  </span>
-                  <span className="font-display text-5xl leading-none text-white">
-                    R$ <span className="text-gold">35</span>
-                  </span>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.42 }}
-                className="mt-9 flex items-center gap-4"
-              >
-                <div className="flex -space-x-2">
-                  <img
-                    className="hero-avatar"
-                    src="/images/sgt-walace-original.jpg"
-                    alt="Sargento Walace Costa"
-                  />
-                  <img
-                    className="hero-avatar"
-                    src="/images/ten-tardelly-original.jpg"
-                    alt="Tenente Walison Tardelly"
-                  />
-                </div>
-                <p className="text-xs leading-relaxed text-white/45">
-                  Desenvolvido por{" "}
-                  <strong className="font-semibold text-white/78">Sargento Walace Costa</strong>
-                  <br />e{" "}
-                  <strong className="font-semibold text-white/78">Tenente Walison Tardelly</strong>
-                </p>
-              </motion.div>
+                Continuar
+                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
+              </motion.a>
             </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, x: 24 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-promo relative mx-auto w-full max-w-[570px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="presentation-footer"
             >
-              <img
-                src="/images/oferta-ponta-da-linha.png"
-                alt="Evite erros que podem custar sua carreira — e-book Atividade Policial Operacional na Ponta da Linha"
-                className="hero-promo-image"
-              />
+              <span>Decisão</span>
+              <span>Fundamento</span>
+              <span>Registro</span>
             </motion.div>
           </div>
         </section>
 
-        <section className="border-y border-white/8 bg-night-2">
-          <div className="mx-auto grid max-w-7xl divide-y divide-white/8 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
-            {[
-              { icon: BookOpen, value: "E-book", label: "material completo em PDF" },
-              { icon: PlayCircle, value: "42 aulas", label: "conteúdo complementar" },
-              { icon: Medal, value: "20 anos", label: "de experiência policial" },
-            ].map((item) => (
-              <div
-                key={item.value}
-                className="flex items-center gap-4 py-6 sm:justify-center sm:px-6"
-              >
-                <item.icon className="h-7 w-7 text-gold" />
-                <div>
-                  <p className="font-display text-2xl tracking-wide">{item.value}</p>
-                  <p className="text-xs text-white/45">{item.label}</p>
-                </div>
-              </div>
+        <div className="signal-marquee" aria-hidden="true">
+          <div className="signal-marquee-track">
+            {[0, 1].map((group) => (
+              <span key={group} className="flex shrink-0 items-center">
+                Decisão <i /> Fundamento <i /> Procedimento <i /> Registro <i /> Responsabilidade
+                <i />
+              </span>
             ))}
+          </div>
+        </div>
+
+        <section id="contexto" className="context-section scroll-mt-16">
+          <div className="section-shell mx-auto max-w-7xl">
+            <Reveal className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-20">
+              <div>
+                <Eyebrow>Antes de qualquer material</Eyebrow>
+                <p className="context-code">CONTEXTO / RESPONSABILIDADE</p>
+              </div>
+              <div>
+                <h2 className="context-statement">
+                  A ocorrência pode terminar na rua. A responsabilidade sobre ela, não.
+                </h2>
+                <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/58 sm:text-lg">
+                  Cada escolha precisa fazer sentido no momento da ação e continuar fazendo sentido
+                  quando for reconstituída por quem não estava lá.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="mt-16 grid border-t border-white/12 md:grid-cols-3">
+              {[
+                {
+                  number: "01",
+                  title: "Decidir",
+                  text: "Ler o cenário, agir sob pressão e reconhecer os limites da própria atuação.",
+                },
+                {
+                  number: "02",
+                  title: "Fundamentar",
+                  text: "Compreender por que a ação foi necessária e quais elementos a sustentam.",
+                },
+                {
+                  number: "03",
+                  title: "Registrar",
+                  text: "Transformar uma situação dinâmica em uma narrativa precisa, clara e verificável.",
+                },
+              ].map((item, index) => (
+                <Reveal key={item.number} delay={index * 0.08}>
+                  <article className="context-principle">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -411,29 +431,6 @@ function LandingPage() {
                 title="A ocorrência não termina na ação: ela continua na redação."
               />
             </div>
-          </div>
-        </section>
-
-        <section className="section-shell">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
-            <Reveal>
-              <Eyebrow>O ponto crítico</Eyebrow>
-              <h2 className="section-title">
-                Uma decisão de segundos pode ser analisada anos depois.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="space-y-5 text-base leading-relaxed text-white/68 sm:text-lg">
-                <p>
-                  A abordagem pode ter sido correta. A prova pode ter sido encontrada. Mas, se
-                  informações importantes forem omitidas ou descritas sem o contexto necessário, o
-                  problema pode começar justamente no papel.
-                </p>
-                <p className="border-l-2 border-gold pl-5 font-semibold text-white">
-                  Agir certo é importante. Saber fundamentar e registrar o que foi feito também.
-                </p>
-              </div>
-            </Reveal>
           </div>
         </section>
 
