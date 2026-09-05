@@ -791,9 +791,15 @@ function LandingPage() {
       <footer className="border-t border-white/8 bg-night-2">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 py-10 text-center sm:px-8 md:flex-row md:text-left">
           <div>
-            <p className="font-display text-lg tracking-wide uppercase">
-              Ponta <span className="text-gold">da linha</span>
-            </p>
+            <div className="flex items-center justify-center gap-3 md:justify-start">
+              <img
+                src="/images/logo-pmmg.png"
+                alt=""
+                className="h-10 w-10 object-contain"
+                aria-hidden="true"
+              />
+              <p className="font-display text-lg tracking-wide uppercase">Walace Costa</p>
+            </div>
             <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/38">
               Conteúdo educacional desenvolvido por Sargento Walace Costa.
             </p>
