@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Camera,
+  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -32,7 +33,8 @@ import walaceFarda from "@/assets/walace-farda.jpeg.asset.json";
 import walaceMedalhas from "@/assets/walace-medalhas.jpeg.asset.json";
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/HiTVrSD";
-const INSTAGRAM_URL = "https://www.instagram.com/walacef.costa/";
+const INSTAGRAM_USERNAME = "@walacef.costa";
+const INSTAGRAM_APP_URL = "instagram://user?username=walacef.costa";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -185,6 +187,32 @@ function LandingPage() {
   const reduceMotion = useReducedMotion();
   const topicsTrackRef = useRef<HTMLDivElement>(null);
   const [activeTopic, setActiveTopic] = useState(0);
+  const [instagramCopied, setInstagramCopied] = useState(false);
+
+  const handleInstagram = useCallback(async () => {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      window.location.href = INSTAGRAM_APP_URL;
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(INSTAGRAM_USERNAME);
+    } catch {
+      const helper = document.createElement("textarea");
+      helper.value = INSTAGRAM_USERNAME;
+      helper.style.position = "fixed";
+      helper.style.opacity = "0";
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand("copy");
+      helper.remove();
+    }
+
+    setInstagramCopied(true);
+    window.setTimeout(() => setInstagramCopied(false), 2500);
+  }, []);
 
   const goToTopic = useCallback(
     (nextIndex: number) => {
@@ -672,7 +700,7 @@ function LandingPage() {
             <Reveal>
               <Eyebrow>Oferta de lançamento</Eyebrow>
               <h2 className="mx-auto max-w-4xl font-display text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[0.9] uppercase">
-                Prepare-se hoje. <span className="text-gold">Registre melhor</span> amanhã.
+                Domine o procedimento. <span className="text-gold">Proteja sua carreira.</span>
               </h2>
               <p className="section-copy mx-auto mt-6 max-w-2xl">
                 Tenha o e-book em PDF e 42 videoaulas complementares para estudar, consultar e
@@ -727,18 +755,23 @@ function LandingPage() {
               Conteúdo educacional desenvolvido por Sargento Walace Costa.
             </p>
           </div>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(event) => {
-              event.preventDefault();
-              window.open(INSTAGRAM_URL, "_blank", "noopener,noreferrer");
-            }}
+          <button
+            type="button"
+            onClick={handleInstagram}
             className="btn-outline"
+            aria-label={
+              instagramCopied
+                ? "Usuário do Instagram copiado"
+                : "Abrir Instagram no celular ou copiar usuário no computador"
+            }
           >
-            <Camera className="h-4 w-4" aria-hidden="true" /> walacef.costa
-          </a>
+            {instagramCopied ? (
+              <Check className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Camera className="h-4 w-4" aria-hidden="true" />
+            )}
+            {instagramCopied ? "Usuário copiado" : "Instagram • walacef.costa"}
+          </button>
         </div>
       </footer>
     </div>
